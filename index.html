@@ -42,6 +42,9 @@
     button, textarea, input { font: inherit; }
     button { color: inherit; }
     a { color: var(--accent); }
+    :focus-visible { outline: 3px solid var(--good); outline-offset: 3px; }
+    .skip-link { position: fixed; top: 8px; left: 12px; z-index: 120; padding: 9px 13px; color: #17121f; background: var(--good); border-radius: 6px; font-weight: 800; transform: translateY(-160%); }
+    .skip-link:focus { transform: translateY(0); }
     code, pre, .mono {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
@@ -162,6 +165,7 @@
     .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
     .hero-meta i { width: 5px; height: 5px; display: block; border-radius: 50%; background: var(--accent); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .share-note { max-width: 700px; margin: 16px 0 0; color: var(--dim); font-size: 12px; }
 
     .spine-band { padding: 58px 0 64px; background: #111315; border-bottom: 1px solid var(--line); }
     .spine-intro { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 68px; align-items: end; margin-bottom: 38px; }
@@ -632,6 +636,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#welcome">Skip to course content</a>
   <div class="progress-line" id="progressLine" aria-hidden="true"></div>
   <header class="topbar">
     <div class="brand-lockup">
@@ -642,9 +647,9 @@
       </div>
     </div>
     <div class="top-actions">
-      <button class="button" id="notesButton" type="button">Expand walkthroughs</button>
-      <button class="button" id="workbookButton" type="button">Open workbook</button>
-      <button class="button" id="focusButton" type="button" title="Toggle focus mode (F)"><span class="button-label">Focus</span> <span aria-hidden="true">↗</span></button>
+      <button class="button" id="notesButton" type="button" aria-pressed="false">Expand walkthroughs</button>
+      <button class="button" id="workbookButton" type="button" aria-pressed="false">Open workbook</button>
+      <button class="button" id="focusButton" type="button" title="Toggle focus mode (F)" aria-pressed="false"><span class="button-label">Focus</span> <span aria-hidden="true">↗</span></button>
       <button class="button primary" id="exportButton" type="button">Export starter pack</button>
       <button class="icon-button" id="printButton" type="button" title="Print companion" aria-label="Print companion">⎙</button>
     </div>
@@ -692,6 +697,7 @@
             <a class="button" href="#paras-built">See the systems I built</a>
             <a class="button" href="#schedule">Open the run of show</a>
           </div>
+          <p class="share-note">Share this one page with students. The agenda, explanations, prompts, examples, checkpoints, practice data, reference answers, and exports all live here.</p>
         </div>
         <div class="hero-visual" aria-label="A recurring business question moving through a governed analytics loop">
           <div class="orbit">
@@ -735,7 +741,7 @@
 
         <div class="setup-flow" aria-label="Workspace readiness checks">
           <div class="setup-row"><b>01</b><strong>Open the right workspace</strong><span>Point the agent at one course folder or sanitized project. Confirm what it can read and where it may write. Do not give it your whole computer by default.</span></div>
-          <div class="setup-row"><b>02</b><strong>Connect one data source</strong><span>Use a local CSV or DuckDB file, or configure the warehouse connector or MCP server. Keep passwords and tokens in the approved secret store, not in chat or course files.</span></div>
+          <div class="setup-row"><b>02</b><strong>Connect one data source</strong><span>Use a local CSV file, or configure the warehouse connector or MCP server your team already approves. Keep passwords and tokens in the approved secret store, not in chat or course files.</span></div>
           <div class="setup-row"><b>03</b><strong>Test the connection</strong><span>Ask the agent to name the active source and list the available tables or files. Then show the date range and run a harmless read such as a row count. “Configured” is not the same as “working.”</span></div>
           <div class="setup-row"><b>04</b><strong>Load the context people carry</strong><span>Add the user and team, the business question, metric definitions, known exclusions, recent changes, saved corrections, and preferred output. Use only context your company permits you to share.</span></div>
           <div class="setup-row"><b>05</b><strong>State the access boundary</strong><span>Say whether this session is read-only, which sources are approved, where outputs may be saved, and what requires a person. If the source is unavailable, use the synthetic workshop case.</span></div>
@@ -746,28 +752,28 @@
             <div>
               <span class="kicker">No warehouse? Start here.</span>
               <h3>Use the same synthetic case Paras will run live.</h3>
-              <p>The kit contains a calculation source, an independent benchmark, the metric definition, a known business change, trusted SQL, a dependency-free Python verifier, and ten eval cases. It works locally with any file-capable harness.</p>
+              <p>The kit contains two CSV files, the metric definition, a known business change, a dependency-free Python verifier, and ten eval cases. It works locally with any file-capable harness.</p>
               <div class="kit-actions">
                 <a class="button primary" href="assets/agentic-analytics-workshop-lab.zip" download="agentic-analytics-workshop-lab.zip">Download the lab kit</a>
-                <a class="button" href="assets/agentic-analytics-lab/README.md" target="_blank">Read the lab guide</a>
-                <a class="button" href="examples/workshop-data.html" target="_blank">Preview the data</a>
+                <a class="button" href="assets/agentic-analytics-lab/README.md" target="_blank" rel="noopener noreferrer">Read the lab guide</a>
+                <a class="button" href="examples/workshop-data.html" target="_blank" rel="noopener noreferrer">Preview the data</a>
                 <a class="button" href="assets/agentic-analytics-lab/data/funnel_segments.csv" download="funnel_segments.csv">Download calculation CSV</a>
                 <a class="button" href="assets/agentic-analytics-lab/data/wbr_benchmark.csv" download="wbr_benchmark.csv">Download benchmark CSV</a>
               </div>
               <p class="microcopy">Use the preview if your browser does not open CSV files directly. Every download now keeps its original <code>.csv</code> filename.</p>
+              <div class="boundary"><strong>Run the kit in three steps</strong><p>1. Download and unzip the kit. 2. Open the extracted folder, not the ZIP file, in your harness. 3. Run <code>python3 --version</code> (Windows: <code>py -3 --version</code>), then run <code>python3 verify.py</code> (Windows: <code>py -3 verify.py</code>). If Python is unavailable, keep working with the two CSV files in your harness, mark the independent verifier unavailable, and use the browser preview plus the collapsed reference answer for the tie-out. Do not install a runtime during class.</p></div>
             </div>
             <ul class="file-list" aria-label="Workshop kit contents">
               <li><code>funnel_segments.csv</code><span>calculation source</span></li>
               <li><code>wbr_benchmark.csv</code><span>independent tie-out</span></li>
               <li><code>metric.yaml</code><span>meaning + limits</span></li>
               <li><code>verify.py</code><span>independent check</span></li>
-              <li><code>analysis.sql</code><span>DuckDB route</span></li>
               <li><code>evals.yaml</code><span>failure cases</span></li>
             </ul>
           </div>
           <details class="reference-answer">
             <summary>Check the kit before class: expected clean result</summary>
-            <div class="note-body"><p><strong>8.4% → 6.9% (-1.5 percentage points).</strong> Paid search is the largest observed contributor; the current partial week is excluded; both complete weeks tie to the benchmark. The correct state for a causal “why” is <strong>Review</strong> because campaign tagging changed between periods.</p><p>Run <code>python3 verify.py</code>. A clean machine should need no package install.</p></div>
+            <div class="note-body"><p><strong>8.4% → 6.9% (-1.5 percentage points).</strong> Paid search is the largest observed contributor; the current partial week is excluded; both complete weeks tie to the benchmark. The correct state for a causal “why” is <strong>Review</strong> because campaign tagging changed between periods.</p><p>If Python is available, run <code>python3 verify.py</code>. It uses only the Python standard library, so no package install is required.</p></div>
           </details>
         </div>
 
@@ -782,7 +788,7 @@
           <div class="note-body">
             <blockquote>“Your favorite harness does not decide whether the analysis is trustworthy. The active data, loaded context, permissions, and checks do.”</blockquote>
             <p><strong>0–4 min:</strong> Ask students to open their preferred harness and one sanitized workspace. Do not spend class time comparing tools.</p>
-            <p><strong>4–8 min:</strong> Students choose their safe source or download the workshop kit. Builders can check an MCP or warehouse connection; everyone can use the local files.</p>
+            <p><strong>4–8 min:</strong> Students choose their safe source or download and unzip the workshop kit. Open the extracted folder in the harness; check the optional Python runtime before relying on the verifier.</p>
             <p><strong>8–15 min:</strong> Run the readiness check: active source, visible tables or files, date range, one harmless read, and explicit access boundary.</p>
             <p><strong>15–20 min:</strong> Load the minimum business context, inspect <code>work/00_readiness.md</code>, and repair one missing item before moving on.</p>
           </div>
@@ -826,8 +832,8 @@
         </div>
 
         <div class="lane-choice" aria-label="Two source choices for the same workshop">
-          <div class="lane"><span>Use your safe source</span><h4>Bring one recurring question</h4><p>Use a sanitized local extract or an approved read-only warehouse route. Run the same staged prompts and keep sensitive data, credentials, and proprietary SQL out of this page.</p></div>
-          <div class="lane"><span>Use the workshop source</span><h4>Everything runs locally</h4><p>Download the kit and follow Paras’s exact case in any file-capable harness. No warehouse, MCP connection, paid tool, or Python package install is required.</p></div>
+          <div class="lane"><span>Use your safe source</span><h4>Frame and contract your real question</h4><p>Use a sanitized local extract or an approved read-only warehouse route for Modules 0–3. Keep sensitive data and credentials out of this page. After class, adapt the tested execution path to your source.</p></div>
+          <div class="lane"><span>Use the workshop source</span><h4>Regroup on one runnable case</h4><p>Everyone uses the included CSV lab for Modules 4–5 so the execution, proof, failures, and repair can be compared in the room. No warehouse, MCP connection, paid tool, or Python package install is required.</p></div>
         </div>
 
       </div>
@@ -836,7 +842,7 @@
     <section class="section case-study-section" id="paras-built" data-nav="paras-built">
       <div class="shell">
         <div class="section-header">
-          <div><span class="kicker">Spine 02 · systems I built</span><h2>See the operating system before you build the pieces.</h2></div>
+          <div><span class="kicker">Reference gallery · no separate time block · systems I built</span><h2>See the operating system before you build the pieces.</h2></div>
           <p class="section-lede">These are sanitized reconstructions of real systems I designed and built. I replaced internal data, sources, names, and tickets with the workshop lab, so you can inspect the design without exposing company material. We will return to them inside the timed modules rather than add another lecture block.</p>
         </div>
 
@@ -957,7 +963,7 @@
             <blockquote>“If two dashboards disagree, adding a chatbot creates a faster disagreement.”</blockquote>
             <p><strong>0–5 min:</strong> Ask everyone to put one recurring metric question in chat, then read three aloud without critiquing them yet.</p>
             <p><strong>5–12 min:</strong> Teach the matrix. “Same answer” means the definition, source, number or direction, main drivers, material caveat, and basic decision remain stable. The prose can change.</p>
-            <p><strong>12–15 min:</strong> Place the synthetic conversion question on the matrix. Move it to “fix the foundation” when tagging changes and no precedence rule exists.</p>
+            <p><strong>12–15 min:</strong> Place the synthetic conversion question on the matrix. Use the War Room / Abandonment distinction to separate “what changed?” from “what deserves investigation?” Move it to “fix the foundation” when tagging changes and no precedence rule exists.</p>
             <p><strong>15–25 min:</strong> Students use the prompt, approve the brief, and select the question they will carry forward.</p>
           </div>
         </details>
@@ -1118,7 +1124,7 @@ Save work/02_contract.yaml and work/02_architecture.md. Mark unknown owners inst
           <div class="note-body">
             <blockquote>“If the contract says ‘help leaders understand the business,’ it is still a wish. Name the decision and the next action.”</blockquote>
             <p><strong>0–7 min:</strong> Teach the seven fields. Contrast “Tell me how growth is doing” with “Explain last week’s qualified-signup conversion movement for the Growth WBR and recommend the next investigation.”</p>
-            <p><strong>7–13 min:</strong> Map the client-neutral production path. Ask where permissions, context versions, validation, proof, and review actually live.</p>
+            <p><strong>7–13 min:</strong> Map the client-neutral production path. Use the data agent’s wrong-source failure to ask where permissions, context versions, validation, proof, and review actually live.</p>
             <p><strong>13–28 min:</strong> Students run the prompt, inspect the two files, and repair one vague boundary.</p>
             <p><strong>28–35 min:</strong> Peer test: a partner tries one ambiguous question and one high-impact action request.</p>
           </div>
@@ -1277,7 +1283,7 @@ Show the proposed file diff and wait for approval before treating it as trusted.
           <div class="note-body">
             <blockquote>“The model may be smart enough to find a number. The system has to know whether it found the right number for this decision.”</blockquote>
             <p><strong>0–8 min:</strong> Build the synthetic metric packet: eligible qualified signups ÷ eligible qualified sessions, complete weekly grain, PT, excluding test and partner-assisted rows.</p>
-            <p><strong>8–15 min:</strong> Reveal the tagging change and partial-week caveat. Show how the same raw number moves from Answer to Review when context is missing.</p>
+            <p><strong>8–15 min:</strong> Reveal the tagging change and partial-week caveat. Connect it to the War Room’s visible verification state: the same raw number moves from Answer to Review when context is missing.</p>
             <p><strong>15–20 min:</strong> Teach Required / Eligible / Retrieved / Applied. Classify six failure layers: missing asset, retrieval miss, context conflict, application error, query error, source data error.</p>
             <p><strong>20–40 min:</strong> Students run the prompt, inspect the diff, and remove any field that does not affect the path, result, caveat, or outcome.</p>
           </div>
@@ -1311,6 +1317,7 @@ Show the proposed file diff and wait for approval before treating it as trusted.
           <div><span class="kicker">Prove the answer</span><h2>A safe system knows when to answer, ask, send to review, or stop.</h2></div>
           <p class="section-lede">Choose what the agent should do before polishing the prose. A fluent answer never gets priority over the correct outcome.</p>
         </div>
+        <div class="boundary"><strong>Common live execution lane</strong><p>From this point through Module 5, run the included CSV lab in your chosen harness. This gives the room one known result, one benchmark, and the same controlled failures. Your own-source design from Modules 0–3 remains the transfer case you adapt after the tested path works.</p></div>
 
         <div class="states" aria-label="Four valid outcomes for an analytics agent">
           <div class="state answer"><span class="state-word">Answer</span><p>The approved path ran and the required validation passed. Return the answer with evidence and caveats.</p><span class="gate">All checks pass</span></div>
@@ -1383,13 +1390,13 @@ Return plan_only: true and source_executed: false. Do not execute until I approv
           <div class="turn-head"><strong>Harness turn 4B · Execute, verify independently, and correct</strong><span>Core build-along</span></div>
           <div class="template-block">
             <button class="button small copy-button" type="button" data-copy-container>Copy execution prompt</button>
-            <pre>Approved. Run the plan using read-only sources.
+            <pre>For the live workshop, use the included CSV lab. Approved. Run the plan using read-only sources.
 
 1. Calculate the last two complete weeks from the calculation source.
 2. Reconcile them to the independent benchmark.
 3. Show percentage-point and relative change separately.
 4. Decompose by channel, device, and landing page; run an isolation check.
-5. Run verify.py as a second method. Compare every quantitative claim as Pass, Warning, or Fail.
+5. Run verify.py as a second method when Python is available. Compare every quantitative claim as Pass, Warning, or Fail.
 6. Revise any failed claim before continuing.
 
 Return exactly one outcome: Answer, Clarify, Review, or Refuse. Include the question, source execution proof, context used, validations passed and failed, uncertainty, caveat, next action, and human owner. Save work/04_proof.yaml.
@@ -1408,10 +1415,11 @@ Do not call an observed contributor a root cause unless the evidence isolates ca
           <summary>Walkthrough + timing + break-the-data demo</summary>
           <div class="note-body">
             <blockquote>“A useful refusal does not apologize for three paragraphs. It names the failed check and the repair path.”</blockquote>
-            <p><strong>0–10 min:</strong> Teach the four outcomes and why model confidence is not a correctness check.</p>
-            <p><strong>10–18 min:</strong> Show the proof receipt. Separate “planned query” from “source ran.” Ask the room what is still uncertain.</p>
-            <p><strong>18–25 min:</strong> Break the synthetic data: qualified signups exceed qualified sessions, or the calculation and benchmark conflict. The agent must Refuse or Review and must not append an unverified number.</p>
-            <p><strong>25–45 min:</strong> Students write automated checks, human-review rules, and one operational refusal. Invite two people to read only their failed check and next step.</p>
+            <p><strong>0–8 min:</strong> Teach the four outcomes and why model confidence is not a correctness check.</p>
+            <p><strong>8–13 min:</strong> Show the War Room proof receipt. Separate “planned route” from “source ran” and ask what is still uncertain.</p>
+            <p><strong>13–20 min:</strong> Students run Turn 4A, inspect the exact CSV path and checks, and approve the plan.</p>
+            <p><strong>20–38 min:</strong> Students run Turn 4B, calculate and reconcile the result, run the independent verifier when available, and correct any unsupported claim.</p>
+            <p><strong>38–45 min:</strong> Save <code>work/04_proof.yaml</code>. Invite two people to read only their outcome, failed or review check, and next step.</p>
           </div>
         </details>
 
@@ -1481,7 +1489,7 @@ Do not call an observed contributor a root cause unless the evidence isolates ca
             <li>Repeated runs keep the path, caveat, and outcome stable</li>
             <li>False blocks tracked beside bad-data blocks</li>
           </ul>
-          <p class="source-note"><strong>Live scope:</strong> run one routine case, one ambiguity, the causal-review case, the authority-boundary case, and the two deterministic injections. The other six cases stay in the take-home pack for extension.</p>
+          <p class="source-note"><strong>Live scope:</strong> run one routine case, one ambiguity, the causal-review case, the authority-boundary case, and the two deterministic injections. The remaining four cases stay in the take-home pack for extension.</p>
         </div>
 
         <div class="template-block">
@@ -1524,7 +1532,7 @@ python3 verify.py --inject-benchmark-conflict</pre>
           <div class="turn-head"><strong>Harness turn 5 · Declare, run, repair, and rerun</strong><span>The correction loop</span></div>
           <div class="template-block">
             <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
-            <pre>Read evals.yaml. Before execution, record the expected outcome and required evidence for these four live cases: routine_1, ambiguous_1, causal_claim, and authority_boundary.
+            <pre>For the live workshop, continue with the included CSV lab. Read evals.yaml. Before execution, record the expected outcome and required evidence for these four live cases: routine_1, ambiguous_1, causal_claim, and authority_boundary.
 
 Run those four cases one at a time. For each, record expected versus observed outcome, evidence present or missing, quietly wrong yes/no, latency, tokens, source calls, and cost when available. Mark unavailable telemetry honestly. Do not average away a failed high-risk case.
 
@@ -1532,9 +1540,11 @@ Then run:
 - python3 verify.py --inject-impossible-row
 - python3 verify.py --inject-benchmark-conflict
 
+If Python is unavailable, run the four harness cases, predict both injected outcomes, observe Paras’s or a partner’s verifier run, record the observed results, and rejoin at the correction step.
+
 Pick one failure or unsupported claim. Identify whether it came from a missing asset, retrieval miss, context conflict, application error, query error, or source-data error. Write the smallest proposed repair under work/, append work/correction.yaml, and rerun every affected case. Do not modify the lab’s data/ or context/ files.
 
-Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep the other six cases as the extension pack after class.</pre>
+Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep the remaining four cases as the extension pack after class.</pre>
           </div>
           <div class="checkpoint"><div><b>You should now have</b><span>Expected-versus-observed results plus one durable correction.</span></div><div><b>Done when</b><span>The affected cases pass after repair and no high-risk failure is hidden in an average.</span></div><div><b>Next</b><span>Turn the tested path into controls, monitoring, and a narrow rollout decision.</span></div></div>
         </div>
@@ -1545,8 +1555,8 @@ Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep
             <blockquote>“The best analytics-agent test includes a question the system should not answer.”</blockquote>
             <p>Do not blend the scores. One overall 92 can hide a high-risk case that the agent answered confidently and incorrectly.</p>
             <p><strong>0–8 min:</strong> Teach expected outcomes, quietly wrong versus loud failure, and why security cases belong beside correctness cases.</p>
-            <p><strong>8–15 min:</strong> Predict three lab outcomes before running them.</p>
-            <p><strong>15–32 min:</strong> Students run four representative cases plus the two injected failures. Do not let the harness skip execution.</p>
+            <p><strong>8–15 min:</strong> Use Abandonment Intelligence’s known-good rules to predict three lab outcomes before running them.</p>
+            <p><strong>15–32 min:</strong> Students run four representative cases plus the two injected failures. Without Python, predict the injections, observe Paras’s or a partner’s run, record the results, and rejoin at the correction. Do not let the harness skip the four cases.</p>
             <p><strong>32–42 min:</strong> Repair one shared artifact, record the correction, and rerun affected cases.</p>
             <p><strong>42–45 min:</strong> State the launch bar and the one case that would stop the release.</p>
           </div>
@@ -1668,7 +1678,7 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
           <summary>Walkthrough + timing + close</summary>
           <div class="note-body">
             <blockquote>“Agents count inputs because inputs are easy to prove. Your team has to measure the decision and the outcome.”</blockquote>
-            <p><strong>0–7 min:</strong> Teach ownership, runtime controls, and the difference between offline evals and sampled live correctness.</p>
+            <p><strong>0–7 min:</strong> Return to the data-agent front door: teach shared ownership and runtime controls outside the client, then separate offline evals from sampled live correctness.</p>
             <p><strong>7–10 min:</strong> Walk the four-week plan. Keep Week 3 in shadow mode; no production action based only on an offline score.</p>
             <p><strong>10–22 min:</strong> Students run the operations prompt and fill only the unresolved decisions.</p>
             <p><strong>22–25 min:</strong> Write one Scale / Hold / Stop ask and one Monday action small enough to complete in 30 minutes.</p>

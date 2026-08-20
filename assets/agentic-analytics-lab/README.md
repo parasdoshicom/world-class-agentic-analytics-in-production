@@ -19,15 +19,12 @@ The answer supports a weekly review decision about what to investigate. It does 
    python3 verify.py
    ```
 
-5. If DuckDB is available, you can also run `analysis.sql`.
-
 ## Files
 
 - `data/funnel_segments.csv` — the calculation source.
 - `data/wbr_benchmark.csv` — an independent weekly-review benchmark.
 - `context/metric.yaml` — the approved definition, filters, limits, and caveats.
 - `context/business_changes.md` — a known tagging change that limits causal claims.
-- `analysis.sql` — the trusted DuckDB route.
 - `verify.py` — a standard-library Python verifier.
 - `evals.yaml` — expected outcomes for routine, ambiguous, broken, and unsafe requests.
 - `work/` — the only folder where the harness should save generated artifacts.

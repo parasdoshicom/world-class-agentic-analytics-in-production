@@ -8,11 +8,9 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -23,6 +21,14 @@ jobs:
         uses: actions/checkout@v6
       - name: Validate course structure
         run: python3 scripts/validate_course.py
+      - name: Validate the clean student journey
+        run: python3 scripts/validate_student_journey.py
+      - name: Install browser test dependencies
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser acceptance tests
+        run: npm run test:browser
       - name: Run the clean lab
         working-directory: assets/agentic-analytics-lab
         run: python3 verify.py
@@ -44,9 +50,13 @@ jobs:
           grep -q 'OUTCOME: Review' /tmp/benchmark-conflict.txt
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: quality
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

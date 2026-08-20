@@ -59,7 +59,15 @@ def check_html(errors: list[str]) -> None:
 
         for target in parser.links:
             parsed = urlsplit(target)
-            if parsed.scheme in {"http", "https", "mailto", "data"} or target.startswith("#"):
+            if target.startswith("#"):
+                fragment = unquote(parsed.fragment)
+                if fragment and fragment not in parser.ids:
+                    fail(
+                        errors,
+                        f"missing internal anchor in {html_file.relative_to(ROOT)}: {target}",
+                    )
+                continue
+            if parsed.scheme in {"http", "https", "mailto", "data"}:
                 continue
             path = unquote(parsed.path)
             if path and not (html_file.parent / path).exists():

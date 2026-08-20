@@ -68,6 +68,17 @@ def main() -> int:
     if missing_columns:
         return refuse("The calculation source is missing required columns.", missing_columns)
 
+    incomplete_rows: list[str] = []
+    for index, row in enumerate(rows, start=2):
+        missing_values = sorted(
+            column for column in required
+            if row.get(column) is None or not str(row.get(column)).strip()
+        )
+        if missing_values:
+            incomplete_rows.append(f"CSV line {index}: missing {', '.join(missing_values)}")
+    if incomplete_rows:
+        return refuse("The calculation source has incomplete required values.", incomplete_rows)
+
     schema_ok = True
     unique_ids = len({row["row_id"] for row in rows}) == len(rows)
 
@@ -111,7 +122,22 @@ def main() -> int:
     benchmark_by_week: dict[str, dict[str, str]] = {}
     benchmark_errors: list[str] = []
     if benchmark_schema_ok:
-        benchmark_by_week = {row["week_start"]: dict(row) for row in benchmarks if as_bool(row["is_complete"])}
+        valid_benchmarks: list[dict[str, str]] = []
+        for index, row in enumerate(benchmarks, start=2):
+            missing_values = sorted(
+                column for column in benchmark_required
+                if row.get(column) is None or not str(row.get(column)).strip()
+            )
+            if missing_values:
+                benchmark_errors.append(
+                    f"benchmark CSV line {index} missing values: {', '.join(missing_values)}"
+                )
+                continue
+            valid_benchmarks.append(row)
+        benchmark_by_week = {
+            row["week_start"]: dict(row)
+            for row in valid_benchmarks if as_bool(row["is_complete"])
+        }
     else:
         missing = sorted(benchmark_required - (set(benchmarks[0]) if benchmarks else set()))
         benchmark_errors.append(f"benchmark missing columns: {', '.join(missing) or 'empty file'}")
@@ -137,7 +163,7 @@ def main() -> int:
     prior_pct = pct(prior["signups"], prior["sessions"])
     current_pct = pct(current["signups"], current["sessions"])
     delta_pp = current_pct - prior_pct
-    relative = 100.0 * (current_pct / prior_pct - 1.0)
+    relative = None if abs(prior_pct) < 1e-12 else 100.0 * (current_pct / prior_pct - 1.0)
 
     prior_rates: dict[tuple[str, str, str], float] = {}
     for row in clean:
@@ -202,7 +228,7 @@ def main() -> int:
     print(f"{prior_week}: {int(prior['signups'])}/{int(prior['sessions'])} = {prior_pct:.2f}%")
     print(f"{current_week}: {int(current['signups'])}/{int(current['sessions'])} = {current_pct:.2f}%")
     print(f"change_pp: {delta_pp:.2f}")
-    print(f"relative_change_pct: {relative:.2f}")
+    print(f"relative_change_pct: {relative:.2f}" if relative is not None else "relative_change_pct: not_applicable")
     print("DRIVER CHECK")
     print(f"paid_search: {pct(channel_totals[(prior_week, 'paid_search')]['signups'], channel_totals[(prior_week, 'paid_search')]['sessions']):.2f}% -> {pct(channel_totals[(current_week, 'paid_search')]['signups'], channel_totals[(current_week, 'paid_search')]['sessions']):.2f}%")
     print(f"mobile_paid_search: {pct(mobile_paid[prior_week]['signups'], mobile_paid[prior_week]['sessions']):.2f}% -> {pct(mobile_paid[current_week]['signups'], mobile_paid[current_week]['sessions']):.2f}%")
@@ -210,7 +236,10 @@ def main() -> int:
     print(f"expected_current_signups_at_prior_segment_rates: {expected_total:.0f}")
     print(f"actual_current_signups: {actual_total:.0f}")
     print(f"segment_rate_underperformance: {total_loss:.0f}")
-    print(f"paid_search_share_of_underperformance: {100.0 * paid_loss / total_loss:.2f}%")
+    if abs(total_loss) < 1e-12:
+        print("paid_search_share_of_underperformance: not_applicable")
+    else:
+        print(f"paid_search_share_of_underperformance: {100.0 * paid_loss / total_loss:.2f}%")
     print(f"without_paid_search: {pct(non_paid[prior_week]['signups'], non_paid[prior_week]['sessions']):.2f}% -> {pct(non_paid[current_week]['signups'], non_paid[current_week]['sessions']):.2f}%")
     print("BENCHMARK CHECK")
     for week, delta in tieouts:
