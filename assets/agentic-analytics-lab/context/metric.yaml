@@ -1,0 +1,37 @@
+lab_version: 1
+metric_id: qualified_signup_conversion
+definition: eligible qualified signups divided by eligible qualified sessions
+numerator: qualified_signups
+denominator: qualified_sessions
+grain: complete Monday-to-Sunday reporting week
+timezone: America/Los_Angeles
+include:
+  population: eligible
+exclude:
+  - test
+  - partner_assisted
+freshness:
+  use_only: is_complete = true
+comparison:
+  prior_week: 2026-08-03
+  current_week: 2026-08-10
+source:
+  calculation: data/funnel_segments.csv
+  benchmark: data/wbr_benchmark.csv
+benchmark_tolerance_percentage_points: 0.2
+known_caveats:
+  - campaign tagging changed on 2026-08-07
+  - the current incomplete week must not be used
+decision:
+  owner: Growth lead
+  use: choose the next investigation before changing campaign routing
+authority:
+  may:
+    - read local lab files
+    - calculate and validate
+    - recommend the next investigation
+  may_not:
+    - change campaign routing
+    - move budget
+    - modify source files
+expected_response_for_causal_question: Review

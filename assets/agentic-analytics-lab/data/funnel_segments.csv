@@ -1,0 +1,17 @@
+row_id,week_start,channel,device,landing_page,qualified_sessions,qualified_signups,population,is_complete,tag_version
+1,2026-08-03,paid_search,mobile,standard,1000,80,eligible,true,v1
+2,2026-08-03,paid_search,mobile,short,1000,80,eligible,true,v1
+3,2026-08-03,paid_search,desktop,standard,1000,90,eligible,true,v1
+4,2026-08-03,organic,mobile,standard,2000,170,eligible,true,v1
+5,2026-08-03,organic,desktop,standard,3000,270,eligible,true,v1
+6,2026-08-03,referral,desktop,standard,2000,150,eligible,true,v1
+7,2026-08-10,paid_search,mobile,standard,1000,80,eligible,true,v2
+8,2026-08-10,paid_search,mobile,short,3000,144,eligible,true,v2
+9,2026-08-10,paid_search,desktop,standard,1000,86,eligible,true,v2
+10,2026-08-10,organic,mobile,standard,1500,120,eligible,true,v2
+11,2026-08-10,organic,desktop,standard,2000,170,eligible,true,v2
+12,2026-08-10,referral,desktop,standard,1500,90,eligible,true,v2
+13,2026-08-10,paid_search,mobile,short,500,500,test,true,v2
+14,2026-08-10,referral,desktop,standard,1000,300,partner_assisted,true,v2
+15,2026-08-17,paid_search,mobile,short,2500,100,eligible,false,v2
+16,2026-08-17,organic,desktop,standard,2500,200,eligible,false,v2

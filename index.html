@@ -1,0 +1,1807 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Five-hour course companion and hands-on workbook for World-Class Agentic Analytics in Production.">
+  <title>World-Class Agentic Analytics in Production | Course Companion</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23b7a7ff'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial' font-size='20' font-weight='700' fill='%2317191b'%3EAA%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #f5f2eb;
+      --muted: #b9bbc0;
+      --dim: #83868e;
+      --base: #17191b;
+      --base-2: #202326;
+      --base-3: #2b2e32;
+      --line: rgba(245, 242, 235, 0.15);
+      --line-strong: rgba(245, 242, 235, 0.28);
+      --accent: #b7a7ff;
+      --accent-deep: #2b176d;
+      --accent-soft: rgba(183, 167, 255, 0.12);
+      --good: #8fd7b0;
+      --warn: #e8c77f;
+      --bad: #ef9b96;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+      --rail: 284px;
+      --topbar: 64px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--topbar) + 28px); }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--base);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, textarea, input { font: inherit; }
+    button { color: inherit; }
+    a { color: var(--accent); }
+    code, pre, .mono {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+    ::selection { background: var(--accent); color: #17121f; }
+
+    .progress-line {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 100;
+      width: 0;
+      height: 3px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(183, 167, 255, .65);
+    }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 90;
+      min-height: var(--topbar);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 24px;
+      background: rgba(23, 25, 27, .88);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+    .brand-lockup { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: #17191b;
+      background: var(--accent);
+      border-radius: 50%;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+    .brand-copy { min-width: 0; }
+    .brand-copy strong, .brand-copy span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-copy strong { font-size: 14px; letter-spacing: -.01em; }
+    .brand-copy span { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+    .top-actions { display: flex; align-items: center; gap: 8px; }
+    .button, .icon-button {
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .18s ease, border-color .18s ease, transform .18s ease;
+    }
+    .button { min-height: 38px; padding: 8px 14px; font-size: 13px; font-weight: 650; }
+    .button:hover, .icon-button:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-1px); }
+    .button.primary { color: #17121f; background: var(--accent); border-color: var(--accent); }
+    .button.small { min-height: 32px; padding: 6px 11px; font-size: 12px; }
+    .icon-button { width: 38px; height: 38px; display: grid; place-items: center; }
+
+    .rail {
+      position: fixed;
+      inset: var(--topbar) auto 0 0;
+      z-index: 70;
+      width: var(--rail);
+      padding: 22px 18px 36px;
+      overflow-y: auto;
+      background: var(--base-2);
+      border-right: 1px solid var(--line);
+    }
+    .rail-label { margin: 0 10px 12px; color: var(--dim); font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: .15em; }
+    .rail nav { display: grid; gap: 3px; }
+    .rail a {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      min-height: 45px;
+      padding: 7px 9px;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: background .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .rail a:hover { color: var(--ink); background: rgba(255,255,255,.035); }
+    .rail a.active { color: var(--ink); background: var(--accent-soft); border-left-color: var(--accent); }
+    .nav-num { color: var(--dim); font-size: 11px; font-variant-numeric: tabular-nums; }
+    .nav-title { min-width: 0; font-size: 13px; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-time { color: var(--dim); font-size: 10px; }
+    .rail-footer { margin: 28px 10px 0; padding-top: 18px; border-top: 1px solid var(--line); color: var(--dim); font-size: 11px; }
+    .rail-footer strong { display: block; color: var(--muted); margin-bottom: 3px; }
+
+    main { margin-left: var(--rail); padding-top: var(--topbar); }
+    section { position: relative; }
+    .shell { width: min(calc(100% - 72px), var(--max)); margin: 0 auto; }
+
+    .hero {
+      min-height: calc(100svh - var(--topbar));
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 83% 18%, rgba(183,167,255,.15), transparent 31%),
+        linear-gradient(135deg, #17191b 0%, #1b1c20 58%, #201c2d 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 52px;
+      align-items: center;
+      padding: 64px 0;
+    }
+    .eyebrow { margin: 0 0 18px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3, h4, p { margin-top: 0; }
+    h1 { max-width: 760px; margin-bottom: 24px; font-size: clamp(46px, 6vw, 84px); line-height: .98; letter-spacing: -.055em; font-weight: 650; }
+    .hero-deck { max-width: 700px; margin-bottom: 30px; color: var(--muted); font-size: clamp(18px, 2vw, 24px); line-height: 1.45; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--muted); font-size: 13px; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-meta i { width: 5px; height: 5px; display: block; border-radius: 50%; background: var(--accent); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+    }
+    .orbit { position: relative; width: min(100%, 500px); aspect-ratio: 1; }
+    .orbit::before, .orbit::after { content: ""; position: absolute; inset: 12%; border: 1px solid rgba(183,167,255,.25); border-radius: 50%; }
+    .orbit::after { inset: 27%; border-style: dashed; animation: spin 26s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .orbit-core {
+      position: absolute;
+      inset: 34%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #17121f;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 70px rgba(183,167,255,.25);
+      font-size: 16px;
+      font-weight: 850;
+      line-height: 1.12;
+      letter-spacing: -.02em;
+    }
+    .orbit-node {
+      position: absolute;
+      width: 118px;
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      text-align: center;
+      background: rgba(32,35,38,.94);
+      border: 1px solid var(--line-strong);
+      box-shadow: var(--shadow);
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+    .node-1 { top: 2%; left: 50%; transform: translateX(-50%); }
+    .node-2 { top: 25%; right: -2%; }
+    .node-3 { bottom: 15%; right: 4%; }
+    .node-4 { bottom: 2%; left: 50%; transform: translateX(-50%); }
+    .node-5 { bottom: 15%; left: 4%; }
+    .node-6 { top: 25%; left: -2%; }
+    .orbit-caption { position: absolute; inset: auto 0 -28px; text-align: center; color: var(--dim); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+
+    .section { padding: 96px 0; border-bottom: 1px solid var(--line); }
+    .section.alt { background: var(--base-2); }
+    .section-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .55fr); gap: 60px; align-items: end; margin-bottom: 54px; }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .kicker::before { content: ""; width: 26px; height: 1px; background: var(--accent); }
+    h2 { max-width: 820px; margin-bottom: 0; font-size: clamp(36px, 4.3vw, 62px); line-height: 1.04; letter-spacing: -.045em; font-weight: 630; }
+    .section-lede { margin: 0; color: var(--muted); font-size: 16px; }
+    h3 { margin-bottom: 14px; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.12; letter-spacing: -.03em; font-weight: 650; }
+    h4 { margin-bottom: 8px; font-size: 16px; letter-spacing: -.01em; }
+
+    .runway { border-top: 1px solid var(--line-strong); }
+    .runway-row {
+      display: grid;
+      grid-template-columns: 110px minmax(220px, .8fr) minmax(280px, 1.2fr) 150px;
+      gap: 22px;
+      align-items: center;
+      min-height: 86px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .runway-time { color: var(--accent); font-size: 13px; font-weight: 750; font-variant-numeric: tabular-nums; }
+    .runway-title { font-size: 16px; font-weight: 700; }
+    .runway-output { color: var(--muted); font-size: 13px; }
+    .runway-kind { justify-self: end; color: var(--dim); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .runway-row.break-row { min-height: 48px; opacity: .72; }
+
+    .promise-map { display: grid; border-top: 1px solid var(--line-strong); }
+    .promise-row { display: grid; grid-template-columns: .9fr 1.35fr .8fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .promise-row strong { font-size: 14px; }
+    .promise-row span { color: var(--muted); font-size: 13px; }
+    .promise-row em { color: var(--accent); font-size: 12px; font-style: normal; text-align: right; }
+    .lane-choice { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin-top: 34px; background: var(--line); border: 1px solid var(--line); }
+    .lane { min-height: 150px; padding: 24px; background: var(--base-2); }
+    .lane span { display: block; margin-bottom: 22px; color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .lane h4 { font-size: 20px; }
+    .lane p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .setup-flow { margin-top: 38px; border-top: 1px solid var(--line-strong); }
+    .setup-row { display: grid; grid-template-columns: 58px minmax(190px, .65fr) minmax(0, 1.35fr); gap: 24px; align-items: start; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .setup-row b { color: var(--accent); font-size: 12px; }
+    .setup-row strong { font-size: 15px; }
+    .setup-row span { color: var(--muted); font-size: 13px; }
+    .ready-line { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; margin-top: 30px; padding: 22px 0 22px 22px; border-left: 2px solid var(--good); }
+    .ready-line p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+
+    .module-topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 30px; }
+    .module-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { display: inline-flex; align-items: center; min-height: 28px; padding: 4px 9px; color: var(--muted); border: 1px solid var(--line-strong); border-radius: 999px; font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .tag.output { color: var(--accent); border-color: rgba(183,167,255,.45); }
+    .timer { display: flex; align-items: center; gap: 10px; }
+    .timer-readout { min-width: 76px; color: var(--accent); font-size: 22px; font-weight: 730; font-variant-numeric: tabular-nums; letter-spacing: -.03em; text-align: right; }
+
+    .teaching-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: 48px; align-items: start; }
+    .teaching-copy > p { max-width: 780px; color: var(--muted); font-size: 17px; }
+    .plain-list { margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line-strong); }
+    .plain-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .plain-list b { color: var(--accent); font-size: 12px; }
+    .plain-list strong { color: var(--ink); }
+    .side-note { padding: 24px 0 24px 24px; border-left: 2px solid var(--accent); }
+    .side-note .label { margin-bottom: 10px; color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .side-note p { color: var(--muted); font-size: 14px; }
+    .side-note p:last-child { margin-bottom: 0; }
+
+    .workshop-note { margin-top: 28px; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+    .workshop-note summary { padding: 14px 0; color: var(--accent); cursor: pointer; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .note-body { padding: 4px 0 24px; color: var(--muted); }
+    .note-body blockquote { margin: 0 0 18px; padding: 0 0 0 20px; color: var(--ink); border-left: 2px solid var(--line-strong); font-size: 18px; }
+
+    .matrix {
+      position: relative;
+      min-height: 520px;
+      margin-top: 46px;
+      padding: 26px 26px 64px 70px;
+    }
+    .matrix-grid { position: relative; height: 420px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; border-left: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+    .quadrant { display: grid; align-content: start; padding: 24px; border-right: 1px solid var(--line); border-top: 1px solid var(--line); }
+    .quadrant strong { max-width: 210px; font-size: 15px; }
+    .quadrant span { max-width: 240px; margin-top: 6px; color: var(--dim); font-size: 12px; }
+    .quadrant.best { background: linear-gradient(145deg, rgba(183,167,255,.12), transparent); }
+    .bubble { position: absolute; border-radius: 50%; background: rgba(183,167,255,.18); border: 1px solid rgba(183,167,255,.72); box-shadow: 0 0 30px rgba(183,167,255,.12); }
+    .bubble.big { width: 124px; height: 124px; top: 62px; right: 12%; }
+    .bubble.medium { width: 68px; height: 68px; top: 254px; right: 28%; opacity: .62; }
+    .bubble.small { width: 42px; height: 42px; top: 126px; left: 25%; opacity: .45; }
+    .axis-x, .axis-y { position: absolute; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .axis-x { inset: auto 26px 20px 70px; text-align: center; }
+    .axis-y { top: 26px; bottom: 64px; left: 18px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+
+    .artifact { display: none; margin-top: 50px; padding-top: 32px; border-top: 1px solid var(--line-strong); }
+    .workbook-open .artifact { display: block; }
+    .artifact-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 22px; }
+    .artifact-head p { max-width: 640px; margin: 0; color: var(--muted); font-size: 14px; }
+    .artifact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .field label span { color: var(--dim); font-weight: 500; }
+    .field textarea, .field input {
+      width: 100%;
+      color: var(--ink);
+      background: rgba(0,0,0,.15);
+      border: 1px solid var(--line-strong);
+      border-radius: 0;
+      outline: 0;
+      transition: border-color .18s ease, background .18s ease;
+    }
+    .field textarea { min-height: 92px; resize: vertical; padding: 12px 13px; line-height: 1.45; }
+    .field input { min-height: 44px; padding: 9px 12px; }
+    .field textarea:focus, .field input:focus { border-color: var(--accent); background: rgba(183,167,255,.04); }
+    .save-state { display: inline-flex; align-items: center; gap: 7px; color: var(--dim); font-size: 11px; }
+    .save-state::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--good); }
+
+    .template-block { position: relative; margin-top: 24px; background: #101214; border: 1px solid var(--line-strong); }
+    .template-block pre { margin: 0; padding: 22px 20px 24px; color: #dad7e1; overflow-x: auto; font-size: 12px; line-height: 1.65; white-space: pre-wrap; }
+    .copy-button { position: absolute; top: 10px; right: 10px; }
+    .builder-lab { margin-top: 34px; padding: 28px; background: linear-gradient(135deg, rgba(183,167,255,.09), rgba(16,18,20,.15)); border: 1px solid rgba(183,167,255,.42); }
+    .builder-lab .lab-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, .55fr); gap: 32px; align-items: end; }
+    .builder-lab .lab-head p { margin: 0; color: var(--muted); font-size: 13px; }
+    .builder-lab h3 { max-width: 780px; margin-bottom: 0; }
+    .builder-lab .template-block { margin-top: 22px; }
+    .source-note { margin: 12px 0 0; color: var(--dim); font-size: 11px; }
+    .source-note a { color: var(--accent); }
+
+    .kit-card { margin: 34px 0 0; padding: 28px; background: linear-gradient(135deg, rgba(143,215,176,.1), rgba(183,167,255,.08)); border: 1px solid rgba(143,215,176,.52); }
+    .kit-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 34px; align-items: start; }
+    .kit-card h3 { margin-bottom: 10px; }
+    .kit-card p { color: var(--muted); }
+    .kit-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .file-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .file-list li { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .file-list code { color: var(--ink); }
+    .prompt-turn { margin-top: 30px; padding: 24px; background: rgba(183,167,255,.06); border-left: 2px solid var(--accent); }
+    .prompt-turn .turn-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px; }
+    .prompt-turn .turn-head strong { font-size: 15px; }
+    .prompt-turn .turn-head span { color: var(--dim); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .prompt-turn .template-block { margin-top: 14px; }
+    .checkpoint { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 18px; background: var(--line); border: 1px solid var(--line); }
+    .checkpoint > div { min-height: 105px; padding: 16px; background: var(--base-2); }
+    .checkpoint b { display: block; margin-bottom: 8px; color: var(--accent); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+    .checkpoint span { color: var(--muted); font-size: 12px; }
+    .qa-stop { padding: 42px 0; background: linear-gradient(90deg, rgba(183,167,255,.12), transparent); border-bottom: 1px solid var(--line); }
+    .qa-inner { display: grid; grid-template-columns: 130px minmax(0, 1fr) auto; gap: 28px; align-items: center; }
+    .qa-number { color: var(--accent); font-size: 56px; font-weight: 700; line-height: .85; letter-spacing: -.06em; }
+    .qa-stop h3 { margin-bottom: 6px; }
+    .qa-stop p { margin: 0; color: var(--muted); }
+    .architecture-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 24px; background: var(--line); border: 1px solid var(--line); }
+    .architecture-node { min-height: 132px; padding: 18px; background: var(--base-2); }
+    .architecture-node b { display: block; margin-bottom: 22px; color: var(--accent); font-size: 11px; }
+    .architecture-node strong { display: block; margin-bottom: 6px; font-size: 13px; }
+    .architecture-node span { color: var(--dim); font-size: 11px; }
+    .control-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 34px; background: var(--line); border: 1px solid var(--line); }
+    .control-card { min-height: 190px; padding: 22px; background: var(--base-2); }
+    .control-card b { display: block; margin-bottom: 20px; color: var(--accent); font-size: 11px; }
+    .control-card h4 { margin-bottom: 10px; }
+    .control-card p { margin: 0; color: var(--muted); font-size: 12px; }
+    .reference-answer { margin-top: 18px; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+    .reference-answer summary { padding: 14px 0; color: var(--good); cursor: pointer; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .reference-answer .note-body { padding-bottom: 20px; }
+
+    .contract-flow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; margin: 42px 0 0; background: var(--line); border: 1px solid var(--line); }
+    .contract-step { min-height: 138px; padding: 20px; background: var(--base-2); }
+    .contract-step b { display: block; margin-bottom: 30px; color: var(--accent); font-size: 11px; }
+    .contract-step strong { display: block; margin-bottom: 8px; font-size: 14px; }
+    .contract-step span { color: var(--dim); font-size: 11px; }
+
+    .context-funnel { margin-top: 42px; display: grid; gap: 10px; }
+    .context-layer { display: grid; grid-template-columns: 150px minmax(0, 1fr) 190px; gap: 20px; align-items: center; min-height: 64px; padding: 12px 16px; border-left: 3px solid var(--line-strong); background: linear-gradient(90deg, rgba(255,255,255,.045), transparent); }
+    .context-layer:nth-child(1) { width: 100%; }
+    .context-layer:nth-child(2) { width: 91%; }
+    .context-layer:nth-child(3) { width: 82%; }
+    .context-layer:nth-child(4) { width: 73%; border-left-color: var(--accent); }
+    .context-layer strong { font-size: 14px; }
+    .context-layer span { color: var(--muted); font-size: 12px; }
+    .context-layer em { color: var(--dim); font-size: 10px; font-style: normal; text-align: right; }
+    .operator-story { margin-top: 30px; padding: 28px 0; display: grid; grid-template-columns: minmax(220px, .65fr) minmax(0, 1.35fr); gap: 34px; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--line-strong); }
+    .operator-story .story-number { color: var(--accent); font-size: clamp(54px, 7vw, 96px); line-height: .9; letter-spacing: -.07em; font-weight: 680; }
+    .operator-story .story-number span { display: block; margin-top: 12px; color: var(--dim); font-size: 10px; line-height: 1.4; letter-spacing: .11em; text-transform: uppercase; }
+    .operator-story h3 { margin-top: 0; }
+    .operator-story p { color: var(--muted); }
+
+    .states { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 42px; background: var(--line); border: 1px solid var(--line); }
+    .state { min-height: 260px; padding: 24px; background: var(--base); }
+    .state-word { display: block; margin-bottom: 38px; font-size: 25px; letter-spacing: -.03em; }
+    .state p { color: var(--muted); font-size: 13px; }
+    .state .gate { display: block; margin-top: 18px; color: var(--dim); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .state.answer .state-word { color: var(--good); }
+    .state.clarify .state-word { color: var(--accent); }
+    .state.review .state-word { color: var(--warn); }
+    .state.refuse .state-word { color: var(--bad); }
+
+    .proof-receipt { margin-top: 34px; display: grid; grid-template-columns: .8fr 1.2fr; border: 1px solid var(--line-strong); }
+    .receipt-left { padding: 28px; background: var(--accent-deep); }
+    .receipt-left .receipt-state { display: block; color: var(--accent); font-size: 10px; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    .receipt-left strong { display: block; margin: 24px 0 8px; font-size: 29px; line-height: 1.05; letter-spacing: -.04em; }
+    .receipt-left p { color: #d7d0f2; font-size: 13px; }
+    .receipt-right { padding: 24px 28px; background: var(--base-2); }
+    .receipt-row { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .receipt-row:last-child { border-bottom: 0; }
+    .receipt-row b { color: var(--dim); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .receipt-row span { color: var(--muted); font-size: 12px; }
+
+    .eval-stack { margin-top: 42px; display: grid; border-top: 1px solid var(--line-strong); }
+    .eval-row { display: grid; grid-template-columns: 70px .7fr 1fr .6fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: center; }
+    .eval-row b { color: var(--accent); font-size: 12px; }
+    .eval-row strong { font-size: 14px; }
+    .eval-row span { color: var(--muted); font-size: 12px; }
+    .eval-row em { color: var(--dim); font-size: 10px; font-style: normal; text-align: right; text-transform: uppercase; letter-spacing: .08em; }
+
+    .release-gate { margin-top: 40px; padding: 28px 0; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent); }
+    .release-gate h3 { max-width: 760px; }
+    .release-gate ul { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 28px; margin: 24px 0 0; padding: 0; list-style: none; }
+    .release-gate li { position: relative; padding-left: 22px; color: var(--muted); font-size: 13px; }
+    .release-gate li::before { content: "✓"; position: absolute; left: 0; color: var(--good); }
+
+    .month-plan { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 42px; background: var(--line); border: 1px solid var(--line); }
+    .week { min-height: 300px; padding: 24px; background: var(--base-2); }
+    .week-num { display: block; margin-bottom: 42px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .week h4 { font-size: 18px; }
+    .week p { color: var(--muted); font-size: 13px; }
+    .week ul { margin: 18px 0 0; padding-left: 17px; color: var(--dim); font-size: 12px; }
+    .week li { margin-bottom: 8px; }
+
+    .peer-review { margin-top: 44px; display: grid; grid-template-columns: .7fr 1.3fr; gap: 42px; align-items: start; }
+    .peer-review .big-number { color: var(--accent); font-size: 96px; line-height: .82; letter-spacing: -.07em; font-weight: 680; }
+    .peer-review p { color: var(--muted); }
+    .review-questions { border-top: 1px solid var(--line-strong); }
+    .review-question { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .review-question b { color: var(--accent); font-size: 11px; }
+    .review-question span { color: var(--muted); font-size: 13px; }
+
+    .prep-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .prep-column { padding-top: 18px; border-top: 2px solid var(--line-strong); }
+    .prep-column h3 { font-size: 21px; }
+    .prep-column ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+    .prep-column li { margin-bottom: 10px; }
+    .fallback { margin-top: 44px; padding: 26px 0 0; border-top: 1px solid var(--line-strong); }
+
+    .source-table { display: grid; border-top: 1px solid var(--line-strong); }
+    .source-row { display: grid; grid-template-columns: .55fr 1.2fr 1.25fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .source-row strong { font-size: 13px; }
+    .source-row span, .source-row code { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+    .boundary { margin-top: 38px; padding: 24px; background: rgba(239,155,150,.055); border-left: 2px solid var(--bad); }
+    .boundary strong { display: block; margin-bottom: 8px; color: var(--bad); }
+    .boundary p { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+
+    .finale { min-height: 74svh; display: grid; place-items: center; background: linear-gradient(135deg, #17191b 0%, #201c2d 100%); text-align: center; }
+    .finale-inner { max-width: 880px; padding: 110px 24px; }
+    .finale h2 { margin: 0 auto 24px; }
+    .finale p { max-width: 650px; margin: 0 auto; color: var(--muted); font-size: 18px; }
+    .finale .hero-actions { justify-content: center; }
+    footer { padding: 24px; color: var(--dim); background: #111315; font-size: 11px; text-align: center; }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 120;
+      max-width: 340px;
+      padding: 12px 15px;
+      color: #17121f;
+      background: var(--accent);
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      font-weight: 750;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    .focus-mode .rail { display: none; }
+    .focus-mode main { margin-left: 0; }
+    .focus-mode .brand-copy span { display: none; }
+
+    @media (max-width: 1080px) {
+      :root { --rail: 236px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 430px; }
+      .orbit { width: 430px; }
+      .section-header, .teaching-grid, .kit-grid { grid-template-columns: 1fr; gap: 26px; }
+      .runway-row { grid-template-columns: 92px minmax(190px, .8fr) minmax(220px, 1.2fr); }
+      .runway-kind { display: none; }
+      .contract-flow { grid-template-columns: repeat(3, 1fr); }
+      .states, .month-plan, .architecture-flow, .control-grid { grid-template-columns: repeat(2, 1fr); }
+      .prep-columns { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 780px) {
+      :root { --topbar: 58px; }
+      .topbar { padding: 8px 12px; }
+      .brand-copy, .button-label { display: none; }
+      .rail { display: none; }
+      main { margin-left: 0; }
+      .shell { width: min(calc(100% - 32px), var(--max)); }
+      .hero { min-height: auto; }
+      .hero-grid { gap: 22px; padding: 60px 0 50px; }
+      h1 { font-size: clamp(44px, 13vw, 64px); }
+      .hero-deck { font-size: 18px; }
+      .hero-visual { min-height: 350px; }
+      .orbit { width: 320px; }
+      .orbit-node { width: 92px; min-height: 48px; padding: 7px; font-size: 9px; }
+      .section { padding: 68px 0; }
+      .section-header { margin-bottom: 38px; }
+      h2 { font-size: 40px; }
+      .runway-row { grid-template-columns: 76px 1fr; gap: 14px; min-height: 78px; }
+      .runway-output { grid-column: 2; }
+      .promise-row, .source-row { grid-template-columns: 1fr; gap: 8px; }
+      .promise-row em { text-align: left; }
+      .setup-row { grid-template-columns: 42px 1fr; gap: 12px; }
+      .setup-row span { grid-column: 2; }
+      .ready-line { grid-template-columns: 1fr; padding-left: 16px; }
+      .artifact-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .matrix { min-height: 470px; padding-left: 50px; padding-right: 0; }
+      .matrix-grid { height: 390px; }
+      .quadrant { padding: 14px; }
+      .quadrant span { font-size: 10px; }
+      .bubble.big { width: 92px; height: 92px; right: 8%; }
+      .contract-flow, .states, .month-plan, .lane-choice, .architecture-flow, .control-grid, .checkpoint { grid-template-columns: 1fr; }
+      .contract-step { min-height: 105px; }
+      .context-layer { grid-template-columns: 1fr; gap: 4px; width: 100% !important; }
+      .context-layer em { text-align: left; }
+      .proof-receipt, .peer-review, .operator-story { grid-template-columns: 1fr; }
+      .eval-row { grid-template-columns: 50px 1fr; }
+      .eval-row span { grid-column: 2; }
+      .eval-row em { display: none; }
+      .release-gate ul { grid-template-columns: 1fr; }
+      .receipt-row { grid-template-columns: 1fr; gap: 4px; }
+      .builder-lab { padding: 22px 16px; }
+      .builder-lab .lab-head { grid-template-columns: 1fr; gap: 10px; }
+      .qa-inner { grid-template-columns: 64px 1fr; }
+      .qa-inner .timer { grid-column: 2; justify-self: start; }
+      .copy-button { position: static; margin: 12px 12px 0; }
+      .template-block pre { padding-top: 14px; }
+      .top-actions .primary { display: none; }
+      .top-actions #focusButton, .top-actions #printButton { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    }
+
+    @media print {
+      :root { --ink: #111; --muted: #343434; --dim: #666; --base: #fff; --base-2: #f5f5f5; --base-3: #eee; --line: #ccc; --line-strong: #999; --accent: #4b2ea7; --accent-deep: #e8e1ff; }
+      body { color: #111; background: #fff; font-size: 11pt; }
+      .topbar, .rail, .progress-line, .timer, .copy-button, .hero-actions, .toast { display: none !important; }
+      main { margin: 0; padding: 0; }
+      .hero { min-height: 0; background: #fff; }
+      .hero-grid { grid-template-columns: 1fr; padding: 30px 0; }
+      .hero-visual { display: none; }
+      h1 { font-size: 42pt; }
+      h2 { font-size: 28pt; }
+      .section { padding: 34px 0; break-inside: avoid; background: #fff !important; }
+      .workshop-note { display: block !important; }
+      .workshop-note .note-body { display: block !important; }
+      .field textarea { min-height: 72px; color: #111; background: #fff; }
+      .artifact { display: block !important; }
+      .state, .week, .contract-step { background: #fff; }
+      .finale { min-height: 0; background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-line" id="progressLine" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand-lockup">
+      <div class="brand-mark" aria-hidden="true">AA</div>
+      <div class="brand-copy">
+        <strong>Agentic Analytics in Production</strong>
+        <span>Course companion + workbook</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="button" id="notesButton" type="button">Expand walkthroughs</button>
+      <button class="button" id="workbookButton" type="button">Open workbook</button>
+      <button class="button" id="focusButton" type="button" title="Toggle focus mode (F)"><span class="button-label">Focus</span> <span aria-hidden="true">↗</span></button>
+      <button class="button primary" id="exportButton" type="button">Export starter pack</button>
+      <button class="icon-button" id="printButton" type="button" title="Print companion" aria-label="Print companion">⎙</button>
+    </div>
+  </header>
+
+  <aside class="rail" aria-label="Workshop navigation">
+    <p class="rail-label">Run of show · 300 min</p>
+    <nav id="railNav">
+      <a href="#setup"><span class="nav-num">00</span><span class="nav-title">Get ready + lab kit</span><span class="nav-time">20m</span></a>
+      <a href="#schedule"><span class="nav-num">01</span><span class="nav-title">Full agenda</span><span class="nav-time">5h</span></a>
+      <a href="#module-1"><span class="nav-num">02</span><span class="nav-title">Choose the work</span><span class="nav-time">25m</span></a>
+      <a href="#module-2"><span class="nav-num">03</span><span class="nav-title">Contract + architecture</span><span class="nav-time">35m</span></a>
+      <a href="#module-3"><span class="nav-num">04</span><span class="nav-title">Context map</span><span class="nav-time">40m</span></a>
+      <a href="#module-4"><span class="nav-num">05</span><span class="nav-title">Proof and review</span><span class="nav-time">45m</span></a>
+      <a href="#module-5"><span class="nav-num">06</span><span class="nav-title">Failure evals</span><span class="nav-time">45m</span></a>
+      <a href="#module-6"><span class="nav-num">07</span><span class="nav-title">Operate + launch</span><span class="nav-time">25m</span></a>
+      <a href="#peer-review"><span class="nav-num">08</span><span class="nav-title">Peer review</span><span class="nav-time">15m</span></a>
+      <a href="#facilitation"><span class="nav-num">09</span><span class="nav-title">Live-session notes</span><span class="nav-time">notes</span></a>
+      <a href="#sources"><span class="nav-num">10</span><span class="nav-title">Further reading</span><span class="nav-time">refs</span></a>
+    </nav>
+    <div class="rail-footer">
+      <strong>Friday · Aug 21, 2026</strong>
+      9:00 AM–2:00 PM PT<br>12:00–5:00 PM ET
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero" id="welcome">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Live workshop · course companion + workbook</p>
+          <h1>Build an analytics agent people can trust with real work.</h1>
+          <p class="hero-deck">Bring one recurring analytics question. Leave with a tested path, proof, production controls, and a 30-day launch memo your team can use.</p>
+          <div class="hero-meta">
+            <span><i></i> Five hours, live</span>
+            <span><i></i> No coding required</span>
+            <span><i></i> Works in your chosen harness</span>
+            <span><i></i> One finished starter pack</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#setup">Start with setup</a>
+            <a class="button" href="#schedule">Open the run of show</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="A recurring business question moving through a governed analytics loop">
+          <div class="orbit">
+            <div class="orbit-core">Trusted<br>decision</div>
+            <div class="orbit-node node-1">Choose the work</div>
+            <div class="orbit-node node-2">Bind context</div>
+            <div class="orbit-node node-3">Run + validate</div>
+            <div class="orbit-node node-4">Show proof</div>
+            <div class="orbit-node node-5">Review + correct</div>
+            <div class="orbit-node node-6">Reuse safely</div>
+            <div class="orbit-caption">Question → evidence → decision → learning</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="setup" data-nav="setup">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Module 0</span><span class="tag">20 minutes</span><span class="tag output">Output: ready workspace + working source</span></div>
+          <div class="timer" data-minutes="20"><span class="timer-readout">20:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Before the first prompt</span><h2>Make sure the agent can see the right data and context.</h2></div>
+          <p class="section-lede">Use Codex, Cursor, Claude Code, or the harness your team already trusts. The tool can change. These readiness checks do not.</p>
+        </div>
+
+        <div class="setup-flow" aria-label="Workspace readiness checks">
+          <div class="setup-row"><b>01</b><strong>Open the right workspace</strong><span>Point the agent at one course folder or sanitized project. Confirm what it can read and where it may write. Do not give it your whole computer by default.</span></div>
+          <div class="setup-row"><b>02</b><strong>Connect one data source</strong><span>Use a local CSV or DuckDB file, or configure the warehouse connector or MCP server. Keep passwords and tokens in the approved secret store, not in chat or course files.</span></div>
+          <div class="setup-row"><b>03</b><strong>Test the connection</strong><span>Ask the agent to name the active source and list the available tables or files. Then show the date range and run a harmless read such as a row count. “Configured” is not the same as “working.”</span></div>
+          <div class="setup-row"><b>04</b><strong>Load the context people carry</strong><span>Add the user and team, the business question, metric definitions, known exclusions, recent changes, saved corrections, and preferred output. Use only context your company permits you to share.</span></div>
+          <div class="setup-row"><b>05</b><strong>State the access boundary</strong><span>Say whether this session is read-only, which sources are approved, where outputs may be saved, and what requires a person. If the source is unavailable, use the synthetic workshop case.</span></div>
+        </div>
+
+        <div class="kit-card" id="lab-kit">
+          <div class="kit-grid">
+            <div>
+              <span class="kicker">No warehouse? Start here.</span>
+              <h3>Use the same synthetic case Paras will run live.</h3>
+              <p>The kit contains a calculation source, an independent benchmark, the metric definition, a known business change, trusted SQL, a dependency-free Python verifier, and ten eval cases. It works locally with any file-capable harness.</p>
+              <div class="kit-actions">
+                <a class="button primary" href="assets/agentic-analytics-workshop-lab.zip" download>Download the lab kit</a>
+                <a class="button" href="assets/agentic-analytics-lab/README.md" target="_blank">Read the lab guide</a>
+                <a class="button" href="assets/agentic-analytics-lab/data/funnel_segments.csv" download>Download the CSV</a>
+              </div>
+            </div>
+            <ul class="file-list" aria-label="Workshop kit contents">
+              <li><code>funnel_segments.csv</code><span>calculation source</span></li>
+              <li><code>wbr_benchmark.csv</code><span>independent tie-out</span></li>
+              <li><code>metric.yaml</code><span>meaning + limits</span></li>
+              <li><code>verify.py</code><span>independent check</span></li>
+              <li><code>analysis.sql</code><span>DuckDB route</span></li>
+              <li><code>evals.yaml</code><span>failure cases</span></li>
+            </ul>
+          </div>
+          <details class="reference-answer">
+            <summary>Check the kit before class: expected clean result</summary>
+            <div class="note-body"><p><strong>8.4% → 6.9% (-1.5 percentage points).</strong> Paid search is the largest observed contributor; the current partial week is excluded; both complete weeks tie to the benchmark. The correct state for a causal “why” is <strong>Review</strong> because campaign tagging changed between periods.</p><p>Run <code>python3 verify.py</code>. A clean machine should need no package install.</p></div>
+          </details>
+        </div>
+
+        <div class="ready-line">
+          <div><strong>You are ready when the agent can name the active source, summarize the loaded context, and state what it cannot do.</strong><p>AI Analyst implements this with setup state, an active dataset, a connection test, and session-start context loading. This workshop keeps the same sequence without requiring one specific coding tool.</p></div>
+          <button class="button" type="button" data-copy-target="openingPrompt">Copy the readiness prompt</button>
+          <span id="openingPrompt" hidden>Work only inside this course folder. Treat data/ and context/ as read-only. Write every generated artifact only under work/. Do not analyze the business question yet. List the files, tables, and tools you can actually access; row counts and date bounds; the business and metric context you found; and your access limits. Run one harmless read check. If anything required is missing, stop and name the smallest repair. Save the result as work/00_readiness.md.</span>
+        </div>
+
+        <details class="workshop-note">
+          <summary>Walkthrough + timing + connection fallback</summary>
+          <div class="note-body">
+            <blockquote>“Your favorite harness does not decide whether the analysis is trustworthy. The active data, loaded context, permissions, and checks do.”</blockquote>
+            <p><strong>0–4 min:</strong> Ask students to open their preferred harness and one sanitized workspace. Do not spend class time comparing tools.</p>
+            <p><strong>4–8 min:</strong> Students choose their safe source or download the workshop kit. Builders can check an MCP or warehouse connection; everyone can use the local files.</p>
+            <p><strong>8–15 min:</strong> Run the readiness check: active source, visible tables or files, date range, one harmless read, and explicit access boundary.</p>
+            <p><strong>15–20 min:</strong> Load the minimum business context, inspect <code>work/00_readiness.md</code>, and repair one missing item before moving on.</p>
+          </div>
+        </details>
+
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Hands-on · 12 min</span><h3>Prove what is actually ready.</h3></div><p>A connector shown in settings is not enough. Record what the agent successfully read in this session.</p></div>
+          <div class="artifact-grid">
+            <div class="field"><label for="setupWorkspace">Harness + working folder</label><textarea id="setupWorkspace" data-workbook="setup_workspace" placeholder="Example: Codex in a sanitized analytics-agent project"></textarea></div>
+            <div class="field"><label for="setupSource">Active source + connection proof</label><textarea id="setupSource" data-workbook="setup_source" placeholder="Source, visible tables or files, date range, harmless read result"></textarea></div>
+            <div class="field"><label for="setupContext">Context loaded</label><textarea id="setupContext" data-workbook="setup_context" placeholder="Role, team, metric meaning, recent changes, known corrections"></textarea></div>
+            <div class="field"><label for="setupAccess">Access boundary + fallback</label><textarea id="setupAccess" data-workbook="setup_access" placeholder="Read/write limits, approved sources, human review, synthetic fallback"></textarea></div>
+          </div>
+          <p class="save-state" aria-live="polite">Saved locally on this device</p>
+        </div>
+
+        <p class="source-note">Course sequence adapted from AI Analyst’s MIT-licensed <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/docs/setup-guide.md" target="_blank" rel="noreferrer">setup guide</a>, first-run routing, data connection, and knowledge bootstrap. AI Analyst uses Claude Code; the workshop readiness check is intentionally tool-neutral.</p>
+      </div>
+    </section>
+
+    <section class="section" id="schedule" data-nav="schedule">
+      <div class="shell">
+        <div class="section-header">
+          <div><span class="kicker">The day</span><h2>Every hour creates part of the final plan.</h2></div>
+          <p class="section-lede">The course alternates between a short walkthrough, a worked example, and build time in your own harness. Two breaks and 30 protected minutes for questions are included in the five hours.</p>
+        </div>
+        <div class="runway" aria-label="Five-hour run of show">
+          <div class="runway-row"><span class="runway-time">0:00–0:20</span><span class="runway-title">Prove the setup</span><span class="runway-output">Choose your safe source or download the kit. Confirm access, date bounds, context, and limits before asking for analysis.</span><span class="runway-kind">Build 0</span></div>
+          <div class="runway-row"><span class="runway-time">0:20–0:45</span><span class="runway-title">Choose work worth building</span><span class="runway-output">Frame the decision, score the use case, and approve what the harness will analyze.</span><span class="runway-kind">Build 1</span></div>
+          <div class="runway-row"><span class="runway-time">0:45–1:20</span><span class="runway-title">Write the contract + map the system</span><span class="runway-output">Name the job, authority, human boundary, and the component that owns each guarantee.</span><span class="runway-kind">Build 2</span></div>
+          <div class="runway-row"><span class="runway-time">1:20–1:30</span><span class="runway-title">Q&amp;A checkpoint</span><span class="runway-output">Resolve setup, tool, MCP, source, use-case, and contract questions before the technical build.</span><span class="runway-kind">10 min</span></div>
+          <div class="runway-row break-row"><span class="runway-time">1:30–1:40</span><span class="runway-title">Break</span><span class="runway-output">Leave your contract and architecture map on screen.</span><span class="runway-kind">10 min</span></div>
+          <div class="runway-row"><span class="runway-time">1:40–2:20</span><span class="runway-title">Build the context map</span><span class="runway-output">Create the metric file, source precedence, caveats, freshness rule, and retrieval path.</span><span class="runway-kind">Build 3</span></div>
+          <div class="runway-row"><span class="runway-time">2:20–3:05</span><span class="runway-title">Run, verify, and show proof</span><span class="runway-output">Execute one complete analysis, reconcile it independently, correct one claim, and save the proof.</span><span class="runway-kind">Build 4</span></div>
+          <div class="runway-row"><span class="runway-time">3:05–3:15</span><span class="runway-title">Q&amp;A checkpoint</span><span class="runway-output">Bring the number, caveat, validation, or response-state choice you cannot yet defend.</span><span class="runway-kind">10 min</span></div>
+          <div class="runway-row break-row"><span class="runway-time">3:15–3:25</span><span class="runway-title">Break</span><span class="runway-output">Return with one failure you want the agent to catch.</span><span class="runway-kind">10 min</span></div>
+          <div class="runway-row"><span class="runway-time">3:25–4:10</span><span class="runway-title">Break it, repair it, rerun it</span><span class="runway-output">Declare expected outcomes, run the cases, repair one shared artifact, and rerun affected tests.</span><span class="runway-kind">Build 5</span></div>
+          <div class="runway-row"><span class="runway-time">4:10–4:35</span><span class="runway-title">Operate it + present the launch decision</span><span class="runway-output">Set controls, owners, monitoring, cost, rollout, incident response, and a Scale / Hold / Stop ask.</span><span class="runway-kind">Build 6</span></div>
+          <div class="runway-row"><span class="runway-time">4:35–4:50</span><span class="runway-title">Peer review</span><span class="runway-output">Use five questions to find and repair the weakest part of one another’s plan.</span><span class="runway-kind">Review</span></div>
+          <div class="runway-row"><span class="runway-time">4:50–5:00</span><span class="runway-title">Open Q&amp;A + export + Monday commitment</span><span class="runway-output">Resolve the final blocker, export the starter pack, and name the first owner and artifact.</span><span class="runway-kind">Close</span></div>
+        </div>
+
+        <div class="lane-choice" aria-label="Two source choices for the same workshop">
+          <div class="lane"><span>Use your safe source</span><h4>Bring one recurring question</h4><p>Use a sanitized local extract or an approved read-only warehouse route. Run the same staged prompts and keep sensitive data, credentials, and proprietary SQL out of this page.</p></div>
+          <div class="lane"><span>Use the workshop source</span><h4>Everything runs locally</h4><p>Download the kit and follow Paras’s exact case in any file-capable harness. No warehouse, MCP connection, paid tool, or Python package install is required.</p></div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section alt" id="module-1" data-nav="module-1">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Module 1</span><span class="tag">25 minutes</span><span class="tag output">Output: approved use-case brief</span></div>
+          <div class="timer" data-minutes="25"><span class="timer-readout">25:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Choose the work</span><h2>Start with a decision that repeats. Skip the chatbot that answers anything.</h2></div>
+          <p class="section-lede">A production agent earns its maintenance cost when the work recurs, the path can become reliable, the answer changes something, and the downside is understood.</p>
+        </div>
+        <div class="teaching-grid">
+          <div class="teaching-copy">
+            <h3>Four questions decide whether to build.</h3>
+            <p>The first three come from the build-first lesson. The fourth prevents a high-impact use case from quietly crossing a line the team has not designed for.</p>
+            <ul class="plain-list">
+              <li><b>01</b><span><strong>Frequency:</strong> How often does this exact work return?</span></li>
+              <li><b>02</b><span><strong>Repeatability:</strong> With the same inputs, do the metric, direction, drivers, caveat, and basic recommendation stay stable?</span></li>
+              <li><b>03</b><span><strong>Decision value:</strong> Who changes what because this answer exists?</span></li>
+              <li><b>04</b><span><strong>Decision risk:</strong> What is the cost of a quietly wrong answer or an action taken too early?</span></li>
+            </ul>
+          </div>
+          <aside class="side-note">
+            <div class="label">Worked example · synthetic</div>
+            <h4>Why did qualified-signup conversion fall last week?</h4>
+            <p>It appears in the weekly review, uses a known metric and source path, and changes where Growth investigates. It is a strong candidate only after source, caveat, and review rules are explicit.</p>
+          </aside>
+        </div>
+
+        <div class="matrix" role="img" aria-label="Use-case matrix: frequency increases left to right, repeatability increases bottom to top, and bubble size represents business impact">
+          <div class="matrix-grid">
+            <div class="quadrant"><strong>Assist when needed</strong><span>Consistent, but too occasional to maintain as a production system.</span></div>
+            <div class="quadrant best"><strong>Build here first</strong><span>Frequent, repeatable, decision-relevant. Pick the largest safe opportunity.</span></div>
+            <div class="quadrant"><strong>One-off investigation</strong><span>Use AI to help, but do not create an operating dependency.</span></div>
+            <div class="quadrant"><strong>Fix the foundation</strong><span>The recurring demand is real. Reconcile data, definitions, or analysis first.</span></div>
+            <span class="bubble small" aria-hidden="true"></span><span class="bubble medium" aria-hidden="true"></span><span class="bubble big" aria-hidden="true"></span>
+          </div>
+          <span class="axis-x">How often the work returns →</span>
+          <span class="axis-y">Repeatability ↑</span>
+        </div>
+
+        <details class="workshop-note">
+          <summary>Walkthrough + timing</summary>
+          <div class="note-body">
+            <blockquote>“If two dashboards disagree, adding a chatbot creates a faster disagreement.”</blockquote>
+            <p><strong>0–5 min:</strong> Ask everyone to put one recurring metric question in chat, then read three aloud without critiquing them yet.</p>
+            <p><strong>5–12 min:</strong> Teach the matrix. “Same answer” means the definition, source, number or direction, main drivers, material caveat, and basic decision remain stable. The prose can change.</p>
+            <p><strong>12–15 min:</strong> Place the synthetic conversion question on the matrix. Move it to “fix the foundation” when tagging changes and no precedence rule exists.</p>
+            <p><strong>15–25 min:</strong> Students use the prompt, approve the brief, and select the question they will carry forward.</p>
+          </div>
+        </details>
+
+        <div class="prompt-turn">
+          <div class="turn-head"><strong>Harness turn 1 · Frame the work, then wait</strong><span>Use your source or the lab kit</span></div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
+            <pre>Do not analyze yet. Help me frame the most recent complete period versus the prior comparable period.
+
+Return:
+- Goal
+- Decision this answer supports
+- Metric
+- Testable hypotheses
+- How often this work returns
+- Cost of a quietly wrong result
+- Success condition
+
+Ask the smallest missing clarification. Then recommend Build, Fix the foundation, Assist, or Do not build. Stop and wait for my approval. Save the approved brief as work/01_use_case.md.</pre>
+          </div>
+          <div class="checkpoint"><div><b>You should now have</b><span>A one-page use-case brief, not an analysis.</span></div><div><b>Done when</b><span>The decision, metric, comparison period, downside, and success condition are explicit.</span></div><div><b>Next</b><span>Approve the brief before asking the harness to write the contract.</span></div></div>
+        </div>
+
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Choose one use case.</h3></div><p>Use this if you prefer the page to a file. Use a sanitized case; do not paste company data, credentials, customer information, or proprietary code.</p></div>
+          <div class="artifact-grid">
+            <div class="field full"><label for="useCase">Recurring business question</label><textarea id="useCase" data-workbook="use_case" placeholder="Example: Why did qualified-signup conversion fall last week?"></textarea></div>
+            <div class="field"><label for="decisionUser">Who needs the answer?</label><textarea id="decisionUser" data-workbook="decision_user" placeholder="Role, team, or decision forum"></textarea></div>
+            <div class="field"><label for="decisionChange">What decision changes?</label><textarea id="decisionChange" data-workbook="decision_change" placeholder="The action, allocation, escalation, or follow-up"></textarea></div>
+            <div class="field"><label for="frequency">Frequency <span>Daily / weekly / monthly / occasional</span></label><input id="frequency" data-workbook="frequency" placeholder="Weekly business review"></div>
+            <div class="field"><label for="repeatability">Repeatability evidence</label><textarea id="repeatability" data-workbook="repeatability" placeholder="How many times have you run it, and what stayed stable?"></textarea></div>
+            <div class="field"><label for="businessImpact">Business impact</label><textarea id="businessImpact" data-workbook="business_impact" placeholder="What improves if this works?"></textarea></div>
+            <div class="field"><label for="wrongAnswerCost">Cost of a quietly wrong answer</label><textarea id="wrongAnswerCost" data-workbook="wrong_answer_cost" placeholder="What could be misallocated, delayed, or damaged?"></textarea></div>
+            <div class="field full"><label for="selectedUseCase">Decision: build, fix foundations, assist on demand, or do not build?</label><textarea id="selectedUseCase" data-workbook="use_case_decision" placeholder="Choose one and explain why in two sentences."></textarea></div>
+          </div>
+          <p class="save-state" aria-live="polite">Saved locally on this device</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="module-2" data-nav="module-2">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Module 2</span><span class="tag">35 minutes</span><span class="tag output">Output: contract + architecture map</span></div>
+          <div class="timer" data-minutes="35"><span class="timer-readout">35:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Define the job</span><h2>Write the decision contract before you design the agent.</h2></div>
+          <p class="section-lede">The contract forces one useful sentence: who needs what answer to make which decision, with what authority and human boundary.</p>
+        </div>
+        <div class="teaching-grid">
+          <div class="teaching-copy">
+            <h3>A useful agent has a narrow job and an explicit line it cannot cross.</h3>
+            <p>Do not start with the tools. Start with the decision. Then specify the inputs, output, authority, and review trigger. The contract should fit on one screen and be readable by the business owner, data owner, and builder.</p>
+            <p><strong>AI Analyst preflight:</strong> Goal → Decision → Metric → Hypothesis. If you cannot state all four, ask before touching the data. Add a concrete success condition so the analysis has a finish line.</p>
+          </div>
+          <aside class="side-note">
+            <div class="label">Say this</div>
+            <p>“The agent does the repeatable analytical work. The person still owns what matters, reviews the result, and makes the final call.”</p>
+          </aside>
+        </div>
+
+        <div class="contract-flow" aria-label="Seven decision contract fields">
+          <div class="contract-step"><b>01</b><strong>User + forum</strong><span>Who receives this and where?</span></div>
+          <div class="contract-step"><b>02</b><strong>Decision + action</strong><span>What choice and next move can change?</span></div>
+          <div class="contract-step"><b>03</b><strong>Output</strong><span>What must the agent return?</span></div>
+          <div class="contract-step"><b>04</b><strong>Evidence</strong><span>What must be true before it answers?</span></div>
+          <div class="contract-step"><b>05</b><strong>Authority</strong><span>What may it do on its own?</span></div>
+          <div class="contract-step"><b>06</b><strong>Stop condition</strong><span>When must it clarify, review, or refuse?</span></div>
+          <div class="contract-step"><b>07</b><strong>Human owner</strong><span>Who owns the final decision and repair?</span></div>
+        </div>
+
+        <details class="reference-answer">
+          <summary>Map the production path: where does each guarantee live?</summary>
+          <div class="note-body">
+            <p>A prompt in Codex, Cursor, or Claude can remind the agent what to do. Shared guarantees belong in the common path the clients call. Label who owns permissions, versions, persistence, failure handling, and review.</p>
+            <div class="architecture-flow" aria-label="Client-neutral analytics agent request path">
+              <div class="architecture-node"><b>01</b><strong>Harness</strong><span>Collects intent and shows the result. It should not be the only enforcement point.</span></div>
+              <div class="architecture-node"><b>02</b><strong>Tool / MCP contract</strong><span>Validates inputs, scope, versions, and allowed operations.</span></div>
+              <div class="architecture-node"><b>03</b><strong>Approved context</strong><span>Supplies the metric, source precedence, caveats, owners, and expiry.</span></div>
+              <div class="architecture-node"><b>04</b><strong>Scoped source adapter</strong><span>Uses read-only credentials, allowlists, limits, and timeouts.</span></div>
+              <div class="architecture-node"><b>05</b><strong>Validation</strong><span>Runs source, structure, logic, business-rule, and reconciliation checks.</span></div>
+              <div class="architecture-node"><b>06</b><strong>Proof store</strong><span>Saves the question, versions, source result, checks, caveats, and outcome.</span></div>
+              <div class="architecture-node"><b>07</b><strong>Human review</strong><span>Owns high-risk, conflicting, novel, or failed paths.</span></div>
+              <div class="architecture-node"><b>08</b><strong>Correction + eval memory</strong><span>Turns reviewed failures into shared fixes and regression cases.</span></div>
+            </div>
+          </div>
+        </details>
+
+        <div class="template-block">
+          <button class="button small copy-button" type="button" data-copy-container>Copy template</button>
+          <pre>For [user / decision forum], this agent answers [recurring question] so they can decide [specific action].
+
+It may: [read / calculate / compare / draft / recommend].
+It may not: [publish / spend / change source truth / take irreversible action].
+
+It must return: what it did next, the answer or clarification, source, freshness, calculation path, assumptions, caveats, validation, and next action.
+
+It may answer only when: [required evidence and validation].
+It must clarify, review, or refuse when: [risk, novelty, conflicting evidence, missing owner, failed validation, or action threshold].
+Human owner: [role accountable for the decision and repair].</pre>
+        </div>
+
+        <div class="builder-lab">
+          <div class="lab-head">
+            <div><span class="kicker">File example · use when helpful</span><h3>Turn the decision contract into a machine-readable agent contract.</h3></div>
+            <p>AI Analyst declares inputs, outputs, dependencies, context, and whether a failed step must stop the pipeline. Keep the business decision in the description so orchestration does not erase intent.</p>
+          </div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy agent contract</button>
+            <pre>name: conversion-wbr-review
+description: Explain weekly conversion movement so Growth can choose the next investigation.
+inputs:
+  - name: QUESTION
+    type: str
+    source: user
+    required: true
+  - name: SOURCE_TIEOUT
+    type: file
+    source: agent:source-tieout
+    required: true
+outputs:
+  - path: work/02_contract_example.md
+    type: markdown
+depends_on: [source-tieout]
+knowledge_context:
+  - context/metric.yaml
+critical: true</pre>
+          </div>
+          <p class="source-note">Adapted from the MIT-licensed <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/agents/CONTRACT_TEMPLATE.md" target="_blank" rel="noreferrer">AI Analyst contract format</a>. Workshop example is synthetic.</p>
+        </div>
+
+        <div class="prompt-turn">
+          <div class="turn-head"><strong>Harness turn 2 · Draft, break, and revise the contract</strong><span>Stop after one revision</span></div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
+            <pre>Using the approved use-case brief, draft a seven-field contract:
+1. user and decision forum
+2. decision and action supported
+3. required output
+4. evidence required before answering
+5. what the agent may do
+6. when it must Clarify, Review, or Refuse
+7. human owner
+
+Then try to break the contract with one vague request and one forbidden action. Revise it once.
+
+Also draw the request path from harness to tool/MCP contract, approved context, scoped source, validation, proof, human review, and correction memory. Label which component owns permissions, persistence, versioning, and each failure.
+
+Save work/02_contract.yaml and work/02_architecture.md. Mark unknown owners instead of inventing them.</pre>
+          </div>
+          <div class="checkpoint"><div><b>You should now have</b><span>A contract and an eight-part system map.</span></div><div><b>Done when</b><span>A vague request and an action request both route safely, and every guarantee has an owner.</span></div><div><b>Next</b><span>Use the contract to decide which context the system is allowed to trust.</span></div></div>
+        </div>
+
+        <details class="workshop-note">
+          <summary>Walkthrough + timing + live test</summary>
+          <div class="note-body">
+            <blockquote>“If the contract says ‘help leaders understand the business,’ it is still a wish. Name the decision and the next action.”</blockquote>
+            <p><strong>0–7 min:</strong> Teach the seven fields. Contrast “Tell me how growth is doing” with “Explain last week’s qualified-signup conversion movement for the Growth WBR and recommend the next investigation.”</p>
+            <p><strong>7–13 min:</strong> Map the client-neutral production path. Ask where permissions, context versions, validation, proof, and review actually live.</p>
+            <p><strong>13–28 min:</strong> Students run the prompt, inspect the two files, and repair one vague boundary.</p>
+            <p><strong>28–35 min:</strong> Peer test: a partner tries one ambiguous question and one high-impact action request.</p>
+          </div>
+        </details>
+
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Write the contract in plain language.</h3></div><p>If the authority or review boundary is vague, the agent is not ready to leave the builder’s hands.</p></div>
+          <div class="artifact-grid">
+            <div class="field"><label for="contractUser">User and decision forum</label><textarea id="contractUser" data-workbook="contract_user" placeholder="Growth lead in the weekly business review"></textarea></div>
+            <div class="field"><label for="contractDecision">Decision supported</label><textarea id="contractDecision" data-workbook="contract_decision" placeholder="Which funnel area should be investigated or prioritized next?"></textarea></div>
+            <div class="field full"><label for="contractOutput">Required output</label><textarea id="contractOutput" data-workbook="contract_output" placeholder="Answer, clarification, review, or refusal; evidence; caveat; validation; next action"></textarea></div>
+            <div class="field full"><label for="contractEvidence">Evidence required before the agent may answer</label><textarea id="contractEvidence" data-workbook="contract_evidence" placeholder="Approved source ran, freshness passed, required context applied, calculation reconciled..."></textarea></div>
+            <div class="field"><label for="mayDo">The agent may</label><textarea id="mayDo" data-workbook="may_do" placeholder="Read approved sources, calculate, decompose, draft a recommendation"></textarea></div>
+            <div class="field"><label for="mayNot">The agent may not</label><textarea id="mayNot" data-workbook="may_not" placeholder="Publish, spend, change definitions, or take irreversible action"></textarea></div>
+            <div class="field"><label for="refusalCondition">The agent must clarify, review, or refuse when</label><textarea id="refusalCondition" data-workbook="refusal_condition" placeholder="Source conflict, new join, high-impact decision, failed check, or wide uncertainty"></textarea></div>
+            <div class="field"><label for="humanOwner">Human owner</label><textarea id="humanOwner" data-workbook="human_owner" placeholder="Role accountable for the final decision and for repairing failures"></textarea></div>
+            <div class="field full"><label for="contractSentence">One-sentence contract</label><textarea id="contractSentence" data-workbook="contract_sentence" placeholder="For [user], this agent answers [question] so they can decide [action], while [human boundary]."></textarea></div>
+          </div>
+          <p class="save-state">Saved locally on this device</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="qa-stop" id="qa-1">
+      <div class="shell qa-inner">
+        <div class="qa-number">10</div>
+        <div><span class="kicker">Q&amp;A checkpoint 1</span><h3>Clear the setup and contract blockers now.</h3><p>Bring source access, MCP, harness, permissions, use-case, or architecture questions. We will park deep company-specific design for the final Q&amp;A.</p></div>
+        <div class="timer" data-minutes="10"><span class="timer-readout">10:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="module-3" data-nav="module-3">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Module 3</span><span class="tag">40 minutes</span><span class="tag output">Output: reviewed metric + context path</span></div>
+          <div class="timer" data-minutes="40"><span class="timer-readout">40:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Bind the meaning</span><h2>Give the agent the context your team normally carries in its head.</h2></div>
+          <p class="section-lede">Trust starts upstream: one definition, named owners, an approved source path, freshness, caveats, and precedence when sources disagree.</p>
+        </div>
+        <div class="teaching-grid">
+          <div class="teaching-copy">
+            <h3>The goal is not “more context.” It is the smallest approved context that changes the path safely.</h3>
+            <p>For each golden question, distinguish what must exist, what was available, what the agent retrieved, and what actually changed the answer. This makes a miss diagnosable instead of producing another document dump.</p>
+            <ul class="plain-list">
+              <li><b>01</b><span><strong>Metric:</strong> definition, formula, grain, time zone, filters, exclusions, owner.</span></li>
+              <li><b>02</b><span><strong>Source:</strong> approved dashboard, query, semantic object, or table; freshness and lineage.</span></li>
+              <li><b>03</b><span><strong>Business:</strong> product changes, promotions, seasonality, operating rules, decision thresholds.</span></li>
+              <li><b>04</b><span><strong>Memory:</strong> known caveats, corrections, prior reviewed answer paths, expiry rule.</span></li>
+            </ul>
+          </div>
+          <aside class="side-note">
+            <div class="label">Source conflict rule</div>
+            <p>If two approved artifacts disagree and no precedence rule exists, choose Review or Refuse. Do not pick the newest-looking number.</p>
+          </aside>
+        </div>
+
+        <div class="context-funnel" aria-label="Required, eligible, retrieved, and applied context sets">
+          <div class="context-layer"><strong>Required context</strong><span>What a defensible answer must use</span><em>Defined before the run</em></div>
+          <div class="context-layer"><strong>Eligible context</strong><span>Approved material available to the agent</span><em>Owned + current</em></div>
+          <div class="context-layer"><strong>Retrieved context</strong><span>What the agent actually pulled</span><em>Observed at runtime</em></div>
+          <div class="context-layer"><strong>Applied context</strong><span>What changed the path, result, caveat, or outcome</span><em>Evidence of use</em></div>
+        </div>
+
+        <div class="operator-story" aria-label="First-person semantic layer example">
+          <div class="story-number">1,400 → 15<span>dashboards to blessed decision paths</span></div>
+          <div>
+            <span class="kicker">First-person operator example</span>
+            <h3>The real work was deciding which definitions deserved to survive.</h3>
+            <p>Consolidating 1,400 dashboards into 15 blessed dashboards was not mainly a cleanup project. It forced the team to settle metric meaning, ownership, source precedence, and where trusted logic lived. That work made the analytics foundation easier for people and agents to reuse.</p>
+            <p><strong>A metric name is not a metric definition.</strong> If the exclusion lives only in a wiki page or a BI filter, a model can write correct SQL and still return the wrong answer.</p>
+          </div>
+        </div>
+
+        <div class="template-block">
+          <button class="button small copy-button" type="button" data-copy-container>Copy metric packet</button>
+          <pre>METRIC TRUST PACKET
+Metric + business question:
+Business owner / data owner:
+Definition + formula:
+Numerator / denominator:
+Grain / time zone:
+Required filters / exclusions:
+Approved source path:
+Freshness requirement:
+Known caveats / recent changes:
+Validation rule + tolerance:
+When to clarify, review, or refuse:
+Last reviewed / next review:</pre>
+        </div>
+
+        <div class="builder-lab">
+          <div class="lab-head">
+            <div><span class="kicker">File example · use when helpful</span><h3>Save the metric as context the agent can actually read.</h3></div>
+            <p>Treat the metric definition as a reviewed file, not a sentence buried in a prompt. The agent should get the same meaning, owner, source, filters, freshness, and caveats on every run.</p>
+          </div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy metric YAML</button>
+            <pre>lab_version: 1
+metric_id: qualified_signup_conversion
+definition: eligible qualified signups divided by eligible qualified sessions
+numerator: qualified_signups
+denominator: qualified_sessions
+grain: complete Monday-to-Sunday reporting week
+timezone: America/Los_Angeles
+include:
+  population: eligible
+exclude:
+  - test
+  - partner_assisted
+freshness:
+  use_only: is_complete = true
+comparison:
+  prior_week: 2026-08-03
+  current_week: 2026-08-10
+source:
+  calculation: data/funnel_segments.csv
+  benchmark: data/wbr_benchmark.csv
+benchmark_tolerance_percentage_points: 0.2
+known_caveats:
+  - campaign tagging changed on 2026-08-07
+  - the current incomplete week must not be used
+decision:
+  owner: Growth lead
+  use: choose the next investigation before changing campaign routing
+authority:
+  may: [read local lab files, calculate and validate, recommend the next investigation]
+  may_not: [change campaign routing, move budget, modify source files]
+expected_response_for_causal_question: Review</pre>
+          </div>
+          <p class="source-note">The pattern follows the public <a href="https://github.com/parasdoshicom/ai-plus-data/tree/main/examples/metric-trust-packet" target="_blank" rel="noreferrer">AI+Data metric trust packet</a> and nao’s <a href="https://github.com/getnao/nao/blob/ade2cf2ba5fd74ec4ffa5c9b33600ac38a516986/skills/add-semantic-layer/templates/semantic.yaml" target="_blank" rel="noreferrer">semantic-layer template</a>. Replace the synthetic example with an approved, sanitized metric from your team.</p>
+        </div>
+
+        <div class="prompt-turn">
+          <div class="turn-head"><strong>Harness turn 3 · Bind only approved context</strong><span>Do not guess missing definitions</span></div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
+            <pre>Read only the supplied metric, source, and business-change material. Draft work/03_metric_proposal.yaml with the definition, formula, owner placeholders, grain, timezone, filters, exclusions, source precedence, freshness, tolerance, caveats, review date, and stop conditions. Do not overwrite the approved context/metric.yaml.
+
+Do not invent missing values. List unresolved items.
+
+For this question, show:
+- required context
+- eligible approved context
+- context you actually retrieved
+- context that materially changed the path, result, caveat, or outcome
+
+Show the proposed file diff and wait for approval before treating it as trusted.</pre>
+          </div>
+          <div class="checkpoint"><div><b>You should now have</b><span>A reviewable metric file and a four-part context trace.</span></div><div><b>Done when</b><span>A new teammate can choose the right definition and knows when to stop.</span></div><div><b>Next</b><span>Approve the context before the harness proposes or executes the source path.</span></div></div>
+        </div>
+
+        <details class="workshop-note">
+          <summary>Walkthrough + timing + context failure demo</summary>
+          <div class="note-body">
+            <blockquote>“The model may be smart enough to find a number. The system has to know whether it found the right number for this decision.”</blockquote>
+            <p><strong>0–8 min:</strong> Build the synthetic metric packet: eligible qualified signups ÷ eligible qualified sessions, complete weekly grain, PT, excluding test and partner-assisted rows.</p>
+            <p><strong>8–15 min:</strong> Reveal the tagging change and partial-week caveat. Show how the same raw number moves from Answer to Review when context is missing.</p>
+            <p><strong>15–20 min:</strong> Teach Required / Eligible / Retrieved / Applied. Classify six failure layers: missing asset, retrieval miss, context conflict, application error, query error, source data error.</p>
+            <p><strong>20–40 min:</strong> Students run the prompt, inspect the diff, and remove any field that does not affect the path, result, caveat, or outcome.</p>
+          </div>
+        </details>
+
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Build the minimum trusted context.</h3></div><p>Write enough that a capable colleague who does not know your data could select the right definition and source. They should also know when to stop.</p></div>
+          <div class="artifact-grid">
+            <div class="field"><label for="metricDefinition">Metric definition and formula</label><textarea id="metricDefinition" data-workbook="metric_definition" placeholder="Plain English + formula"></textarea></div>
+            <div class="field"><label for="metricOwners">Business owner and data owner</label><textarea id="metricOwners" data-workbook="metric_owners" placeholder="Name roles, not a generic team"></textarea></div>
+            <div class="field"><label for="grainFilters">Grain, time zone, filters, exclusions</label><textarea id="grainFilters" data-workbook="grain_filters" placeholder="Weekly, PT, exclude test accounts..."></textarea></div>
+            <div class="field"><label for="approvedSource">Approved source path</label><textarea id="approvedSource" data-workbook="approved_source" placeholder="Dashboard / query / model / table / semantic object"></textarea></div>
+            <div class="field"><label for="freshness">Freshness rule</label><textarea id="freshness" data-workbook="freshness_rule" placeholder="Complete by 8 AM PT; never use partial current week"></textarea></div>
+            <div class="field"><label for="precedence">Source precedence when artifacts disagree</label><textarea id="precedence" data-workbook="source_precedence" placeholder="Which wins, who decides, and what happens until resolved?"></textarea></div>
+            <div class="field"><label for="caveats">Known caveats and recent changes</label><textarea id="caveats" data-workbook="caveats" placeholder="Tagging, backfill, denominator shift, seasonality, data gaps"></textarea></div>
+            <div class="field"><label for="validationRule">Validation rule and tolerance</label><textarea id="validationRule" data-workbook="validation_rule" placeholder="Reconcile to trusted source within an agreed tolerance"></textarea></div>
+            <div class="field full"><label for="requiredContext">Required context IDs or artifacts</label><textarea id="requiredContext" data-workbook="required_context" placeholder="List only the artifacts needed for a defensible answer."></textarea></div>
+          </div>
+          <p class="save-state">Saved locally on this device</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="module-4" data-nav="module-4">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Module 4</span><span class="tag">45 minutes</span><span class="tag output">Output: proof + response rules</span></div>
+          <div class="timer" data-minutes="45"><span class="timer-readout">45:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Prove the answer</span><h2>A safe system knows when to answer, ask, send to review, or stop.</h2></div>
+          <p class="section-lede">Choose what the agent should do before polishing the prose. A fluent answer never gets priority over the correct outcome.</p>
+        </div>
+
+        <div class="states" aria-label="Four valid outcomes for an analytics agent">
+          <div class="state answer"><span class="state-word">Answer</span><p>The approved path ran and the required validation passed. Return the answer with evidence and caveats.</p><span class="gate">All checks pass</span></div>
+          <div class="state clarify"><span class="state-word">Clarify</span><p>The question is missing the smallest detail needed to choose the metric, period, segment, grain, or comparison.</p><span class="gate">Missing scope</span></div>
+          <div class="state review"><span class="state-word">Review</span><p>The path is plausible, but ownership, business context, a novel join, benchmark, or decision risk needs a person.</p><span class="gate">Plausible, not proven</span></div>
+          <div class="state refuse"><span class="state-word">Refuse</span><p>The source is unsafe, stale, contradictory, out of scope, restricted, or failed a blocking validation check.</p><span class="gate">Blocking check failed</span></div>
+        </div>
+        <p class="source-note">Run checks in dependency order: source tie-out and structure first, then logic, business rules, and statistical or segment-reversal checks. A failed source tie-out stops the analysis; more sophisticated validation cannot repair the wrong input.</p>
+
+        <div class="proof-receipt" aria-label="Worked example proof receipt">
+          <div class="receipt-left"><span class="receipt-state">Example outcome · Review</span><strong>Conversion fell 1.5 percentage points.</strong><p>The movement reconciles to the weekly export, but a tagging change overlaps the period. Do not call it purely a product issue yet.</p></div>
+          <div class="receipt-right">
+            <div class="receipt-row"><b>Question</b><span>Why did qualified-signup conversion fall in the most recent complete week?</span></div>
+            <div class="receipt-row"><b>Source</b><span><code>funnel_segments.csv</code> + independent WBR benchmark; source run confirmed</span></div>
+            <div class="receipt-row"><b>Freshness</b><span>Last complete week; refreshed before the WBR cutoff</span></div>
+            <div class="receipt-row"><b>Validation</b><span>Totals reconciled within 0.2 percentage points; filters applied</span></div>
+            <div class="receipt-row"><b>Caveat</b><span>Campaign tagging changed three days before the movement</span></div>
+            <div class="receipt-row"><b>Next step</b><span>Review traffic quality and rerun using pre/post-tagging cohorts</span></div>
+          </div>
+        </div>
+
+        <div class="template-block">
+          <button class="button small copy-button" type="button" data-copy-container>Copy refusal</button>
+          <pre>Outcome: Refuse
+Failed check: [freshness / source mismatch / conflict / arithmetic / restricted input]
+Observed: [what the system can prove]
+Risk: [why answering would be unsafe]
+Next step: [smallest repair or narrower safe question]</pre>
+        </div>
+
+        <div class="builder-lab">
+          <div class="lab-head">
+            <div><span class="kicker">File example · use when helpful</span><h3>Write the proof as a reusable artifact, without storing raw rows.</h3></div>
+            <p>Separate the visible answer from the evidence trail. A reviewer should be able to find the source, see what passed, understand the caveat, and know the next action.</p>
+          </div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy proof YAML</button>
+            <pre>title: Weekly conversion review
+metric_id: qualified_signup_conversion
+answer_state: needs_analyst_review
+source: data/funnel_segments.csv
+evidence_checked:
+  - source execution confirmed
+  - dashboard tie-out within 0.2 percentage points
+freshness: last complete week
+validation: arithmetic, exclusions, and grain passed
+business_context_check: campaign tagging changed during the period
+uncertainty: attribution is not yet isolated
+caveats:
+  - do not call the movement purely a product issue
+next_action: compare pre- and post-tagging cohorts
+owner: growth_analytics</pre>
+          </div>
+          <p class="source-note">The fields follow the public <a href="https://github.com/parasdoshicom/ai-plus-data/tree/main/examples/trusted-answer-lifecycle" target="_blank" rel="noreferrer">AI+Data trusted-answer lifecycle</a>. The values are synthetic and are not customer-production evidence.</p>
+        </div>
+
+        <div class="prompt-turn">
+          <div class="turn-head"><strong>Harness turn 4A · Plan before execution</strong><span>Inspect, approve, then run</span></div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy planning prompt</button>
+            <pre>Propose the exact source path, calculations, and validation checks for the approved question. Name the files or tables and the expected output.
+
+Run checks in dependency order: source and structure, logic, business rules, segment or statistical checks, then benchmark reconciliation.
+
+Return plan_only: true and source_executed: false. Do not execute until I approve.</pre>
+          </div>
+        </div>
+
+        <div class="prompt-turn">
+          <div class="turn-head"><strong>Harness turn 4B · Execute, verify independently, and correct</strong><span>Core build-along</span></div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy execution prompt</button>
+            <pre>Approved. Run the plan using read-only sources.
+
+1. Calculate the last two complete weeks from the calculation source.
+2. Reconcile them to the independent benchmark.
+3. Show percentage-point and relative change separately.
+4. Decompose by channel, device, and landing page; run an isolation check.
+5. Run verify.py as a second method. Compare every quantitative claim as Pass, Warning, or Fail.
+6. Revise any failed claim before continuing.
+
+Return exactly one outcome: Answer, Clarify, Review, or Refuse. Include the question, source execution proof, context used, validations passed and failed, uncertainty, caveat, next action, and human owner. Save work/04_proof.yaml.
+
+Do not call an observed contributor a root cause unless the evidence isolates causality.</pre>
+          </div>
+          <div class="checkpoint"><div><b>You should now have</b><span>One executed answer, an independent tie-out, and a saved proof file.</span></div><div><b>Done when</b><span>Every number traces to output; the causal wording matches the evidence; a failed critical check stops the answer.</span></div><div><b>Expected lab outcome</b><span>Review: 8.4% → 6.9%; paid search is the largest observed contributor; tagging limits causality.</span></div></div>
+        </div>
+
+        <details class="reference-answer">
+          <summary>Check your work: synthetic case reference answer</summary>
+          <div class="note-body"><p><strong>Overall:</strong> 840 / 10,000 = 8.4%; 690 / 10,000 = 6.9%; -1.5 percentage points and -17.86% relative.</p><p><strong>Driver:</strong> paid search moved from 8.33% to 6.20%; mobile paid search moved from 8.0% to 5.6%; short-form share of mobile paid-search traffic rose from 50% to 75%. At prior segment rates, the current mix would have produced 830 signups; actual was 690. Paid search contributes 100 of the 140-signup segment-rate gap, or 71.4%.</p><p><strong>Isolation:</strong> without paid search, conversion still falls from 8.43% to 7.60%. Call paid search the largest observed contributor, not the sole root cause.</p></div>
+        </details>
+
+        <details class="workshop-note">
+          <summary>Walkthrough + timing + break-the-data demo</summary>
+          <div class="note-body">
+            <blockquote>“A useful refusal does not apologize for three paragraphs. It names the failed check and the repair path.”</blockquote>
+            <p><strong>0–10 min:</strong> Teach the four outcomes and why model confidence is not a correctness check.</p>
+            <p><strong>10–18 min:</strong> Show the proof receipt. Separate “planned query” from “source ran.” Ask the room what is still uncertain.</p>
+            <p><strong>18–25 min:</strong> Break the synthetic data: qualified signups exceed qualified sessions, or the calculation and benchmark conflict. The agent must Refuse or Review and must not append an unverified number.</p>
+            <p><strong>25–45 min:</strong> Students write automated checks, human-review rules, and one operational refusal. Invite two people to read only their failed check and next step.</p>
+          </div>
+        </details>
+
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Design the proof and the stop rules.</h3></div><p>Match the checks to the stakes. A board, finance, customer, or irreversible action needs a higher bar than an exploratory internal trend.</p></div>
+          <div class="artifact-grid">
+            <div class="field"><label for="autoChecks">Checks that run every time</label><textarea id="autoChecks" data-workbook="automatic_checks" placeholder="Definition, source, freshness, filters, arithmetic, grain, range, reconciliation..."></textarea></div>
+            <div class="field"><label for="humanGates">Answers that require human review</label><textarea id="humanGates" data-workbook="human_review_gates" placeholder="Novel source, wide uncertainty, high-impact decision, new segment..."></textarea></div>
+            <div class="field full"><label for="proofFields">Proof receipt fields</label><textarea id="proofFields" data-workbook="proof_receipt_fields" placeholder="Question, source, execution, freshness, context applied, checks, caveats, uncertainty, reviewer, reuse decision"></textarea></div>
+            <div class="field"><label for="clarifyRule">Clarify when</label><textarea id="clarifyRule" data-workbook="clarify_rule" placeholder="The smallest missing scope detail is..."></textarea></div>
+            <div class="field"><label for="reviewRule">Review when</label><textarea id="reviewRule" data-workbook="review_rule" placeholder="The path is plausible, but..."></textarea></div>
+            <div class="field full"><label for="refusalRule">Your useful refusal</label><textarea id="refusalRule" data-workbook="refusal_rule" placeholder="Outcome / failed check / observed / risk / next step"></textarea></div>
+          </div>
+          <p class="save-state">Saved locally on this device</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="qa-stop" id="qa-2">
+      <div class="shell qa-inner">
+        <div class="qa-number">10</div>
+        <div><span class="kicker">Q&amp;A checkpoint 2</span><h3>Bring the number or caveat you cannot yet defend.</h3><p>We will work through source conflicts, calculations, validation order, response-state choices, and proof. The goal is to enter the failure lab with one defensible path.</p></div>
+        <div class="timer" data-minutes="10"><span class="timer-readout">10:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="module-5" data-nav="module-5">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Module 5</span><span class="tag">45 minutes</span><span class="tag output">Output: run → fail → repair → rerun</span></div>
+          <div class="timer" data-minutes="45"><span class="timer-readout">45:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Test the failures</span><h2>Set the pass bar before the model shows you a polished answer.</h2></div>
+          <p class="section-lede">A serious eval tests the path, expected outcome, result, and operating behavior. It includes unsafe questions the agent must block.</p>
+        </div>
+        <div class="teaching-grid">
+          <div class="teaching-copy">
+            <h3>Start with eight core cases and two production threats.</h3>
+            <p>Use real recurring questions and past mistakes from data you already know well. The first reviewer should be able to spot the wrong column, filter, or definition. Freeze the question, expected outcome, approved source, expected result or range, and the evidence needed to pass.</p>
+          </div>
+          <aside class="side-note">
+            <div class="label">The dangerous outcome</div>
+            <p><strong>Quietly wrong:</strong> the response looks plausible, reaches the user, and fails the expected metric, source, outcome, or caveat without making the failure visible.</p>
+          </aside>
+        </div>
+
+        <div class="eval-stack" aria-label="Recommended eight-case eval set">
+          <div class="eval-row"><b>01–02</b><strong>Happy path</strong><span>Two phrasings, same path and substantive answer</span><em>Answer</em></div>
+          <div class="eval-row"><b>03–04</b><strong>Ambiguous scope</strong><span>Missing period, metric meaning, segment, or comparison</span><em>Clarify</em></div>
+          <div class="eval-row"><b>05</b><strong>Stale or partial source</strong><span>Freshness falls below the metric requirement</span><em>Refuse</em></div>
+          <div class="eval-row"><b>06</b><strong>Conflicting approved sources</strong><span>No precedence rule or owner resolution exists</span><em>Review</em></div>
+          <div class="eval-row"><b>07</b><strong>Broken calculation or impossible data</strong><span>Range, arithmetic, denominator, or reconciliation fails</span><em>Refuse</em></div>
+          <div class="eval-row"><b>08</b><strong>Novel high-risk request</strong><span>New join, restricted data, wrong workspace, or irreversible action</span><em>Review / refuse</em></div>
+          <div class="eval-row"><b>09</b><strong>Secret or row-level request</strong><span>Credentials, PII, broad extract, or unapproved destination</span><em>Refuse</em></div>
+          <div class="eval-row"><b>10</b><strong>Malicious retrieved instruction</strong><span>Context tries to override permissions, sources, or secret handling</span><em>Refuse</em></div>
+        </div>
+
+        <div class="release-gate">
+          <span class="kicker">Sample launch bar</span>
+          <h3>No quietly wrong result in a high-risk case.</h3>
+          <ul>
+            <li>All known unsafe cases block or escalate correctly</li>
+            <li>No claim that a source ran without execution evidence</li>
+            <li>Correct outcome on the agreed share of all cases</li>
+            <li>Every new failure assigned to one repair layer and owner</li>
+            <li>Repeated runs keep the path, caveat, and outcome stable</li>
+            <li>False blocks tracked beside bad-data blocks</li>
+          </ul>
+          <p class="source-note"><strong>Live scope:</strong> run one routine case, one ambiguity, the causal-review case, the authority-boundary case, and the two deterministic injections. The other six cases stay in the take-home pack for extension.</p>
+        </div>
+
+        <div class="template-block">
+          <button class="button small copy-button" type="button" data-copy-container>Copy eval case</button>
+          <pre>EVAL CASE
+ID / risk tier:
+Business question:
+Decision supported:
+Expected outcome: Answer / Clarify / Review / Refuse
+Expected result or range:
+Approved source path:
+Required context:
+Checks that must pass:
+Known caveat that must appear:
+Failure layer if it misses:
+Reviewer / source snapshot date:</pre>
+        </div>
+
+        <div class="builder-lab">
+          <div class="lab-head">
+            <div><span class="kicker">Executable test · included in the lab</span><h3>Test observed results, not whether the SQL looks familiar.</h3></div>
+            <p>The lab’s verifier re-derives the answer without external packages. The eval file adds the expected outcome, required evidence, caveat, and authority checks around the numbers.</p>
+          </div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy commands</button>
+            <pre># Clean independent check
+python3 verify.py
+
+# Critical structural failure: must Refuse
+python3 verify.py --inject-impossible-row
+# Exit code 2 is expected; the refusal is the passing result.
+
+# Calculation-versus-benchmark conflict: must Review
+python3 verify.py --inject-benchmark-conflict</pre>
+          </div>
+          <p class="source-note">The row/value comparison pattern is informed by nao’s Apache-licensed <a href="https://github.com/getnao/nao/blob/ade2cf2ba5fd74ec4ffa5c9b33600ac38a516986/skills/create-context-tests/SKILL.md" target="_blank" rel="noreferrer">context-test workflow</a>. The course adds explicit response, evidence, caveat, and authority checks.</p>
+        </div>
+
+        <div class="prompt-turn">
+          <div class="turn-head"><strong>Harness turn 5 · Declare, run, repair, and rerun</strong><span>The correction loop</span></div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
+            <pre>Read evals.yaml. Before execution, record the expected outcome and required evidence for these four live cases: routine_1, ambiguous_1, causal_claim, and authority_boundary.
+
+Run those four cases one at a time. For each, record expected versus observed outcome, evidence present or missing, quietly wrong yes/no, latency, tokens, source calls, and cost when available. Mark unavailable telemetry honestly. Do not average away a failed high-risk case.
+
+Then run:
+- python3 verify.py --inject-impossible-row
+- python3 verify.py --inject-benchmark-conflict
+
+Pick one failure or unsupported claim. Identify whether it came from a missing asset, retrieval miss, context conflict, application error, query error, or source-data error. Write the smallest proposed repair under work/, append work/correction.yaml, and rerun every affected case. Do not modify the lab’s data/ or context/ files.
+
+Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep the other six cases as the extension pack after class.</pre>
+          </div>
+          <div class="checkpoint"><div><b>You should now have</b><span>Expected-versus-observed results plus one durable correction.</span></div><div><b>Done when</b><span>The affected cases pass after repair and no high-risk failure is hidden in an average.</span></div><div><b>Next</b><span>Turn the tested path into controls, monitoring, and a narrow rollout decision.</span></div></div>
+        </div>
+
+        <details class="workshop-note">
+          <summary>Walkthrough + timing + team challenge</summary>
+          <div class="note-body">
+            <blockquote>“The best analytics-agent test includes a question the system should not answer.”</blockquote>
+            <p>Do not blend the scores. One overall 92 can hide a high-risk case that the agent answered confidently and incorrectly.</p>
+            <p><strong>0–8 min:</strong> Teach expected outcomes, quietly wrong versus loud failure, and why security cases belong beside correctness cases.</p>
+            <p><strong>8–15 min:</strong> Predict three lab outcomes before running them.</p>
+            <p><strong>15–32 min:</strong> Students run four representative cases plus the two injected failures. Do not let the harness skip execution.</p>
+            <p><strong>32–42 min:</strong> Repair one shared artifact, record the correction, and rerun affected cases.</p>
+            <p><strong>42–45 min:</strong> State the launch bar and the one case that would stop the release.</p>
+          </div>
+        </details>
+
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Record the core cases and launch bar.</h3></div><p>Use short descriptions; the expected outcome and proof matter more than perfect prose.</p></div>
+          <div class="artifact-grid">
+            <div class="field full"><label for="evalHappy">Cases 1–2 · Happy path</label><textarea id="evalHappy" data-workbook="eval_happy" placeholder="Question variants / expected result / required evidence"></textarea></div>
+            <div class="field full"><label for="evalAmbiguous">Cases 3–4 · Ambiguity</label><textarea id="evalAmbiguous" data-workbook="eval_ambiguous" placeholder="What detail is missing, and what exact clarification should be asked?"></textarea></div>
+            <div class="field"><label for="evalStale">Case 5 · Stale or partial source</label><textarea id="evalStale" data-workbook="eval_stale" placeholder="Failed freshness check / expected refusal"></textarea></div>
+            <div class="field"><label for="evalConflict">Case 6 · Conflicting sources</label><textarea id="evalConflict" data-workbook="eval_conflict" placeholder="Conflict / precedence gap / expected review"></textarea></div>
+            <div class="field"><label for="evalBroken">Case 7 · Broken math or data</label><textarea id="evalBroken" data-workbook="eval_broken" placeholder="Impossible result or failed reconciliation / expected refusal"></textarea></div>
+            <div class="field"><label for="evalRisk">Case 8 · Novel high-risk request</label><textarea id="evalRisk" data-workbook="eval_risk" placeholder="New join, restricted data, wrong source, or action request"></textarea></div>
+            <div class="field full"><label for="releaseBar">Launch bar</label><textarea id="releaseBar" data-workbook="release_gate" placeholder="Set thresholds before running the eval; call out zero-tolerance categories"></textarea></div>
+          </div>
+          <p class="save-state">Saved locally on this device</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="module-6" data-nav="module-6">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Module 6</span><span class="tag">25 minutes</span><span class="tag output">Output: controls + launch memo</span></div>
+          <div class="timer" data-minutes="25"><span class="timer-readout">25:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Operate it</span><h2>Production begins when the demo ends.</h2></div>
+          <p class="section-lede">A production plan needs owners, a review rhythm, monitoring, correction memory, cost, and a clear rule for stopping or narrowing the system.</p>
+        </div>
+        <div class="teaching-grid">
+          <div class="teaching-copy">
+            <h3>Assign five owners. One person can wear several hats.</h3>
+            <ul class="plain-list">
+              <li><b>01</b><span><strong>Decision owner:</strong> owns the business action and risk.</span></li>
+              <li><b>02</b><span><strong>Metric owner:</strong> approves the meaning, caveat, and review date.</span></li>
+              <li><b>03</b><span><strong>Data owner:</strong> owns source quality, freshness, and change notices.</span></li>
+              <li><b>04</b><span><strong>System owner:</strong> owns the path, tests, cost, permissions, and incidents.</span></li>
+              <li><b>05</b><span><strong>Reviewer/operator:</strong> samples live answers and turns corrections into durable fixes.</span></li>
+            </ul>
+          </div>
+          <aside class="side-note">
+            <div class="label">Measure the system</div>
+            <p>Start with four questions: Did it save time? Was the answer good? Did the decision improve? Was the team experience better? Track quietly wrong results, false blocks, stability, review burden, and cost beside them.</p>
+          </aside>
+        </div>
+
+        <div class="control-grid" aria-label="Production control checklist">
+          <div class="control-card"><b>01 · Data + permission</b><h4>Least access wins</h4><p>Classify allowed and prohibited data. Use read-only scope, source and table allowlists, row or byte limits, secret redaction, and row-level PII refusal.</p></div>
+          <div class="control-card"><b>02 · Runtime behavior</b><h4>Fail predictably</h4><p>Set timeout, retry and backoff, idempotency, rate and concurrency limits, degraded-result rule, cached fallback, and circuit breaker.</p></div>
+          <div class="control-card"><b>03 · Version + release</b><h4>Know what changed</h4><p>Pin the route, context, metric, model, and threshold versions. Move through shadow, canary, and narrow production with rollback and a kill switch.</p></div>
+          <div class="control-card"><b>04 · Observability</b><h4>Trace every serious claim</h4><p>Log source snapshot, freshness, response outcome, validation stages, latency, tokens, cost, calls, fallback, reviewer label, and correction id.</p></div>
+          <div class="control-card"><b>05 · Audit + incident</b><h4>Review the right risk</h4><p>Sample routine answers; review every finance, board, customer, or high-impact answer. Preserve evidence, pause the affected route, repair, regress, and name who may resume.</p></div>
+          <div class="control-card"><b>06 · Value + capacity</b><h4>Earn the next use case</h4><p>Compare with the manual baseline. Track adoption, reuse, time saved, review burden, cost per run and month, and whether the decision or team experience improved.</p></div>
+        </div>
+
+        <div class="month-plan" aria-label="Four-week production plan">
+          <div class="week"><span class="week-num">Week 1</span><h4>Lock the path</h4><p>Choose the question, contract, metric, owners, approved source, and risk tier.</p><ul><li>Baseline current manual work</li><li>Resolve source conflicts</li><li>Name out-of-scope requests</li></ul></div>
+          <div class="week"><span class="week-num">Week 2</span><h4>Build the proof</h4><p>Create the minimum context, proof receipt, eight cases, and predeclared launch bar.</p><ul><li>Run repeated phrasings</li><li>Inject bad data</li><li>Log failure layers</li></ul></div>
+          <div class="week"><span class="week-num">Week 3</span><h4>Pilot in shadow mode</h4><p>Run beside the existing process. A person reviews every output before it affects work.</p><ul><li>Compare to the human path</li><li>Track review burden</li><li>Fix shared artifacts</li></ul></div>
+          <div class="week"><span class="week-num">Week 4</span><h4>Release narrowly</h4><p>Open the reviewed scope, sample live outputs, publish the owner path, and set the next review.</p><ul><li>Audit high-risk outputs</li><li>Save reviewed paths</li><li>Expand, hold, or stop</li></ul></div>
+        </div>
+
+        <div class="builder-lab">
+          <div class="lab-head">
+            <div><span class="kicker">File example · use when helpful</span><h3>Persist progress and corrections outside the chat.</h3></div>
+            <p>AI Analyst saves per-step status so interrupted work can resume. The same principle applies here: chat history is a convenience, not the only record of state, proof, or correction.</p>
+          </div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy run record</button>
+            <pre># work/run_state.yaml
+run_id: 2026-08-21_qualified-signup-conversion
+question: Why did qualified-signup conversion fall in the latest complete week?
+status: paused
+steps:
+  source_tieout:
+    status: complete
+    output: work/source_tieout.md
+  validation:
+    status: failed
+    error: dashboard delta exceeded tolerance
+next_runnable_step: repair_source_conflict
+
+# work/correction.yaml
+- id: CORR-001
+  category: metric
+  description: Partner-assisted sessions were included.
+  fix: Apply the approved exclusion before calculating conversion.
+  prevented_by: business-rules validation
+  owner: growth_analytics</pre>
+          </div>
+          <p class="source-note">Adapted from AI Analyst’s <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/agents/pipeline_state_schema.md" target="_blank" rel="noreferrer">pipeline state</a> and the public AI+Data correction-memory pattern. Workshop values are synthetic.</p>
+        </div>
+
+        <div class="prompt-turn">
+          <div class="turn-head"><strong>Harness turn 6 · Operate it and ask for a launch decision</strong><span>Portfolio-ready output</span></div>
+          <div class="template-block">
+            <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
+            <pre>Read the approved contract, metric, proof, eval results, and correction.
+
+Create work/06_operations.md with:
+- manual baseline and target, check date, and guardrail
+- five owner roles and who may change the metric, source, route, model, or thresholds
+- read-only scope, prohibited data, limits, timeout, retry, fallback, health check, and kill switch
+- run-event fields, alert thresholds, audit sample, reviewer-capacity ceiling, and incident/resume owner
+- shadow → canary → narrow-production steps and rollback rule
+- model, warehouse, and human-review cost per run and per month
+- expiry and reapproval triggers
+
+Then create work/07_launch_memo.md: business decision, pilot users and workflow, quality result, material risks, adoption and reuse measure, review burden, total cost, 30-day milestones, and the leadership decision requested: Scale, Hold, or Stop.
+
+Do not invent names, baselines, thresholds, or deployment evidence. Mark unresolved decisions and make Monday’s first move small enough to complete in 30 minutes.</pre>
+          </div>
+          <div class="checkpoint"><div><b>You should now have</b><span>A production-control sheet and one-page launch memo.</span></div><div><b>Done when</b><span>The manual baseline, owner, cost, rollback, reviewer capacity, and Scale / Hold / Stop ask are explicit.</span></div><div><b>Next</b><span>Give the proof and memo to a peer. Ask them to find the weakest link.</span></div></div>
+        </div>
+
+        <details class="workshop-note">
+          <summary>Walkthrough + timing + close</summary>
+          <div class="note-body">
+            <blockquote>“Agents count inputs because inputs are easy to prove. Your team has to measure the decision and the outcome.”</blockquote>
+            <p><strong>0–7 min:</strong> Teach ownership, runtime controls, and the difference between offline evals and sampled live correctness.</p>
+            <p><strong>7–10 min:</strong> Walk the four-week plan. Keep Week 3 in shadow mode; no production action based only on an offline score.</p>
+            <p><strong>10–22 min:</strong> Students run the operations prompt and fill only the unresolved decisions.</p>
+            <p><strong>22–25 min:</strong> Write one Scale / Hold / Stop ask and one Monday action small enough to complete in 30 minutes.</p>
+          </div>
+        </details>
+
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Finish the 30-day plan.</h3></div><p>Use roles if names are not known yet. A missing owner is a blocker to resolve, not a reason to invent one.</p></div>
+          <div class="artifact-grid">
+            <div class="field full"><label for="owners">Owner map</label><textarea id="owners" data-workbook="owners" placeholder="Decision / metric / data / system / reviewer"></textarea></div>
+            <div class="field"><label for="week1">Week 1 milestone + proof</label><textarea id="week1" data-workbook="week_1" placeholder="What is complete, and how will you prove it?"></textarea></div>
+            <div class="field"><label for="week2">Week 2 milestone + proof</label><textarea id="week2" data-workbook="week_2" placeholder="What is complete, and how will you prove it?"></textarea></div>
+            <div class="field"><label for="week3">Week 3 milestone + proof</label><textarea id="week3" data-workbook="week_3" placeholder="Shadow-mode cohort / review sample / comparison"></textarea></div>
+            <div class="field"><label for="week4">Week 4 milestone + proof</label><textarea id="week4" data-workbook="week_4" placeholder="Narrow launch / audit / expansion decision"></textarea></div>
+            <div class="field"><label for="monitoring">Production measures and review rhythm</label><textarea id="monitoring" data-workbook="monitoring" placeholder="What will you measure, sample, and review? How often, and who owns it?"></textarea></div>
+            <div class="field"><label for="costSupport">Cost, permissions, and support path</label><textarea id="costSupport" data-workbook="cost_permissions_support" placeholder="Budget, access boundary, incident owner, retry / timeout / fallback"></textarea></div>
+            <div class="field"><label for="stopRule">Stop or narrow rule</label><textarea id="stopRule" data-workbook="stop_rule" placeholder="When do you pause, roll back, narrow scope, or return to shadow mode?"></textarea></div>
+            <div class="field"><label for="mondayMove">Monday’s first 30-minute move</label><textarea id="mondayMove" data-workbook="monday_move" placeholder="A calendar invite, one metric packet, one source tie-out, or three golden questions"></textarea></div>
+          </div>
+          <p class="save-state">Saved locally on this device</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="peer-review" data-nav="peer-review">
+      <div class="shell">
+        <div class="module-topline">
+          <div class="module-meta"><span class="tag">Peer review</span><span class="tag">15 minutes</span><span class="tag output">Output: revised launch blocker</span></div>
+          <div class="timer" data-minutes="15"><span class="timer-readout">15:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+        </div>
+        <div class="section-header">
+          <div><span class="kicker">Peer review</span><h2>Your partner gets five minutes to find the weak link.</h2></div>
+          <p class="section-lede">Explain the plan in two minutes. Your partner asks the five questions. Spend the remaining time revising one blocker.</p>
+        </div>
+        <div class="peer-review">
+          <div><div class="big-number">5</div><h3>questions</h3><p>A good review targets the path and operating boundary. It does not rewrite the presentation.</p></div>
+          <div class="review-questions">
+            <div class="review-question"><b>01</b><span>What exact decision changes, and is this agent the smallest useful way to support it?</span></div>
+            <div class="review-question"><b>02</b><span>Which definition and source win when the obvious alternatives disagree?</span></div>
+            <div class="review-question"><b>03</b><span>Show me one question the agent must clarify and one answer it must refuse.</span></div>
+            <div class="review-question"><b>04</b><span>What could still be quietly wrong after the current checks pass?</span></div>
+            <div class="review-question"><b>05</b><span>Who gets paged, what gets paused, and what becomes a regression test when a live answer fails?</span></div>
+          </div>
+        </div>
+        <div class="artifact">
+          <div class="artifact-head"><div><span class="kicker">Final revision</span><h3>Record the launch blocker your partner found.</h3></div><p>This is the best question to bring to the private follow-up session.</p></div>
+          <div class="artifact-grid">
+            <div class="field full"><label for="peerBlocker">Blocker, risk, and next repair</label><textarea id="peerBlocker" data-workbook="peer_review_blocker" placeholder="The weak link is... The risk is... Before launch we will..."></textarea></div>
+            <div class="field full"><label for="followupQuestion">Question for the private 60-minute review</label><textarea id="followupQuestion" data-workbook="private_review_question" placeholder="The decision or design tradeoff where you want Paras's input"></textarea></div>
+          </div>
+          <p class="save-state">Saved locally on this device</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="qa-stop" id="closing-qa">
+      <div class="shell qa-inner">
+        <div class="qa-number">10</div>
+        <div><span class="kicker">Open Q&amp;A + export</span><h3>Resolve the final blocker and commit Monday’s first move.</h3><p>Use this time for the questions that did not fit the checkpoints. Export the starter pack, then name the owner, meeting, or first artifact you will create.</p></div>
+        <div class="timer" data-minutes="10"><span class="timer-readout">10:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
+      </div>
+    </section>
+
+    <section class="section" id="facilitation" data-nav="facilitation">
+      <div class="shell">
+        <div class="section-header">
+          <div><span class="kicker">Live-session notes</span><h2>How this workshop stays useful when a demo fails.</h2></div>
+          <p class="section-lede">These notes are here for anyone running the session again. The learning depends on the path and judgment, not a lucky API response.</p>
+        </div>
+        <details class="workshop-note">
+          <summary>Expand live-session preparation, room rules, and scripts</summary>
+          <div class="note-body">
+            <div class="prep-columns">
+              <div class="prep-column"><h3>30 minutes before</h3><ul><li>Open this page and export a blank starter pack.</li><li>Download the lab zip and run <code>python3 verify.py</code>.</li><li>Check any MCP or warehouse route you plan to demo; do not make it the critical path.</li><li>Silence notifications and share one browser window.</li><li>Put the three Q&amp;A windows and two breaks in your calendar.</li></ul></div>
+              <div class="prep-column"><h3>Room contract</h3><ul><li>Use sanitized company examples only.</li><li>No credentials, proprietary SQL, raw customer records, or restricted files.</li><li>No coding experience is required; the harness can write and run the files.</li><li>Questions about a specific company stay at the design level.</li><li>If a source cannot run, state that clearly and use the lab kit.</li></ul></div>
+              <div class="prep-column"><h3>Energy design</h3><ul><li>Use chat in the first two minutes.</li><li>Do not talk for more than ten minutes without a room action.</li><li>Ask students to predict an outcome before revealing it.</li><li>Use the synthetic case whenever an example is sensitive.</li><li>Timebox feedback to the current artifact.</li></ul></div>
+            </div>
+            <div class="fallback"><h3>If the live agent fails, teach the failure.</h3><p>Show the planned path, state that the source did not run, and ask what the agent should do next. Use the lab’s proof as the completed example. A failed call becomes a production lesson, not dead air.</p></div>
+            <blockquote>Opening: “By 2 PM, you will have one written production plan. We are going to build it in six pieces, and you will use the same real question all day.”</blockquote>
+            <blockquote>Closing: “Do not start Monday by building the whole agent. Start by locking one question, one owner, and one approved metric path. Then make one failure visible and fix it.”</blockquote>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section alt" id="sources" data-nav="sources">
+      <div class="shell">
+        <div class="section-header">
+          <div><span class="kicker">Further reading</span><h2>Continue with the public source material.</h2></div>
+          <p class="section-lede">You do not need these links during class. Use them later to inspect the patterns, code, and licenses behind the workshop.</p>
+        </div>
+        <details class="workshop-note">
+          <summary>Expand the reading list</summary>
+          <div class="note-body source-table">
+            <div class="source-row"><strong>Maven course</strong><span>Course outcomes and follow-up experience</span><code><a href="https://maven.com/paras-doshi/agentic-analytics-in-production" target="_blank" rel="noreferrer">Agentic Analytics in Production</a></code></div>
+            <div class="source-row"><strong>AI+Data</strong><span>Synthetic funnel, metric packet, trusted-answer lifecycle, refusal checks, context tests, and eval scorecard</span><code><a href="https://github.com/parasdoshicom/ai-plus-data" target="_blank" rel="noreferrer">GitHub repository</a></code></div>
+            <div class="source-row"><strong>AI Analyst</strong><span>Setup, source tie-out, agent contracts, layered validation, resumable state, and correction memory</span><code><a href="https://github.com/ai-analyst-lab/ai-analyst" target="_blank" rel="noreferrer">MIT-licensed repository</a></code></div>
+            <div class="source-row"><strong>nao</strong><span>File-based context, semantic metric definitions, executable expected SQL, and row/value comparison</span><code><a href="https://github.com/getnao/nao" target="_blank" rel="noreferrer">GitHub repository</a></code></div>
+          </div>
+        </details>
+        <div class="boundary">
+          <strong>Keep the evidence honest</strong>
+          <p>The workshop case is synthetic. A passing local verifier, internal QA, a deployed pilot, sampled live correctness, and a measured business outcome are different levels of evidence. Say which one you have.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="finale">
+      <div class="finale-inner">
+        <span class="kicker">The finish line</span>
+        <h2>One real use case. One path people can inspect. One plan your team can start.</h2>
+        <p>The final output is not “an agent.” It is a governed way to move from a recurring question to evidence, a decision, and a learning loop.</p>
+        <div class="hero-actions">
+          <button class="button primary" id="exportButtonBottom" type="button">Export my starter pack</button>
+          <a class="button" href="#welcome">Return to the start</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Prepared for World-Class Agentic Analytics in Production · Paras Doshi · August 21, 2026</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const STORAGE_PREFIX = 'aa-workshop-2026-08-21:';
+    const body = document.body;
+    const toast = document.getElementById('toast');
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function toggleFocus() {
+      body.classList.toggle('focus-mode');
+      const active = body.classList.contains('focus-mode');
+      document.getElementById('focusButton').setAttribute('aria-pressed', String(active));
+      showToast(active ? 'Focus mode on. Press F to exit.' : 'Focus mode off');
+    }
+    document.getElementById('focusButton').addEventListener('click', toggleFocus);
+    document.addEventListener('keydown', (event) => {
+      if ((event.key === 'f' || event.key === 'F') && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) toggleFocus();
+    });
+
+    const notesButton = document.getElementById('notesButton');
+    const expandableNotes = [...document.querySelectorAll('.workshop-note')];
+    notesButton.addEventListener('click', () => {
+      const shouldOpen = expandableNotes.some((detail) => !detail.open);
+      expandableNotes.forEach((detail) => { detail.open = shouldOpen; });
+      notesButton.textContent = shouldOpen ? 'Collapse walkthroughs' : 'Expand walkthroughs';
+      notesButton.setAttribute('aria-pressed', String(shouldOpen));
+      showToast(shouldOpen ? 'Walkthroughs expanded' : 'Walkthroughs collapsed');
+    });
+
+    const workbookButton = document.getElementById('workbookButton');
+    workbookButton.addEventListener('click', () => {
+      body.classList.toggle('workbook-open');
+      const open = body.classList.contains('workbook-open');
+      workbookButton.textContent = open ? 'Close workbook' : 'Open workbook';
+      workbookButton.setAttribute('aria-pressed', String(open));
+      showToast(open ? 'Browser workbook opened' : 'Browser workbook closed');
+    });
+
+    const workbookFields = [...document.querySelectorAll('[data-workbook]')];
+    workbookFields.forEach((field) => {
+      const key = STORAGE_PREFIX + field.dataset.workbook;
+      const saved = localStorage.getItem(key);
+      if (saved !== null) field.value = saved;
+      field.addEventListener('input', () => localStorage.setItem(key, field.value));
+    });
+
+    const exportLabels = {
+      setup_workspace: 'Harness and working folder', setup_source: 'Active source and connection proof', setup_context: 'Context loaded', setup_access: 'Access boundary and fallback',
+      use_case: 'Recurring business question', decision_user: 'Who needs the answer', decision_change: 'Decision changed', frequency: 'Frequency', repeatability: 'Repeatability evidence', business_impact: 'Business impact', wrong_answer_cost: 'Cost of a quietly wrong answer', use_case_decision: 'Use-case decision',
+      contract_user: 'User and forum', contract_decision: 'Decision and action supported', contract_output: 'Required output', contract_evidence: 'Evidence required before answering', may_do: 'The agent may', may_not: 'The agent may not', refusal_condition: 'Clarify, review, or refusal condition', human_owner: 'Human owner', contract_sentence: 'One-sentence contract',
+      metric_definition: 'Metric definition and formula', metric_owners: 'Metric owners', grain_filters: 'Grain, time zone, filters, exclusions', approved_source: 'Approved source path', freshness_rule: 'Freshness rule', source_precedence: 'Source precedence', caveats: 'Known caveats', validation_rule: 'Validation rule', required_context: 'Required context',
+      automatic_checks: 'Checks that run every time', human_review_gates: 'Human review gates', proof_receipt_fields: 'Proof receipt fields', clarify_rule: 'Clarify rule', review_rule: 'Review rule', refusal_rule: 'Refusal rule',
+      eval_happy: 'Cases 1-2: happy path', eval_ambiguous: 'Cases 3-4: ambiguity', eval_stale: 'Case 5: stale source', eval_conflict: 'Case 6: conflicting sources', eval_broken: 'Case 7: broken math or data', eval_risk: 'Case 8: novel high-risk request', release_gate: 'Launch bar',
+      owners: 'Owner map', week_1: 'Week 1 milestone', week_2: 'Week 2 milestone', week_3: 'Week 3 milestone', week_4: 'Week 4 milestone', monitoring: 'Monitoring and review rhythm', cost_permissions_support: 'Cost, permissions, and support', stop_rule: 'Stop or narrow rule', monday_move: 'Monday first move', peer_review_blocker: 'Peer-review blocker', private_review_question: 'Question for private review'
+    };
+
+    function exportWorkbook() {
+      const sections = [
+        ['0. Workspace readiness', ['setup_workspace','setup_source','setup_context','setup_access']],
+        ['1. Use case decision', ['use_case','decision_user','decision_change','frequency','repeatability','business_impact','wrong_answer_cost','use_case_decision']],
+        ['2. Decision contract', ['contract_user','contract_decision','contract_output','contract_evidence','may_do','may_not','refusal_condition','human_owner','contract_sentence']],
+        ['3. Context map and metric packet', ['metric_definition','metric_owners','grain_filters','approved_source','freshness_rule','source_precedence','caveats','validation_rule','required_context']],
+        ['4. Proof and response rules', ['automatic_checks','human_review_gates','proof_receipt_fields','clarify_rule','review_rule','refusal_rule']],
+        ['5. Eval set and launch bar', ['eval_happy','eval_ambiguous','eval_stale','eval_conflict','eval_broken','eval_risk','release_gate']],
+        ['6. Production controls and 30-day plan', ['owners','week_1','week_2','week_3','week_4','monitoring','cost_permissions_support','stop_rule','monday_move','peer_review_blocker','private_review_question']]
+      ];
+      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
+      sections.forEach(([title, keys]) => {
+        markdown += `## ${title}\n\n`;
+        keys.forEach((key) => {
+          const value = localStorage.getItem(STORAGE_PREFIX + key) || '';
+          markdown += `### ${exportLabels[key] || key}\n\n${value.trim() || '_Not completed yet._'}\n\n`;
+        });
+      });
+      const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'agentic-analytics-production-starter-pack.md';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast('Starter pack exported as Markdown');
+    }
+    document.getElementById('exportButton').addEventListener('click', exportWorkbook);
+    document.getElementById('exportButtonBottom').addEventListener('click', exportWorkbook);
+    document.getElementById('printButton').addEventListener('click', () => window.print());
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        const helper = document.createElement('textarea');
+        helper.value = text;
+        helper.setAttribute('readonly', '');
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+      }
+      showToast('Copied to clipboard');
+    }
+    document.querySelectorAll('[data-copy-target]').forEach((button) => {
+      button.addEventListener('click', () => copyText(document.getElementById(button.dataset.copyTarget).textContent.trim()));
+    });
+    document.querySelectorAll('[data-copy-container]').forEach((button) => {
+      button.addEventListener('click', () => copyText(button.parentElement.querySelector('pre').textContent.trim()));
+    });
+
+    document.querySelectorAll('.timer').forEach((timer) => {
+      const total = Number(timer.dataset.minutes) * 60;
+      let remaining = total;
+      let interval = null;
+      const readout = timer.querySelector('.timer-readout');
+      const toggle = timer.querySelector('.timer-toggle');
+      const reset = timer.querySelector('.timer-reset');
+      const draw = () => {
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        readout.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        readout.style.color = remaining <= 60 ? 'var(--bad)' : 'var(--accent)';
+      };
+      const stop = () => { clearInterval(interval); interval = null; toggle.textContent = 'Start'; };
+      toggle.addEventListener('click', () => {
+        if (interval) { stop(); return; }
+        toggle.textContent = 'Pause';
+        interval = setInterval(() => {
+          remaining -= 1;
+          draw();
+          if (remaining <= 0) { stop(); showToast('Time is up for this block'); }
+        }, 1000);
+      });
+      reset.addEventListener('click', () => { stop(); remaining = total; draw(); });
+      draw();
+    });
+
+    const progressLine = document.getElementById('progressLine');
+    function updateProgress() {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      progressLine.style.width = `${max > 0 ? (doc.scrollTop / max) * 100 : 0}%`;
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    const navLinks = [...document.querySelectorAll('#railNav a')];
+    const sections = [...document.querySelectorAll('[data-nav]')];
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === '#' + visible.target.id));
+    }, { rootMargin: '-18% 0px -62% 0px', threshold: [0.01, 0.1, 0.3] });
+    sections.forEach((section) => observer.observe(section));
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 780) body.classList.remove('focus-mode');
+      });
+    });
+  </script>
+</body>
+</html>

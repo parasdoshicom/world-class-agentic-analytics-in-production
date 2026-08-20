@@ -1,0 +1,4 @@
+week_start,qualified_sessions,qualified_signups,conversion_pct,refreshed_at_pt,is_complete
+2026-08-03,10000,840,8.4,2026-08-10T08:00:00-07:00,true
+2026-08-10,10000,690,6.9,2026-08-17T08:00:00-07:00,true
+2026-08-17,5000,300,6.0,2026-08-20T08:00:00-07:00,false

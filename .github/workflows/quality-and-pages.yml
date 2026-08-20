@@ -1,0 +1,62 @@
+name: Quality and GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Validate course structure
+        run: python3 scripts/validate_course.py
+      - name: Run the clean lab
+        working-directory: assets/agentic-analytics-lab
+        run: python3 verify.py
+      - name: Confirm impossible data is refused
+        working-directory: assets/agentic-analytics-lab
+        shell: bash
+        run: |
+          set +e
+          output=$(python3 verify.py --inject-impossible-row 2>&1)
+          code=$?
+          set -e
+          printf '%s\n' "$output"
+          test "$code" -eq 2
+          grep -q 'OUTCOME: Refuse' <<< "$output"
+      - name: Confirm benchmark conflict routes to review
+        working-directory: assets/agentic-analytics-lab
+        run: python3 verify.py --inject-benchmark-conflict | tee /tmp/benchmark-conflict.txt && grep -q 'OUTCOME: Review' /tmp/benchmark-conflict.txt
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: quality
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
