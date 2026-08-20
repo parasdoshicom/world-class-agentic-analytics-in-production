@@ -140,11 +140,29 @@ def check_public_boundary(errors: list[str]) -> None:
                 fail(errors, f"private marker {marker!r} found in {path.relative_to(ROOT)}")
 
 
+def check_course_content(errors: list[str]) -> None:
+    required_sources = (
+        "https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/",
+        "https://openai.com/index/inside-our-in-house-data-agent/",
+        "https://www.anthropic.com/engineering/building-effective-agents",
+        "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+        "https://ai.meta.com/blog/practical-ai-agent-security/",
+        "https://github.com/meta-llama/PurpleLlama",
+        "https://engineering.ramp.com/post/meet-ramp-research",
+        "https://builders.ramp.com/post/how-to-build-agents-users-can-trust",
+    )
+    course_text = COURSE.read_text(encoding="utf-8")
+    for source in required_sources:
+        if source not in course_text:
+            fail(errors, f"missing leading-practice source in index.html: {source}")
+
 def main() -> int:
     errors: list[str] = []
     check_html(errors)
     check_zip(errors)
     check_public_boundary(errors)
+    check_course_content(errors)
     if errors:
         for error in errors:
             print(f"FAIL: {error}")

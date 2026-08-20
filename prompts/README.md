@@ -13,4 +13,4 @@ Use these prompts one at a time. Inspect what the harness creates, make correcti
 | 5 | [Evaluate, repair, and rerun](05-evaluate-repair-and-rerun.md) | `work/correction.yaml`, `work/05_eval_results.csv` |
 | 6 | [Operate and ask for a launch decision](06-operate-and-launch.md) | `work/06_operations.md`, `work/07_launch_memo.md` |
 
-Start with the [synthetic lab](../assets/agentic-analytics-lab/README.md) if you do not have an approved warehouse or local data source.
+Start with the [practice lab](../assets/agentic-analytics-lab/README.md) if you do not have an approved warehouse or local data source.

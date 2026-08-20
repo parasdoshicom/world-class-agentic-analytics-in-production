@@ -11,6 +11,10 @@ For this question, show:
 - context you actually retrieved
 - context that materially changed the path, result, caveat, or outcome
 
+For every retained context item, record its owner, retrieval trigger, freshness or expiry, and why it is needed. Keep lightweight identifiers in the working context and retrieve detailed material only when the question requires it. Remove context that does not change the route, result, caveat, or response state.
+
+Propose two context tests: one missing-required-context case and one conflicting-context case. State the expected outcome before running them.
+
 Show the proposed file diff and wait for approval before treating it as trusted.
 ```
 

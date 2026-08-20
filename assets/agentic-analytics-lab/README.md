@@ -1,6 +1,6 @@
 # Agentic Analytics Workshop Lab
 
-This is a synthetic, public-safe case for the workshop. It works without a warehouse, an MCP server, or extra Python packages.
+This is the included practice case for the workshop. It works without a warehouse, an MCP server, or extra Python packages.
 
 ## The question
 
@@ -55,4 +55,4 @@ python3 verify.py --inject-benchmark-conflict
 
 The first drill should refuse to answer because signups exceed sessions. It intentionally exits with code `2`; that refusal is the passing result, not a broken lab. The second should send the result to review because the calculated value and benchmark disagree beyond tolerance.
 
-All companies, values, and events in this lab are fictional.
+The course dataset is designed for practice and includes known data-quality and business-context traps.

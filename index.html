@@ -186,7 +186,7 @@
     .case-media { position: relative; display: block; overflow: hidden; background: #0a0e14; border: 1px solid var(--line-strong); box-shadow: 0 28px 90px rgba(0,0,0,.32); }
     .case-media img { width: 100%; display: block; transition: transform .35s ease; }
     .case-media:hover img { transform: scale(1.018); }
-    .case-media::after { content: "Open full reconstruction ↗"; position: absolute; right: 14px; bottom: 14px; padding: 7px 10px; color: #17121f; background: var(--accent); font-size: 10px; font-weight: 850; letter-spacing: .05em; }
+    .case-media::after { content: "Open full example ↗"; position: absolute; right: 14px; bottom: 14px; padding: 7px 10px; color: #17121f; background: var(--accent); font-size: 10px; font-weight: 850; letter-spacing: .05em; }
     .case-copy .case-index { display: block; margin-bottom: 22px; color: var(--accent); font: 800 11px/1 ui-monospace,monospace; letter-spacing: .12em; text-transform: uppercase; }
     .case-copy h3 { font-size: clamp(32px, 3.5vw, 48px); }
     .case-copy > p { color: var(--muted); }
@@ -416,6 +416,7 @@
     .control-card b { display: block; margin-bottom: 20px; color: var(--accent); font-size: 11px; }
     .control-card h4 { margin-bottom: 10px; }
     .control-card p { margin: 0; color: var(--muted); font-size: 12px; }
+    .control-card p + p { margin-top: 10px; }
     .reference-answer { margin-top: 18px; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
     .reference-answer summary { padding: 14px 0; color: var(--good); cursor: pointer; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .reference-answer .note-body { padding-bottom: 20px; }
@@ -684,7 +685,7 @@
         <div>
           <p class="eyebrow">Live workshop · course companion + workbook</p>
           <h1>Build an analytics agent people can trust with real work.</h1>
-          <p class="hero-deck">Learn the production framework, see how I used it in systems I built, then practice the full path with your data or the included synthetic lab.</p>
+          <p class="hero-deck">Learn the production framework, see how I used it in systems I built, then practice the full path with your data or the included lab.</p>
           <div class="hero-meta">
             <span><i></i> Five hours, live</span>
             <span><i></i> No coding required</span>
@@ -718,11 +719,11 @@
       <div class="shell">
         <div class="spine-intro">
           <div><span class="kicker">One course, three linked spines</span><h2>Learn it. See it. Build it.</h2></div>
-          <p>Each module moves through the same three views. I will teach the production pattern, show how that choice appeared in systems I built, and then give you a safe way to create the artifact yourself. If your warehouse is unavailable, the synthetic case keeps the third spine fully runnable.</p>
+          <p>Each module moves through the same three views. I will teach the production pattern, show how that choice appeared in systems I built, and then give you a safe way to create the artifact yourself. If your warehouse is unavailable, the practice case keeps the third spine fully runnable.</p>
         </div>
         <div class="spine-grid">
           <article class="spine"><span class="spine-num">SPINE 01</span><h3>The production framework</h3><p>Decision contract, approved context, scoped execution, validation, proof, review states, correction memory, and operations.</p><a href="#module-1">Start with the framework →</a></article>
-          <article class="spine"><span class="spine-num">SPINE 02</span><h3>Systems I built</h3><p>Acquisition War Room, Abandonment Intelligence, and the conversational data-agent front door—shown with sanitized interfaces and honest evidence boundaries.</p><a href="#paras-built">Open the case studies →</a></article>
+          <article class="spine"><span class="spine-num">SPINE 02</span><h3>Systems I built</h3><p>Acquisition War Room, Abandonment Intelligence, and the conversational data-agent front door—showing the product choices, controls, and operating loops behind each experience.</p><a href="#paras-built">Open the case studies →</a></article>
           <article class="spine"><span class="spine-num">SPINE 03</span><h3>Your hands-on build</h3><p>Use an approved company source or run the same workflow on the included conversion lab. Every prompt produces a file you can take back to work.</p><a href="#lab-kit">Download the practice lab →</a></article>
         </div>
       </div>
@@ -740,18 +741,18 @@
         </div>
 
         <div class="setup-flow" aria-label="Workspace readiness checks">
-          <div class="setup-row"><b>01</b><strong>Open the right workspace</strong><span>Point the agent at one course folder or sanitized project. Confirm what it can read and where it may write. Do not give it your whole computer by default.</span></div>
+          <div class="setup-row"><b>01</b><strong>Open the right workspace</strong><span>Point the agent at one course folder or an approved project. Confirm what it can read and where it may write. Do not give it your whole computer by default.</span></div>
           <div class="setup-row"><b>02</b><strong>Connect one data source</strong><span>Use a local CSV file, or configure the warehouse connector or MCP server your team already approves. Keep passwords and tokens in the approved secret store, not in chat or course files.</span></div>
           <div class="setup-row"><b>03</b><strong>Test the connection</strong><span>Ask the agent to name the active source and list the available tables or files. Then show the date range and run a harmless read such as a row count. “Configured” is not the same as “working.”</span></div>
           <div class="setup-row"><b>04</b><strong>Load the context people carry</strong><span>Add the user and team, the business question, metric definitions, known exclusions, recent changes, saved corrections, and preferred output. Use only context your company permits you to share.</span></div>
-          <div class="setup-row"><b>05</b><strong>State the access boundary</strong><span>Say whether this session is read-only, which sources are approved, where outputs may be saved, and what requires a person. If the source is unavailable, use the synthetic workshop case.</span></div>
+          <div class="setup-row"><b>05</b><strong>State the access boundary</strong><span>Say whether this session is read-only, which sources are approved, where outputs may be saved, and what requires a person. If the source is unavailable, use the workshop practice case.</span></div>
         </div>
 
         <div class="kit-card" id="lab-kit">
           <div class="kit-grid">
             <div>
               <span class="kicker">No warehouse? Start here.</span>
-              <h3>Use the same synthetic case Paras will run live.</h3>
+              <h3>Use the same practice case Paras will run live.</h3>
               <p>The kit contains two CSV files, the metric definition, a known business change, a dependency-free Python verifier, and ten eval cases. It works locally with any file-capable harness.</p>
               <div class="kit-actions">
                 <a class="button primary" href="assets/agentic-analytics-workshop-lab.zip" download="agentic-analytics-workshop-lab.zip">Download the lab kit</a>
@@ -787,7 +788,7 @@
           <summary>Walkthrough + timing + connection fallback</summary>
           <div class="note-body">
             <blockquote>“Your favorite harness does not decide whether the analysis is trustworthy. The active data, loaded context, permissions, and checks do.”</blockquote>
-            <p><strong>0–4 min:</strong> Ask students to open their preferred harness and one sanitized workspace. Do not spend class time comparing tools.</p>
+            <p><strong>0–4 min:</strong> Ask students to open their preferred harness and one approved workspace. Do not spend class time comparing tools.</p>
             <p><strong>4–8 min:</strong> Students choose their safe source or download and unzip the workshop kit. Open the extracted folder in the harness; check the optional Python runtime before relying on the verifier.</p>
             <p><strong>8–15 min:</strong> Run the readiness check: active source, visible tables or files, date range, one harmless read, and explicit access boundary.</p>
             <p><strong>15–20 min:</strong> Load the minimum business context, inspect <code>work/00_readiness.md</code>, and repair one missing item before moving on.</p>
@@ -797,10 +798,10 @@
         <div class="artifact">
           <div class="artifact-head"><div><span class="kicker">Hands-on · 12 min</span><h3>Prove what is actually ready.</h3></div><p>A connector shown in settings is not enough. Record what the agent successfully read in this session.</p></div>
           <div class="artifact-grid">
-            <div class="field"><label for="setupWorkspace">Harness + working folder</label><textarea id="setupWorkspace" data-workbook="setup_workspace" placeholder="Example: Codex in a sanitized analytics-agent project"></textarea></div>
+            <div class="field"><label for="setupWorkspace">Harness + working folder</label><textarea id="setupWorkspace" data-workbook="setup_workspace" placeholder="Example: Codex in an approved analytics-agent project"></textarea></div>
             <div class="field"><label for="setupSource">Active source + connection proof</label><textarea id="setupSource" data-workbook="setup_source" placeholder="Source, visible tables or files, date range, harmless read result"></textarea></div>
             <div class="field"><label for="setupContext">Context loaded</label><textarea id="setupContext" data-workbook="setup_context" placeholder="Role, team, metric meaning, recent changes, known corrections"></textarea></div>
-            <div class="field"><label for="setupAccess">Access boundary + fallback</label><textarea id="setupAccess" data-workbook="setup_access" placeholder="Read/write limits, approved sources, human review, synthetic fallback"></textarea></div>
+            <div class="field"><label for="setupAccess">Access boundary + fallback</label><textarea id="setupAccess" data-workbook="setup_access" placeholder="Read/write limits, approved sources, human review, practice-data fallback"></textarea></div>
           </div>
           <p class="save-state" aria-live="polite">Saved locally on this device</p>
         </div>
@@ -832,7 +833,7 @@
         </div>
 
         <div class="lane-choice" aria-label="Two source choices for the same workshop">
-          <div class="lane"><span>Use your safe source</span><h4>Frame and contract your real question</h4><p>Use a sanitized local extract or an approved read-only warehouse route for Modules 0–3. Keep sensitive data and credentials out of this page. After class, adapt the tested execution path to your source.</p></div>
+          <div class="lane"><span>Use your approved source</span><h4>Frame and contract your real question</h4><p>Use an approved local extract or read-only warehouse route for Modules 0–3. Keep sensitive data and credentials out of this page. After class, adapt the tested execution path to your source.</p></div>
           <div class="lane"><span>Use the workshop source</span><h4>Regroup on one runnable case</h4><p>Everyone uses the included CSV lab for Modules 4–5 so the execution, proof, failures, and repair can be compared in the room. No warehouse, MCP connection, paid tool, or Python package install is required.</p></div>
         </div>
 
@@ -843,11 +844,11 @@
       <div class="shell">
         <div class="section-header">
           <div><span class="kicker">Reference gallery · no separate time block · systems I built</span><h2>See the operating system before you build the pieces.</h2></div>
-          <p class="section-lede">These are sanitized reconstructions of real systems I designed and built. I replaced internal data, sources, names, and tickets with the workshop lab, so you can inspect the design without exposing company material. We will return to them inside the timed modules rather than add another lecture block.</p>
+          <p class="section-lede">These examples show how I turned recurring business questions into products people could inspect, challenge, and use. We will return to the design choices inside the timed modules rather than add another lecture block.</p>
         </div>
 
         <article class="case-block" id="war-room-case">
-          <a class="case-media" href="examples/paras-built/acquisition-war-room.html" target="_blank" rel="noreferrer"><img src="assets/case-studies/acquisition-war-room.png" alt="Sanitized Acquisition War Room showing synthetic headline metrics, movement decomposition, review state, segment comparison, and validation gates"></a>
+          <a class="case-media" href="examples/paras-built/acquisition-war-room.html" target="_blank" rel="noreferrer"><img src="assets/case-studies/acquisition-war-room.png" alt="Acquisition War Room example showing headline metrics, movement decomposition, review state, segment comparison, and validation gates"></a>
           <div class="case-copy">
             <span class="case-index">Case 01 · Executive sensing</span>
             <h3>Acquisition War Room</h3>
@@ -859,12 +860,12 @@
               <div class="design-decision"><b>04</b><span><strong>The decision sat next to the evidence.</strong> The number, decomposition, caveat, next investigation, and authority boundary lived on the same screen.</span></div>
             </div>
             <div class="case-actions"><a class="button primary" href="examples/paras-built/acquisition-war-room.html" target="_blank" rel="noreferrer">Open the full example</a><a class="button" href="#module-4">See the proof pattern</a></div>
-            <p class="evidence-label">Interface: sanitized reconstruction · visible values: synthetic workshop data · architecture: grounded in the system I built</p>
+            <p class="evidence-label">Practice data: included course CSVs · focus: movement, contributors, caveats, validation, and the next decision</p>
           </div>
         </article>
 
         <article class="case-block reverse" id="abandonment-case">
-          <a class="case-media" href="examples/paras-built/abandonment-intelligence.html" target="_blank" rel="noreferrer"><img src="assets/case-studies/abandonment-intelligence.png" alt="Sanitized Abandonment Intelligence interface showing three ranked actions, synthetic conversion metrics, a funnel gap, and an investigation table"></a>
+          <a class="case-media" href="examples/paras-built/abandonment-intelligence.html" target="_blank" rel="noreferrer"><img src="assets/case-studies/abandonment-intelligence.png" alt="Abandonment Intelligence example showing three ranked actions, conversion metrics, a funnel gap, and an investigation table"></a>
           <div class="case-copy">
             <span class="case-index">Case 02 · Investigation + action</span>
             <h3>Abandonment Intelligence</h3>
@@ -876,7 +877,7 @@
               <div class="design-decision"><b>04</b><span><strong>Synthesis ranked work, not observations.</strong> The result was a reviewable action list with gates, not a longer dashboard.</span></div>
             </div>
             <div class="case-actions"><a class="button primary" href="examples/paras-built/abandonment-intelligence.html" target="_blank" rel="noreferrer">Open the full example</a><a class="button" href="#module-5">See the correction loop</a></div>
-            <p class="evidence-label">Interface: sanitized reconstruction · visible values: synthetic workshop data · investigation rules: grounded in the system I built</p>
+            <p class="evidence-label">Practice data: included course CSVs · focus: ranked actions, known-good behavior, exceptions, and investigation depth</p>
           </div>
         </article>
 
@@ -903,7 +904,7 @@
           <table>
             <thead><tr><th>Course step</th><th>Spine 01 · Framework</th><th>Spine 02 · What I built</th><th>Spine 03 · What you build</th></tr></thead>
             <tbody>
-              <tr><td>Choose</td><td><strong>Start with a recurring decision</strong>Frequency, repeatability, value, and risk.</td><td><strong>War Room + Abandonment</strong>“What changed?” and “what deserves action?” were separate recurring jobs.</td><td><strong>Use-case brief</strong>Frame the synthetic conversion question or your approved question.</td></tr>
+              <tr><td>Choose</td><td><strong>Start with a recurring decision</strong>Frequency, repeatability, value, and risk.</td><td><strong>War Room + Abandonment</strong>“What changed?” and “what deserves action?” were separate recurring jobs.</td><td><strong>Use-case brief</strong>Frame the practice conversion question or your approved question.</td></tr>
               <tr><td>Contract</td><td><strong>Bound output and authority</strong>Define Answer, Clarify, Review, and Refuse.</td><td><strong>Visible verification and action gates</strong>A useful result could still require review; no autonomous budget or routing change.</td><td><strong>Contract + architecture</strong>Create `work/02_contract.yaml` and map the shared request path.</td></tr>
               <tr><td>Context</td><td><strong>Bind approved meaning</strong>Metric, source, business change, owner, freshness, and precedence.</td><td><strong>Domain rules survived every run</strong>Correct funnel order, time comparison, exclusions, known-good behavior, and prior corrections.</td><td><strong>Metric proposal</strong>Inspect `context/metric.yaml` and propose `work/03_metric_proposal.yaml`.</td></tr>
               <tr><td>Prove</td><td><strong>Execute and verify independently</strong>Keep source execution, validation, caveat, and decision together.</td><td><strong>War Room proof layer</strong>Cross-validation, freshness, decomposition, and verification state appeared in the briefing.</td><td><strong>Proof receipt</strong>Run the lab, tie to the benchmark, and save `work/04_proof.yaml`.</td></tr>
@@ -913,7 +914,30 @@
           </table>
         </div>
 
-        <div class="boundary"><strong>Public evidence boundary</strong><p>The systems and design decisions are grounded in Paras’s operating work. The interfaces here are sanitized reconstructions, and every visible number comes from the fictional workshop lab. Treat shipped code, internal testing, production design, and customer-production proof as different evidence states.</p></div>
+        <div class="boundary"><strong>How to use the examples</strong><p>Start with the decision the user needs to make. Then inspect the context, calculation, validation, review state, and correction path that make the answer useful more than once.</p></div>
+
+        <div class="section-header" style="margin-top: 64px;">
+          <div><span class="kicker">My first-principles operating model</span><h2>Trustworthy analytics needs meaning, feedback, and review.</h2></div>
+          <p class="section-lede">Over the last year, I have been obsessed with one question: how do you get agentic analytics adopted across a company without giving up trust? This model helped more than 800 people adopt it, about 80% of the company. I worked backward from a failure I kept seeing. The agent could choose the wrong definition and still sound polished. A user could spot the problem but had no way to fix the shared system.</p>
+        </div>
+        <div class="control-grid" aria-label="Three-part trustworthy analytics operating model">
+          <div class="control-card"><b>01 · Semantic model</b><h4>Give the agent shared meaning</h4><p>The agent needs the metric, source, exclusions, and approved logic.</p><p>In my implementation, Snowflake Cortex provided this layer. Claude Code, Cursor, Gumloop, and other tools called it through MCP. Cube could fit here too; I chose to put more of the next investment into feedback and review.</p></div>
+          <div class="control-card"><b>02 · User feedback</b><h4>Capture wrong or unverifiable answers</h4><p>Users need one easy way to flag an answer that is wrong or hard to validate.</p><p>We started in Slack. Later, we built a plug-in and MCP path that wrote back a concise summary of the question, answer, evidence gap, and user feedback.</p></div>
+          <div class="control-card"><b>03 · Data-admin review</b><h4>Promote the correction to source of truth</h4><p>Data owners review the edge case and settle the canonical definition or answer path. They publish the accepted change into the semantic layer.</p><p>We also narrowed the search space from roughly 1,400 dashboards to about 15 approved paths stored as code. The agent could now compare its work with logic the team had reviewed.</p></div>
+          <div class="control-card"><b>The operating result</b><h4>Spend people’s time on the edge cases</h4><p>The review burden started high. As self-checks and validations improved, the system handled more than 95% of cases and left the data team with roughly 5% of edge cases.</p><p>The goal is not zero human review. Each review should improve the shared path.</p></div>
+        </div>
+        <div class="boundary"><strong>The flywheel</strong><p>When the agent gets it wrong or the user cannot validate it, the user flags the gap. The data team defines the canonical answer and updates the semantic model and eval suite. The next run gets better. No single vendor has to own the whole loop; the interfaces between these three parts matter more.</p></div>
+
+        <div class="section-header" style="margin-top: 64px;">
+          <div><span class="kicker">Compare with published practice</span><h2>How OpenAI, Anthropic, Meta, and Ramp sharpen the design.</h2></div>
+          <p class="section-lede">Start from the operating problem above. Then use these teams’ published lessons to challenge the architecture, security boundary, context design, evaluation method, and release plan.</p>
+        </div>
+        <div class="control-grid" aria-label="OpenAI, Anthropic, Meta, and Ramp agent practices mapped to the workshop">
+          <div class="control-card"><b>OpenAI</b><h4>Start narrow and verify results</h4><p>Use an agent when judgment and changing steps matter. Begin with one agent, clear tools, layered guardrails, and human review for high-risk actions.</p><p>For analytics, compare executed results with a curated golden result instead of grading query text alone. <a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/" target="_blank" rel="noreferrer">Guide</a> · <a href="https://openai.com/index/inside-our-in-house-data-agent/" target="_blank" rel="noreferrer">Data agent</a></p></div>
+          <div class="control-card"><b>Anthropic</b><h4>Earn complexity</h4><p>Use the simplest workflow that can do the job. Keep tools distinct and easy to choose. Retrieve only high-signal context.</p><p>Evaluate complete runs with repeated trials, observable traces, deterministic checks, and human calibration. <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noreferrer">Agents</a> · <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noreferrer">Evals</a></p></div>
+          <div class="control-card"><b>Meta</b><h4>Break the dangerous chain</h4><p>Apply least privilege and system-level safeguards around the model. Meta’s Rule of Two says an autonomous session should not combine untrusted input, sensitive access, and external action.</p><p>If the workflow needs all three, narrow the session or ask a person to approve the action. <a href="https://ai.meta.com/blog/practical-ai-agent-security/" target="_blank" rel="noreferrer">Rule of Two</a></p></div>
+          <div class="control-card"><b>Ramp</b><h4>Make trust actionable</h4><p>Put domain-owner context and metadata within reach. Let users clarify in a stateful thread. Show sources and rationale, and use actionable review states instead of invented confidence scores.</p><p>Turn user feedback into context fixes and regression cases. <a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" rel="noreferrer">Ramp Research</a> · <a href="https://builders.ramp.com/post/how-to-build-agents-users-can-trust" target="_blank" rel="noreferrer">Trust guide</a></p></div>
+        </div>
       </div>
     </section>
 
@@ -930,7 +954,7 @@
         <div class="teaching-grid">
           <div class="teaching-copy">
             <h3>Four questions decide whether to build.</h3>
-            <p>The first three come from the build-first lesson. The fourth prevents a high-impact use case from quietly crossing a line the team has not designed for.</p>
+            <p>The first three come from the build-first lesson. The fourth prevents a high-impact use case from quietly crossing a line the team has not designed for. Then make one more choice: if a fixed query or deterministic workflow can do the job reliably, use it. Add agent autonomy only where the steps genuinely require judgment or adaptation.</p>
             <ul class="plain-list">
               <li><b>01</b><span><strong>Frequency:</strong> How often does this exact work return?</span></li>
               <li><b>02</b><span><strong>Repeatability:</strong> With the same inputs, do the metric, direction, drivers, caveat, and basic recommendation stay stable?</span></li>
@@ -939,7 +963,7 @@
             </ul>
           </div>
           <aside class="side-note">
-            <div class="label">Worked example · synthetic</div>
+            <div class="label">Worked example · practice case</div>
             <h4>Why did qualified-signup conversion fall last week?</h4>
             <p>It appears in the weekly review, uses a known metric and source path, and changes where Growth investigates. It is a strong candidate only after source, caveat, and review rules are explicit.</p>
           </aside>
@@ -963,7 +987,7 @@
             <blockquote>“If two dashboards disagree, adding a chatbot creates a faster disagreement.”</blockquote>
             <p><strong>0–5 min:</strong> Ask everyone to put one recurring metric question in chat, then read three aloud without critiquing them yet.</p>
             <p><strong>5–12 min:</strong> Teach the matrix. “Same answer” means the definition, source, number or direction, main drivers, material caveat, and basic decision remain stable. The prose can change.</p>
-            <p><strong>12–15 min:</strong> Place the synthetic conversion question on the matrix. Use the War Room / Abandonment distinction to separate “what changed?” from “what deserves investigation?” Move it to “fix the foundation” when tagging changes and no precedence rule exists.</p>
+            <p><strong>12–15 min:</strong> Place the practice conversion question on the matrix. Use the War Room / Abandonment distinction to separate “what changed?” from “what deserves investigation?” Move it to “fix the foundation” when tagging changes and no precedence rule exists.</p>
             <p><strong>15–25 min:</strong> Students use the prompt, approve the brief, and select the question they will carry forward.</p>
           </div>
         </details>
@@ -982,14 +1006,15 @@ Return:
 - How often this work returns
 - Cost of a quietly wrong result
 - Success condition
+- Why this needs an agent instead of a fixed query, dashboard, or deterministic workflow
 
-Ask the smallest missing clarification. Then recommend Build, Fix the foundation, Assist, or Do not build. Stop and wait for my approval. Save the approved brief as work/01_use_case.md.</pre>
+Ask the smallest missing clarification. Then recommend Build, Fix the foundation, Assist, or Do not build. Prefer the simplest workable design and begin with one agent unless observed failures require a more complex workflow. Stop and wait for my approval. Save the approved brief as work/01_use_case.md.</pre>
           </div>
           <div class="checkpoint"><div><b>You should now have</b><span>A one-page use-case brief, not an analysis.</span></div><div><b>Done when</b><span>The decision, metric, comparison period, downside, and success condition are explicit.</span></div><div><b>Next</b><span>Approve the brief before asking the harness to write the contract.</span></div></div>
         </div>
 
         <div class="artifact">
-          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Choose one use case.</h3></div><p>Use this if you prefer the page to a file. Use a sanitized case; do not paste company data, credentials, customer information, or proprietary code.</p></div>
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Choose one use case.</h3></div><p>Use this if you prefer the page to a file. Use approved material; do not paste company data, credentials, customer information, or proprietary code into the page.</p></div>
           <div class="artifact-grid">
             <div class="field full"><label for="useCase">Recurring business question</label><textarea id="useCase" data-workbook="use_case" placeholder="Example: Why did qualified-signup conversion fall last week?"></textarea></div>
             <div class="field"><label for="decisionUser">Who needs the answer?</label><textarea id="decisionUser" data-workbook="decision_user" placeholder="Role, team, or decision forum"></textarea></div>
@@ -1035,6 +1060,11 @@ Ask the smallest missing clarification. Then recommend Build, Fix the foundation
           <div class="contract-step"><b>05</b><strong>Authority</strong><span>What may it do on its own?</span></div>
           <div class="contract-step"><b>06</b><strong>Stop condition</strong><span>When must it clarify, review, or refuse?</span></div>
           <div class="contract-step"><b>07</b><strong>Human owner</strong><span>Who owns the final decision and repair?</span></div>
+        </div>
+
+        <div class="boundary">
+          <strong>Meta’s Rule of Two: check the session before granting autonomy</strong>
+          <p>Mark whether this session can (A) process untrusted input, (B) access sensitive systems or private data, and (C) change state or communicate externally. If all three are present, do not let the agent operate autonomously. Remove one capability, split the work into a fresh trusted session, or require a person to approve the action.</p>
         </div>
 
         <details class="reference-answer">
@@ -1094,7 +1124,7 @@ knowledge_context:
   - context/metric.yaml
 critical: true</pre>
           </div>
-          <p class="source-note">Adapted from the MIT-licensed <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/agents/CONTRACT_TEMPLATE.md" target="_blank" rel="noreferrer">AI Analyst contract format</a>. Workshop example is synthetic.</p>
+          <p class="source-note">Adapted from the MIT-licensed <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/agents/CONTRACT_TEMPLATE.md" target="_blank" rel="noreferrer">AI Analyst contract format</a>.</p>
         </div>
 
         <div class="prompt-turn">
@@ -1114,6 +1144,14 @@ Then try to break the contract with one vague request and one forbidden action. 
 
 Also draw the request path from harness to tool/MCP contract, approved context, scoped source, validation, proof, human review, and correction memory. Label which component owns permissions, persistence, versioning, and each failure.
 
+List the minimum tools this path needs. For each tool, record its purpose, required inputs, read/write scope, risk tier, and overlap with other tools. Remove or rename any tool when it is unclear which one the agent should choose. Start with one agent unless an observed evaluation failure justifies another.
+
+Apply the Rule of Two to this session:
+- A: can it process untrusted input?
+- B: can it access sensitive systems or private data?
+- C: can it change state or communicate externally?
+If A, B, and C are all present, require human approval or redesign the session before granting autonomy.
+
 Save work/02_contract.yaml and work/02_architecture.md. Mark unknown owners instead of inventing them.</pre>
           </div>
           <div class="checkpoint"><div><b>You should now have</b><span>A contract and an eight-part system map.</span></div><div><b>Done when</b><span>A vague request and an action request both route safely, and every guarantee has an owner.</span></div><div><b>Next</b><span>Use the contract to decide which context the system is allowed to trust.</span></div></div>
@@ -1124,8 +1162,8 @@ Save work/02_contract.yaml and work/02_architecture.md. Mark unknown owners inst
           <div class="note-body">
             <blockquote>“If the contract says ‘help leaders understand the business,’ it is still a wish. Name the decision and the next action.”</blockquote>
             <p><strong>0–7 min:</strong> Teach the seven fields. Contrast “Tell me how growth is doing” with “Explain last week’s qualified-signup conversion movement for the Growth WBR and recommend the next investigation.”</p>
-            <p><strong>7–13 min:</strong> Map the client-neutral production path. Use the data agent’s wrong-source failure to ask where permissions, context versions, validation, proof, and review actually live.</p>
-            <p><strong>13–28 min:</strong> Students run the prompt, inspect the two files, and repair one vague boundary.</p>
+            <p><strong>7–13 min:</strong> Map the client-neutral production path. Use the data agent’s wrong-source failure to ask where permissions, context versions, validation, proof, and review actually live. Apply the Rule of Two before granting autonomy.</p>
+            <p><strong>13–28 min:</strong> Students run the prompt, inspect the two files, remove one ambiguous tool or boundary, and keep the design to one agent unless an eval shows why more are needed.</p>
             <p><strong>28–35 min:</strong> Peer test: a partner tries one ambiguous question and one high-impact action request.</p>
           </div>
         </details>
@@ -1256,7 +1294,7 @@ authority:
   may_not: [change campaign routing, move budget, modify source files]
 expected_response_for_causal_question: Review</pre>
           </div>
-          <p class="source-note">The pattern follows the public <a href="https://github.com/parasdoshicom/ai-plus-data/tree/main/examples/metric-trust-packet" target="_blank" rel="noreferrer">AI+Data metric trust packet</a> and nao’s <a href="https://github.com/getnao/nao/blob/ade2cf2ba5fd74ec4ffa5c9b33600ac38a516986/skills/add-semantic-layer/templates/semantic.yaml" target="_blank" rel="noreferrer">semantic-layer template</a>. Replace the synthetic example with an approved, sanitized metric from your team.</p>
+          <p class="source-note">The pattern follows the public <a href="https://github.com/parasdoshicom/ai-plus-data/tree/main/examples/metric-trust-packet" target="_blank" rel="noreferrer">AI+Data metric trust packet</a> and nao’s <a href="https://github.com/getnao/nao/blob/ade2cf2ba5fd74ec4ffa5c9b33600ac38a516986/skills/add-semantic-layer/templates/semantic.yaml" target="_blank" rel="noreferrer">semantic-layer template</a>. Replace the practice metric with an approved metric from your team.</p>
         </div>
 
         <div class="prompt-turn">
@@ -1273,6 +1311,10 @@ For this question, show:
 - context you actually retrieved
 - context that materially changed the path, result, caveat, or outcome
 
+For every retained context item, record its owner, retrieval trigger, freshness or expiry, and why it is needed. Keep lightweight identifiers in the working context and retrieve detailed material only when the question requires it. Remove context that does not change the route, result, caveat, or response state.
+
+Propose two context tests: one missing-required-context case and one conflicting-context case. State the expected outcome before running them.
+
 Show the proposed file diff and wait for approval before treating it as trusted.</pre>
           </div>
           <div class="checkpoint"><div><b>You should now have</b><span>A reviewable metric file and a four-part context trace.</span></div><div><b>Done when</b><span>A new teammate can choose the right definition and knows when to stop.</span></div><div><b>Next</b><span>Approve the context before the harness proposes or executes the source path.</span></div></div>
@@ -1282,10 +1324,10 @@ Show the proposed file diff and wait for approval before treating it as trusted.
           <summary>Walkthrough + timing + context failure demo</summary>
           <div class="note-body">
             <blockquote>“The model may be smart enough to find a number. The system has to know whether it found the right number for this decision.”</blockquote>
-            <p><strong>0–8 min:</strong> Build the synthetic metric packet: eligible qualified signups ÷ eligible qualified sessions, complete weekly grain, PT, excluding test and partner-assisted rows.</p>
+            <p><strong>0–8 min:</strong> Build the practice metric packet: eligible qualified signups ÷ eligible qualified sessions, complete weekly grain, PT, excluding test and partner-assisted rows.</p>
             <p><strong>8–15 min:</strong> Reveal the tagging change and partial-week caveat. Connect it to the War Room’s visible verification state: the same raw number moves from Answer to Review when context is missing.</p>
-            <p><strong>15–20 min:</strong> Teach Required / Eligible / Retrieved / Applied. Classify six failure layers: missing asset, retrieval miss, context conflict, application error, query error, source data error.</p>
-            <p><strong>20–40 min:</strong> Students run the prompt, inspect the diff, and remove any field that does not affect the path, result, caveat, or outcome.</p>
+            <p><strong>15–20 min:</strong> Teach Required / Eligible / Retrieved / Applied. Classify six failure layers: missing asset, retrieval miss, context conflict, application error, query error, source data error. Connect Anthropic’s high-signal context guidance with Ramp Research’s domain-owner documentation and context-layer tests.</p>
+            <p><strong>20–40 min:</strong> Students run the prompt, inspect the diff, remove any field that does not affect the path, result, caveat, or outcome, and declare one missing-context and one conflict test.</p>
           </div>
         </details>
 
@@ -1371,7 +1413,7 @@ caveats:
 next_action: compare pre- and post-tagging cohorts
 owner: growth_analytics</pre>
           </div>
-          <p class="source-note">The fields follow the public <a href="https://github.com/parasdoshicom/ai-plus-data/tree/main/examples/trusted-answer-lifecycle" target="_blank" rel="noreferrer">AI+Data trusted-answer lifecycle</a>. The values are synthetic and are not customer-production evidence.</p>
+          <p class="source-note">The fields follow the public <a href="https://github.com/parasdoshicom/ai-plus-data/tree/main/examples/trusted-answer-lifecycle" target="_blank" rel="noreferrer">AI+Data trusted-answer lifecycle</a>.</p>
         </div>
 
         <div class="prompt-turn">
@@ -1407,7 +1449,7 @@ Do not call an observed contributor a root cause unless the evidence isolates ca
         </div>
 
         <details class="reference-answer">
-          <summary>Check your work: synthetic case reference answer</summary>
+          <summary>Check your work: practice-case reference answer</summary>
           <div class="note-body"><p><strong>Overall:</strong> 840 / 10,000 = 8.4%; 690 / 10,000 = 6.9%; -1.5 percentage points and -17.86% relative.</p><p><strong>Driver:</strong> paid search moved from 8.33% to 6.20%; mobile paid search moved from 8.0% to 5.6%; short-form share of mobile paid-search traffic rose from 50% to 75%. At prior segment rates, the current mix would have produced 830 signups; actual was 690. Paid search contributes 100 of the 140-signup segment-rate gap, or 71.4%.</p><p><strong>Isolation:</strong> without paid search, conversion still falls from 8.43% to 7.60%. Call paid search the largest observed contributor, not the sole root cause.</p></div>
         </details>
 
@@ -1424,7 +1466,7 @@ Do not call an observed contributor a root cause unless the evidence isolates ca
         </details>
 
         <div class="artifact">
-          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Design the proof and the stop rules.</h3></div><p>Match the checks to the stakes. A board, finance, customer, or irreversible action needs a higher bar than an exploratory internal trend.</p></div>
+          <div class="artifact-head"><div><span class="kicker">Optional browser notes</span><h3>Design the proof and the stop rules.</h3></div><p>Match the checks to the stakes. A board, finance, customer, or irreversible action needs a higher bar than an exploratory team question.</p></div>
           <div class="artifact-grid">
             <div class="field"><label for="autoChecks">Checks that run every time</label><textarea id="autoChecks" data-workbook="automatic_checks" placeholder="Definition, source, freshness, filters, arithmetic, grain, range, reconciliation..."></textarea></div>
             <div class="field"><label for="humanGates">Answers that require human review</label><textarea id="humanGates" data-workbook="human_review_gates" placeholder="Novel source, wide uncertainty, high-impact decision, new segment..."></textarea></div>
@@ -1454,7 +1496,7 @@ Do not call an observed contributor a root cause unless the evidence isolates ca
         </div>
         <div class="section-header">
           <div><span class="kicker">Test the failures</span><h2>Set the pass bar before the model shows you a polished answer.</h2></div>
-          <p class="section-lede">A serious eval tests the path, expected outcome, result, and operating behavior. It includes unsafe questions the agent must block.</p>
+          <p class="section-lede">A serious eval tests the path, expected outcome, result, and operating behavior. It includes unsafe questions the agent must block and failures users could not validate on their own.</p>
         </div>
         <div class="teaching-grid">
           <div class="teaching-copy">
@@ -1536,13 +1578,15 @@ python3 verify.py --inject-benchmark-conflict</pre>
 
 Run those four cases one at a time. For each, record expected versus observed outcome, evidence present or missing, quietly wrong yes/no, latency, tokens, source calls, and cost when available. Mark unavailable telemetry honestly. Do not average away a failed high-risk case.
 
+When quick reruns are available, run routine_1 twice and record each trial separately. Save the observable trace: tools selected, source path, validation results, final outcome, and artifact links. Do not ask for or store hidden reasoning. Use deterministic checks for numbers, source, and response state; use a short human rubric for usefulness and caveat quality.
+
 Then run:
 - python3 verify.py --inject-impossible-row
 - python3 verify.py --inject-benchmark-conflict
 
 If Python is unavailable, run the four harness cases, predict both injected outcomes, observe Paras’s or a partner’s verifier run, record the observed results, and rejoin at the correction step.
 
-Pick one failure or unsupported claim. Identify whether it came from a missing asset, retrieval miss, context conflict, application error, query error, or source-data error. Write the smallest proposed repair under work/, append work/correction.yaml, and rerun every affected case. Do not modify the lab’s data/ or context/ files.
+Pick one failure or unsupported claim. Identify whether it came from a missing asset, retrieval miss, context conflict, application error, query error, or source-data error. Write a feedback record with the question, response outcome, evidence gap, user impact, self-validation result, and failure layer. Write the smallest proposed repair under work/, append work/correction.yaml, and rerun every affected case. Do not modify the lab’s data/ or context/ files. Once the repair is approved, keep the failure as a regression case.
 
 Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep the remaining four cases as the extension pack after class.</pre>
           </div>
@@ -1554,7 +1598,7 @@ Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep
           <div class="note-body">
             <blockquote>“The best analytics-agent test includes a question the system should not answer.”</blockquote>
             <p>Do not blend the scores. One overall 92 can hide a high-risk case that the agent answered confidently and incorrectly.</p>
-            <p><strong>0–8 min:</strong> Teach expected outcomes, quietly wrong versus loud failure, and why security cases belong beside correctness cases.</p>
+            <p><strong>0–8 min:</strong> Teach task, trial, observable trace, deterministic check, human rubric, and quietly wrong versus loud failure. Explain why security cases belong beside correctness cases.</p>
             <p><strong>8–15 min:</strong> Use Abandonment Intelligence’s known-good rules to predict three lab outcomes before running them.</p>
             <p><strong>15–32 min:</strong> Students run four representative cases plus the two injected failures. Without Python, predict the injections, observe Paras’s or a partner’s run, record the results, and rejoin at the correction. Do not let the harness skip the four cases.</p>
             <p><strong>32–42 min:</strong> Repair one shared artifact, record the correction, and rerun affected cases.</p>
@@ -1586,7 +1630,7 @@ Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep
         </div>
         <div class="section-header">
           <div><span class="kicker">Operate it</span><h2>Production begins when the demo ends.</h2></div>
-          <p class="section-lede">A production plan needs owners, a review rhythm, monitoring, correction memory, cost, and a clear rule for stopping or narrowing the system.</p>
+          <p class="section-lede">A production plan needs owners, a review rhythm, monitoring, correction memory, cost, and a clear rule for stopping or narrowing the system. The user-feedback path and data-admin approval path are part of the product.</p>
         </div>
         <div class="teaching-grid">
           <div class="teaching-copy">
@@ -1606,19 +1650,19 @@ Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep
         </div>
 
         <div class="control-grid" aria-label="Production control checklist">
-          <div class="control-card"><b>01 · Data + permission</b><h4>Least access wins</h4><p>Classify allowed and prohibited data. Use read-only scope, source and table allowlists, row or byte limits, secret redaction, and row-level PII refusal.</p></div>
+          <div class="control-card"><b>01 · Data + permission</b><h4>Least access wins</h4><p>Classify allowed and prohibited data. Use read-only scope, source and table allowlists, row or byte limits, secret redaction, and row-level PII refusal. Apply the Rule of Two before enabling external action.</p></div>
           <div class="control-card"><b>02 · Runtime behavior</b><h4>Fail predictably</h4><p>Set timeout, retry and backoff, idempotency, rate and concurrency limits, degraded-result rule, cached fallback, and circuit breaker.</p></div>
           <div class="control-card"><b>03 · Version + release</b><h4>Know what changed</h4><p>Pin the route, context, metric, model, and threshold versions. Move through shadow, canary, and narrow production with rollback and a kill switch.</p></div>
-          <div class="control-card"><b>04 · Observability</b><h4>Trace every serious claim</h4><p>Log source snapshot, freshness, response outcome, validation stages, latency, tokens, cost, calls, fallback, reviewer label, and correction id.</p></div>
-          <div class="control-card"><b>05 · Audit + incident</b><h4>Review the right risk</h4><p>Sample routine answers; review every finance, board, customer, or high-impact answer. Preserve evidence, pause the affected route, repair, regress, and name who may resume.</p></div>
-          <div class="control-card"><b>06 · Value + capacity</b><h4>Earn the next use case</h4><p>Compare with the manual baseline. Track adoption, reuse, time saved, review burden, cost per run and month, and whether the decision or team experience improved.</p></div>
+          <div class="control-card"><b>04 · Observability</b><h4>Trace every serious claim</h4><p>Log source snapshot, freshness, response outcome, validation stages, latency, tokens, cost, calls, fallback, reviewer label, feedback id, and correction id.</p></div>
+          <div class="control-card"><b>05 · Feedback + review</b><h4>Improve the shared path</h4><p>Give users one way to flag wrong or unverifiable answers. Let data admins review the edge case, change the canonical definition or answer path, and promote the accepted correction into context and regression tests.</p></div>
+          <div class="control-card"><b>06 · Value + capacity</b><h4>Earn the next use case</h4><p>Compare with the manual baseline. Track adoption, reuse, self-validated answers, review burden, cost per run and month, and whether the decision or team experience improved. Route models by observed task quality, latency, and cost.</p></div>
         </div>
 
         <div class="month-plan" aria-label="Four-week production plan">
           <div class="week"><span class="week-num">Week 1</span><h4>Lock the path</h4><p>Choose the question, contract, metric, owners, approved source, and risk tier.</p><ul><li>Baseline current manual work</li><li>Resolve source conflicts</li><li>Name out-of-scope requests</li></ul></div>
           <div class="week"><span class="week-num">Week 2</span><h4>Build the proof</h4><p>Create the minimum context, proof receipt, eight cases, and predeclared launch bar.</p><ul><li>Run repeated phrasings</li><li>Inject bad data</li><li>Log failure layers</li></ul></div>
-          <div class="week"><span class="week-num">Week 3</span><h4>Pilot in shadow mode</h4><p>Run beside the existing process. A person reviews every output before it affects work.</p><ul><li>Compare to the human path</li><li>Track review burden</li><li>Fix shared artifacts</li></ul></div>
-          <div class="week"><span class="week-num">Week 4</span><h4>Release narrowly</h4><p>Open the reviewed scope, sample live outputs, publish the owner path, and set the next review.</p><ul><li>Audit high-risk outputs</li><li>Save reviewed paths</li><li>Expand, hold, or stop</li></ul></div>
+          <div class="week"><span class="week-num">Week 3</span><h4>Pilot in shadow mode</h4><p>Run beside the existing process. A person reviews every output before it affects work.</p><ul><li>Compare to the human path</li><li>Track self-validation and review burden</li><li>Fix shared artifacts</li></ul></div>
+          <div class="week"><span class="week-num">Week 4</span><h4>Release narrowly</h4><p>Move from suggestions to reviewed actions only after the tested scope earns it. Sample live outputs, publish the owner path, and set the next review.</p><ul><li>Audit high-risk outputs</li><li>Promote reviewed paths</li><li>Expand, hold, or stop</li></ul></div>
         </div>
 
         <div class="builder-lab">
@@ -1649,7 +1693,7 @@ next_runnable_step: repair_source_conflict
   prevented_by: business-rules validation
   owner: growth_analytics</pre>
           </div>
-          <p class="source-note">Adapted from AI Analyst’s <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/agents/pipeline_state_schema.md" target="_blank" rel="noreferrer">pipeline state</a> and the public AI+Data correction-memory pattern. Workshop values are synthetic.</p>
+          <p class="source-note">Adapted from AI Analyst’s <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/agents/pipeline_state_schema.md" target="_blank" rel="noreferrer">pipeline state</a> and the public AI+Data correction-memory pattern.</p>
         </div>
 
         <div class="prompt-turn">
@@ -1662,9 +1706,11 @@ Create work/06_operations.md with:
 - manual baseline and target, check date, and guardrail
 - five owner roles and who may change the metric, source, route, model, or thresholds
 - read-only scope, prohibited data, limits, timeout, retry, fallback, health check, and kill switch
+- Rule of Two classification for untrusted input, sensitive access, and external action
+- user-feedback intake, self-validation signal, review queue, data-admin approval, and promotion into semantic context and regression tests
 - run-event fields, alert thresholds, audit sample, reviewer-capacity ceiling, and incident/resume owner
 - shadow → canary → narrow-production steps and rollback rule
-- model, warehouse, and human-review cost per run and per month
+- model-routing rule based on task quality, latency, and cost; plus model, warehouse, and human-review cost per run and per month
 - expiry and reapproval triggers
 
 Then create work/07_launch_memo.md: business decision, pilot users and workflow, quality result, material risks, adoption and reuse measure, review burden, total cost, 30-day milestones, and the leadership decision requested: Scale, Hold, or Stop.
@@ -1724,10 +1770,10 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
           </div>
         </div>
         <div class="artifact">
-          <div class="artifact-head"><div><span class="kicker">Final revision</span><h3>Record the launch blocker your partner found.</h3></div><p>This is the best question to bring to the private follow-up session.</p></div>
+          <div class="artifact-head"><div><span class="kicker">Final revision</span><h3>Record the launch blocker your partner found.</h3></div><p>Bring this question to the 60-minute follow-up review.</p></div>
           <div class="artifact-grid">
             <div class="field full"><label for="peerBlocker">Blocker, risk, and next repair</label><textarea id="peerBlocker" data-workbook="peer_review_blocker" placeholder="The weak link is... The risk is... Before launch we will..."></textarea></div>
-            <div class="field full"><label for="followupQuestion">Question for the private 60-minute review</label><textarea id="followupQuestion" data-workbook="private_review_question" placeholder="The decision or design tradeoff where you want Paras's input"></textarea></div>
+            <div class="field full"><label for="followupQuestion">Question for the 60-minute follow-up review</label><textarea id="followupQuestion" data-workbook="followup_question" placeholder="The decision or design tradeoff where you want Paras's input"></textarea></div>
           </div>
           <p class="save-state">Saved locally on this device</p>
         </div>
@@ -1753,8 +1799,8 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
           <div class="note-body">
             <div class="prep-columns">
               <div class="prep-column"><h3>30 minutes before</h3><ul><li>Open this page and export a blank starter pack.</li><li>Download the lab zip and run <code>python3 verify.py</code>.</li><li>Check any MCP or warehouse route you plan to demo; do not make it the critical path.</li><li>Silence notifications and share one browser window.</li><li>Put the three Q&amp;A windows and two breaks in your calendar.</li></ul></div>
-              <div class="prep-column"><h3>Room contract</h3><ul><li>Use sanitized company examples only.</li><li>No credentials, proprietary SQL, raw customer records, or restricted files.</li><li>No coding experience is required; the harness can write and run the files.</li><li>Questions about a specific company stay at the design level.</li><li>If a source cannot run, state that clearly and use the lab kit.</li></ul></div>
-              <div class="prep-column"><h3>Energy design</h3><ul><li>Use chat in the first two minutes.</li><li>Do not talk for more than ten minutes without a room action.</li><li>Ask students to predict an outcome before revealing it.</li><li>Use the synthetic case whenever an example is sensitive.</li><li>Timebox feedback to the current artifact.</li></ul></div>
+              <div class="prep-column"><h3>Room contract</h3><ul><li>Use approved examples only.</li><li>No credentials, proprietary SQL, raw customer records, or restricted files.</li><li>No coding experience is required; the harness can write and run the files.</li><li>Questions about a specific company stay at the design level.</li><li>If a source cannot run, state that clearly and use the lab kit.</li></ul></div>
+              <div class="prep-column"><h3>Energy design</h3><ul><li>Use chat in the first two minutes.</li><li>Do not talk for more than ten minutes without a room action.</li><li>Ask students to predict an outcome before revealing it.</li><li>Use the practice case whenever an example is sensitive.</li><li>Timebox feedback to the current artifact.</li></ul></div>
             </div>
             <div class="fallback"><h3>If the live agent fails, teach the failure.</h3><p>Show the planned path, state that the source did not run, and ask what the agent should do next. Use the lab’s proof as the completed example. A failed call becomes a production lesson, not dead air.</p></div>
             <blockquote>Opening: “By 2 PM, you will have one written production plan. We are going to build it in six pieces, and you will use the same real question all day.”</blockquote>
@@ -1774,14 +1820,18 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
           <summary>Expand the reading list</summary>
           <div class="note-body source-table">
             <div class="source-row"><strong>Maven course</strong><span>Course outcomes and follow-up experience</span><code><a href="https://maven.com/paras-doshi/agentic-analytics-in-production" target="_blank" rel="noreferrer">Agentic Analytics in Production</a></code></div>
-            <div class="source-row"><strong>AI+Data</strong><span>Synthetic funnel, metric packet, trusted-answer lifecycle, refusal checks, context tests, and eval scorecard</span><code><a href="https://github.com/parasdoshicom/ai-plus-data" target="_blank" rel="noreferrer">GitHub repository</a></code></div>
+            <div class="source-row"><strong>AI+Data</strong><span>Practice funnel, metric packet, trusted-answer lifecycle, refusal checks, context tests, and eval scorecard</span><code><a href="https://github.com/parasdoshicom/ai-plus-data" target="_blank" rel="noreferrer">GitHub repository</a></code></div>
             <div class="source-row"><strong>AI Analyst</strong><span>Setup, source tie-out, agent contracts, layered validation, resumable state, and correction memory</span><code><a href="https://github.com/ai-analyst-lab/ai-analyst" target="_blank" rel="noreferrer">MIT-licensed repository</a></code></div>
             <div class="source-row"><strong>nao</strong><span>File-based context, semantic metric definitions, executable expected SQL, and row/value comparison</span><code><a href="https://github.com/getnao/nao" target="_blank" rel="noreferrer">GitHub repository</a></code></div>
+            <div class="source-row"><strong>OpenAI</strong><span>Agent use-case selection, single-agent-first design, tools, guardrails, human intervention, layered data context, golden-result evals, and permission pass-through</span><code><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/" target="_blank" rel="noreferrer">Agent guide</a> · <a href="https://openai.com/index/inside-our-in-house-data-agent/" target="_blank" rel="noreferrer">Data agent</a></code></div>
+            <div class="source-row"><strong>Anthropic</strong><span>Simple composable workflows, distinct tools, high-signal context, environmental feedback, repeated trials, mixed graders, and regression suites</span><code><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noreferrer">Agent patterns</a> · <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noreferrer">Context</a> · <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noreferrer">Evals</a></code></div>
+            <div class="source-row"><strong>Meta</strong><span>Agent security threat modeling, least privilege, system-level safeguards, prompt-injection controls, and the Rule of Two</span><code><a href="https://ai.meta.com/blog/practical-ai-agent-security/" target="_blank" rel="noreferrer">Rule of Two</a> · <a href="https://github.com/meta-llama/PurpleLlama" target="_blank" rel="noreferrer">Protection tools</a></code></div>
+            <div class="source-row"><strong>Ramp</strong><span>Domain-owner context, metadata search, stateful conversations, source visibility, actionable uncertainty states, context-layer tests, user-controlled autonomy, and failure-driven evals</span><code><a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" rel="noreferrer">Ramp Research</a> · <a href="https://builders.ramp.com/post/how-to-build-agents-users-can-trust" target="_blank" rel="noreferrer">Trust guide</a></code></div>
           </div>
         </details>
         <div class="boundary">
           <strong>Keep the evidence honest</strong>
-          <p>The workshop case is synthetic. A passing local verifier, internal QA, a deployed pilot, sampled live correctness, and a measured business outcome are different levels of evidence. Say which one you have.</p>
+          <p>A passing practice-data verifier, a tested build, a deployed pilot, sampled live correctness, and a measured business outcome are different levels of evidence. Say which one you have.</p>
         </div>
       </div>
     </section>
@@ -1860,7 +1910,7 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
       metric_definition: 'Metric definition and formula', metric_owners: 'Metric owners', grain_filters: 'Grain, time zone, filters, exclusions', approved_source: 'Approved source path', freshness_rule: 'Freshness rule', source_precedence: 'Source precedence', caveats: 'Known caveats', validation_rule: 'Validation rule', required_context: 'Required context',
       automatic_checks: 'Checks that run every time', human_review_gates: 'Human review gates', proof_receipt_fields: 'Proof receipt fields', clarify_rule: 'Clarify rule', review_rule: 'Review rule', refusal_rule: 'Refusal rule',
       eval_happy: 'Cases 1-2: happy path', eval_ambiguous: 'Cases 3-4: ambiguity', eval_stale: 'Case 5: stale source', eval_conflict: 'Case 6: conflicting sources', eval_broken: 'Case 7: broken math or data', eval_risk: 'Case 8: novel high-risk request', release_gate: 'Launch bar',
-      owners: 'Owner map', week_1: 'Week 1 milestone', week_2: 'Week 2 milestone', week_3: 'Week 3 milestone', week_4: 'Week 4 milestone', monitoring: 'Monitoring and review rhythm', cost_permissions_support: 'Cost, permissions, and support', stop_rule: 'Stop or narrow rule', monday_move: 'Monday first move', peer_review_blocker: 'Peer-review blocker', private_review_question: 'Question for private review'
+      owners: 'Owner map', week_1: 'Week 1 milestone', week_2: 'Week 2 milestone', week_3: 'Week 3 milestone', week_4: 'Week 4 milestone', monitoring: 'Monitoring and review rhythm', cost_permissions_support: 'Cost, permissions, and support', stop_rule: 'Stop or narrow rule', monday_move: 'Monday first move', peer_review_blocker: 'Peer-review blocker', followup_question: 'Question for follow-up review'
     };
 
     function exportWorkbook() {
@@ -1871,9 +1921,9 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
         ['3. Context map and metric packet', ['metric_definition','metric_owners','grain_filters','approved_source','freshness_rule','source_precedence','caveats','validation_rule','required_context']],
         ['4. Proof and response rules', ['automatic_checks','human_review_gates','proof_receipt_fields','clarify_rule','review_rule','refusal_rule']],
         ['5. Eval set and launch bar', ['eval_happy','eval_ambiguous','eval_stale','eval_conflict','eval_broken','eval_risk','release_gate']],
-        ['6. Production controls and 30-day plan', ['owners','week_1','week_2','week_3','week_4','monitoring','cost_permissions_support','stop_rule','monday_move','peer_review_blocker','private_review_question']]
+        ['6. Production controls and 30-day plan', ['owners','week_1','week_2','week_3','week_4','monitoring','cost_permissions_support','stop_rule','monday_move','peer_review_blocker','followup_question']]
       ];
-      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## The three-spine route\n\n1. **Framework:** decision contract, approved context, scoped execution, validation, proof, review, correction, and operations.\n2. **Paras-built examples:** [Acquisition War Room](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/acquisition-war-room.html) and [Abandonment Intelligence](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/abandonment-intelligence.html). Both public interfaces use synthetic lab data.\n3. **Your build:** the files below, created with an approved source or the included public lab.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
+      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## The three-spine route\n\n1. **Framework:** decision contract, approved context, scoped execution, validation, proof, review, correction, and operations.\n2. **Paras-built examples:** [Acquisition War Room](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/acquisition-war-room.html) and [Abandonment Intelligence](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/abandonment-intelligence.html), using the included course dataset.\n3. **Your build:** the files below, created with an approved source or the included practice lab.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
       sections.forEach(([title, keys]) => {
         markdown += `## ${title}\n\n`;
         keys.forEach((key) => {

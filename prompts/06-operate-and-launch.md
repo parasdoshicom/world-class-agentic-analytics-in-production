@@ -7,9 +7,11 @@ Create work/06_operations.md with:
 - manual baseline and target, check date, and guardrail
 - five owner roles and who may change the metric, source, route, model, or thresholds
 - read-only scope, prohibited data, limits, timeout, retry, fallback, health check, and kill switch
+- Rule of Two classification for untrusted input, sensitive access, and external action
+- user-feedback intake, self-validation signal, review queue, data-admin approval, and promotion into semantic context and regression tests
 - run-event fields, alert thresholds, audit sample, reviewer-capacity ceiling, and incident/resume owner
 - shadow → canary → narrow-production steps and rollback rule
-- model, warehouse, and human-review cost per run and per month
+- model-routing rule based on task quality, latency, and cost; plus model, warehouse, and human-review cost per run and per month
 - expiry and reapproval triggers
 
 Then create work/07_launch_memo.md: business decision, pilot users and workflow, quality result, material risks, adoption and reuse measure, review burden, total cost, 30-day milestones, and the leadership decision requested: Scale, Hold, or Stop.

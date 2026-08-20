@@ -1,10 +1,10 @@
-# Systems Paras built: public teaching reconstructions
+# Systems Paras built
 
-These examples preserve the operating patterns Paras used in real analytics systems while replacing internal data, names, sources, and tickets with the course's synthetic lab.
+These examples show how recurring analytics questions became products people could inspect, challenge, and use. The visible numbers use the included course dataset so you can follow the same path yourself.
 
 ## Acquisition War Room
 
-[Open the full reconstruction](acquisition-war-room.html)
+[Open the full example](acquisition-war-room.html)
 
 The War Room is the executive sensing layer. It turns a recurring operating question into one reviewed briefing:
 
@@ -18,7 +18,7 @@ The design used parallel specialist agents for headline metrics, deep dives, seg
 
 ## Abandonment Intelligence
 
-[Open the full reconstruction](abandonment-intelligence.html)
+[Open the full example](abandonment-intelligence.html)
 
 Abandonment Intelligence is the investigation-and-action layer. It rejects a generic finding such as “conversion is down.” A useful finding names the affected population, the broken rule or flow, and the durability evidence. It also needs an owner, a work item or next test, and a confidence level.
 
@@ -28,6 +28,4 @@ The design used parallel investigators across funnel breakpoints plus operationa
 
 The conversational agent is the front door. It routes direct questions, investigations, and recurring briefings through approved sources and review rules. One early test produced a fluent but incorrect answer after choosing the wrong source. That failure drove the visible SQL, source citation, semantic context, validation, caching, time-window, security, and PII controls taught in this course.
 
-## Evidence boundary
-
-Paras designed and built the systems behind these interfaces and architecture. Every number and event visible in these public examples comes from the fictional workshop lab. These reconstructions do not claim a current customer deployment or customer result.
+Use the examples to ask five questions: What decision is this helping someone make? Which meaning and source does it trust? What can the user verify? When does it ask for review? How does a correction improve the next run?

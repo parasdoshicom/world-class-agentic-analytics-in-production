@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent, dependency-free verifier for the workshop's synthetic lab."""
+"""Independent, dependency-free verifier for the workshop practice lab."""
 
 from __future__ import annotations
 
