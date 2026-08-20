@@ -7,3 +7,5 @@ __pycache__/
 .playwright/
 test-results/
 playwright-report/
+/assets/agentic-analytics-lab/work/*
+!/assets/agentic-analytics-lab/work/.gitkeep

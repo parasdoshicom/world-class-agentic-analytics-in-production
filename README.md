@@ -6,7 +6,7 @@ This repository is the companion for a five-hour, hands-on course. You can bring
 
 The material runs on three linked spines. You learn the production framework, inspect systems Paras built, and practice with an approved source or the included lab.
 
-The live workshop page is the canonical student and instructor experience. Share that one URL for class; it contains the agenda, explanations, prompts, examples, checkpoints, practice-data links, reference answers, and exports. The standalone repository files are optional direct-access copies and testable source material.
+The live workshop page is the canonical course experience. Share that one URL for class; it contains the agenda, explanations, prompts, examples, checkpoints, practice-data links, reference answers, and exports. The standalone files give students direct access to the prompts and practice lab.
 
 ## The operating model
 
@@ -45,8 +45,8 @@ By the end of the course, you will have:
 3. a client-neutral production architecture;
 4. a reviewed metric-context proposal;
 5. an executed analysis with independent verification and a proof receipt;
-6. an evaluation set, one controlled failure, a correction, and a rerun;
-7. production controls and a one-page Scale, Hold, or Stop launch memo.
+6. an evaluation set and one complete user-feedback → data-admin review → shared correction → fresh-session rerun loop;
+7. observed run and review data, production controls, and a one-page Scale, Hold, or Stop launch memo.
 
 Generated work stays under the lab's `work/` directory. The supplied `data/` and `context/` directories are read-only inputs.
 
@@ -60,27 +60,6 @@ Generated work stays under the lab's `work/` directory. The supplied `data/` and
 | [`assets/case-studies/`](assets/case-studies/) | Screenshots used in the course case studies |
 | [`assets/agentic-analytics-lab/`](assets/agentic-analytics-lab/README.md) | Practice CSV data, approved context, evals, and verifier |
 | [`assets/agentic-analytics-workshop-lab.zip`](assets/agentic-analytics-workshop-lab.zip) | Downloadable copy of the full lab |
-| [`scripts/validate_course.py`](scripts/validate_course.py) | Link, prompt-sync, ZIP-integrity, and course checks |
-| [`scripts/validate_student_journey.py`](scripts/validate_student_journey.py) | Clean-download, filename, CSV, prompt-output, verifier, and write-boundary checks |
-| [`tests/course.spec.js`](tests/course.spec.js) | Browser acceptance checks for controls, downloads, preview data, export, and mobile layout |
-| [`.github/workflows/quality-and-pages.yml`](.github/workflows/quality-and-pages.yml) | Tests every change and refreshes GitHub Pages from `main` |
-
-## Updating the course
-
-Edit the smallest owning file. If a prompt changes, update both `index.html` and its matching file under `prompts/`. If the lab changes, rebuild the lab ZIP so the browser download matches the visible source.
-
-Before pushing:
-
-```bash
-python3 scripts/validate_course.py
-python3 scripts/validate_student_journey.py
-npm ci
-npm run test:browser
-cd assets/agentic-analytics-lab
-python3 verify.py
-```
-
-A push to `main` runs the same checks and publishes the refreshed workshop through GitHub Pages.
 
 ## License
 

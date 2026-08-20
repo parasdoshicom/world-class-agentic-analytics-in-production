@@ -9,7 +9,7 @@ test('master course controls and downloads work end to end', async ({ page, cont
   await page.goto('/');
 
   await expect(page).toHaveTitle(/World-Class Agentic Analytics/);
-  await expect(page.locator('details.reference-answer')).toHaveCount(2);
+  await expect(page.locator('details.reference-answer')).toHaveCount(3);
   await expect(page.locator('details.reference-answer[open]')).toHaveCount(0);
 
   await page.getByRole('button', { name: 'Expand walkthroughs' }).click();

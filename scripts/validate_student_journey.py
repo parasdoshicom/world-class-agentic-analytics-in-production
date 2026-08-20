@@ -92,8 +92,13 @@ def check_prompt_contract() -> None:
         "work/03_metric_proposal.yaml",
         "work/04a_plan.yaml",
         "work/04_proof.yaml",
-        "work/correction.yaml",
+        "work/05_feedback.yaml",
+        "work/05_admin_decision.yaml",
+        "work/shared_context/correction-001.yaml",
+        "work/05_regression_case.yaml",
+        "work/05_reuse_rerun.md",
         "work/05_eval_results.csv",
+        "work/05_observed_operations.csv",
         "work/06_operations.md",
         "work/07_launch_memo.md",
     )
@@ -152,10 +157,15 @@ def check_downloaded_lab() -> None:
             "data/wbr_benchmark.csv",
             "context/metric.yaml",
             "context/business_changes.md",
+            "feedback/flagged_answer.yaml",
             "work/.gitkeep",
         )
         for relative in expected_files:
             require((lab / relative).is_file(), f"downloaded lab is missing: {relative}")
+
+        feedback_text = (lab / "feedback/flagged_answer.yaml").read_text(encoding="utf-8")
+        for required in ("reported_claim: Paid search caused the decline.", "self_validation: failed", "requested_action:"):
+            require(required in feedback_text, f"seeded feedback is missing: {required}")
 
         with (lab / "data/funnel_segments.csv").open(newline="", encoding="utf-8") as handle:
             calculation_rows = list(csv.DictReader(handle))
@@ -264,14 +274,33 @@ def check_downloaded_lab() -> None:
             "03_metric_proposal.yaml",
             "04a_plan.yaml",
             "04_proof.yaml",
-            "correction.yaml",
+            "05_feedback.yaml",
+            "05_admin_decision.yaml",
+            "shared_context/correction-001.yaml",
+            "05_regression_case.yaml",
+            "05_reuse_rerun.md",
             "05_eval_results.csv",
+            "05_observed_operations.csv",
             "06_operations.md",
             "07_launch_memo.md",
         ):
             path = lab / "work" / output
+            path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("student acceptance artifact\n", encoding="utf-8")
             require(path.is_file(), f"student cannot write expected artifact: work/{output}")
+
+        operator_artifacts = {
+            "05_feedback.yaml": "outcome: Answer\nself_validation: failed\nrequested_review: true\n",
+            "05_admin_decision.yaml": "decision: Approve\ncorrection: largest observed contributor, not root cause\n",
+            "shared_context/correction-001.yaml": "id: CORR-001\nrequired_outcome: Review\nforbid_claim: paid search caused the decline\n",
+            "05_regression_case.yaml": "case_id: causal_claim\nexpected_outcome: Review\n",
+            "05_reuse_rerun.md": "# Fresh-session rerun\nBefore: Answer\nAfter: Review\nUnsupported causal claim prevented: yes\n",
+            "05_observed_operations.csv": "case_id,outcome,elapsed_seconds,reviewer_minutes,source_calls,tokens,cost,correction_reused,result_changed\ncausal_claim,Review,42,6,2,unavailable,unavailable,true,true\n",
+        }
+        for relative, content in operator_artifacts.items():
+            path = lab / "work" / relative
+            path.write_text(content, encoding="utf-8")
+            require(path.read_text(encoding="utf-8") == content, f"operating-loop artifact did not persist: work/{relative}")
 
 
 def main() -> int:

@@ -14,6 +14,7 @@ FUNNEL_PATH = ROOT / "data" / "funnel_segments.csv"
 BENCHMARK_PATH = ROOT / "data" / "wbr_benchmark.csv"
 TOLERANCE_PP = 0.2
 WORK_PATH = ROOT / "work"
+FEEDBACK_PATH = ROOT / "feedback" / "flagged_answer.yaml"
 CALCULATION_REQUIRED = {
     "row_id", "week_start", "channel", "device", "landing_page",
     "qualified_sessions", "qualified_signups", "population",
@@ -74,6 +75,8 @@ def main() -> int:
             readiness_errors.append(f"benchmark CSV missing columns: {', '.join(missing)}")
         if not WORK_PATH.is_dir():
             readiness_errors.append("work/ directory is missing")
+        if not FEEDBACK_PATH.is_file():
+            readiness_errors.append("feedback/flagged_answer.yaml is missing")
         if readiness_errors:
             print("READINESS: FAIL")
             for error in readiness_errors:

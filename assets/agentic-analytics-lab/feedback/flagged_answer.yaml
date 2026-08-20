@@ -1,0 +1,14 @@
+id: FLAG-001
+question: Why did qualified-signup conversion fall in the latest complete week?
+reported_outcome: Answer
+reported_claim: Paid search caused the decline.
+evidence_present:
+  - paid search had the largest observed rate deterioration
+evidence_missing:
+  - campaign tagging changed between the comparison periods
+  - non-paid conversion also declined
+  - the analysis did not isolate causality
+user_feedback: I cannot validate the causal claim or use it for a spend decision.
+self_validation: failed
+decision_risk: Budget could be moved on an unsupported causal claim.
+requested_action: Review the answer path and prevent this causal claim from passing again.

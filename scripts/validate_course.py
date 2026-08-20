@@ -95,6 +95,10 @@ def check_zip(errors: list[str]) -> None:
         path.relative_to(LAB).as_posix(): path.read_bytes()
         for path in LAB.rglob("*")
         if path.is_file()
+        and (
+            path.relative_to(LAB).as_posix() == "work/.gitkeep"
+            or path.relative_to(LAB).parts[0] != "work"
+        )
     }
     with zipfile.ZipFile(LAB_ZIP) as archive:
         zip_files = {
@@ -156,6 +160,33 @@ def check_course_content(errors: list[str]) -> None:
     for source in required_sources:
         if source not in course_text:
             fail(errors, f"missing leading-practice source in index.html: {source}")
+
+    forbidden_student_copy = (
+        "Live-session notes",
+        "live-session preparation, room rules, and scripts",
+        "30 minutes before",
+        "Room contract",
+        "Energy design",
+        "This model helped more than 800 people",
+        "about 80% of the company",
+        "roughly 1,400 dashboards",
+        "more than 95% of cases",
+        "roughly 5% of edge cases",
+    )
+    for phrase in forbidden_student_copy:
+        if phrase in course_text:
+            fail(errors, f"student page contains private or unsupported copy: {phrase}")
+
+    for required in (
+        "feedback/flagged_answer.yaml",
+        "work/05_admin_decision.yaml",
+        "work/shared_context/correction-001.yaml",
+        "work/05_reuse_rerun.md",
+        "work/05_observed_operations.csv",
+        "Python 3.9+",
+    ):
+        if required not in course_text:
+            fail(errors, f"student page is missing the live operating loop: {required}")
 
     setup_start = course_text.find('<section class="section alt" id="setup"')
     setup_end = course_text.find('<section class="section" id="schedule"')

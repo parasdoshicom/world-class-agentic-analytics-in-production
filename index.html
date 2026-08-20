@@ -511,13 +511,6 @@
     .review-question b { color: var(--accent); font-size: 11px; }
     .review-question span { color: var(--muted); font-size: 13px; }
 
-    .prep-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-    .prep-column { padding-top: 18px; border-top: 2px solid var(--line-strong); }
-    .prep-column h3 { font-size: 21px; }
-    .prep-column ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
-    .prep-column li { margin-bottom: 10px; }
-    .fallback { margin-top: 44px; padding: 26px 0 0; border-top: 1px solid var(--line-strong); }
-
     .source-table { display: grid; border-top: 1px solid var(--line-strong); }
     .source-row { display: grid; grid-template-columns: .55fr 1.2fr 1.25fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
     .source-row strong { font-size: 13px; }
@@ -579,7 +572,6 @@
       .runway-kind { display: none; }
       .contract-flow { grid-template-columns: repeat(3, 1fr); }
       .states, .month-plan, .architecture-flow, .control-grid { grid-template-columns: repeat(2, 1fr); }
-      .prep-columns { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 780px) {
@@ -696,11 +688,10 @@
       <a href="#module-2"><span class="nav-num">05</span><span class="nav-title">Contract + architecture</span><span class="nav-time">35m</span></a>
       <a href="#module-3"><span class="nav-num">06</span><span class="nav-title">Context map</span><span class="nav-time">40m</span></a>
       <a href="#module-4"><span class="nav-num">07</span><span class="nav-title">Proof and review</span><span class="nav-time">45m</span></a>
-      <a href="#module-5"><span class="nav-num">08</span><span class="nav-title">Failure evals</span><span class="nav-time">45m</span></a>
+      <a href="#module-5"><span class="nav-num">08</span><span class="nav-title">Feedback + reuse</span><span class="nav-time">45m</span></a>
       <a href="#module-6"><span class="nav-num">09</span><span class="nav-title">Operate + launch</span><span class="nav-time">25m</span></a>
       <a href="#peer-review"><span class="nav-num">10</span><span class="nav-title">Peer review</span><span class="nav-time">15m</span></a>
-      <a href="#facilitation"><span class="nav-num">11</span><span class="nav-title">Live-session notes</span><span class="nav-time">notes</span></a>
-      <a href="#sources"><span class="nav-num">12</span><span class="nav-title">Further reading</span><span class="nav-time">refs</span></a>
+      <a href="#sources"><span class="nav-num">11</span><span class="nav-title">Further reading</span><span class="nav-time">refs</span></a>
     </nav>
     <div class="rail-footer">
       <strong>Friday · Aug 21, 2026</strong>
@@ -712,9 +703,9 @@
     <section class="hero" id="welcome">
       <div class="shell hero-grid">
         <div>
-          <p class="eyebrow">Live workshop · course companion + workbook</p>
+          <p class="eyebrow">Live workshop · one production path, end to end</p>
           <h1>Build analytics agents people can trust.</h1>
-          <p class="hero-deck">Learn the production framework, see it in systems I built, then practice the full path with your data or the included lab.</p>
+          <p class="hero-deck">Contract one recurring question, run it, catch a bad answer, promote the correction, prove that a fresh session reuses it, and make a measured Scale, Hold, or Stop decision.</p>
           <div class="hero-meta">
             <span><i></i> Five hours, live</span>
             <span><i></i> Python optional</span>
@@ -769,7 +760,7 @@
         <div class="setup-flow" aria-label="Workspace readiness checks">
           <div class="setup-row"><b>01</b><strong>Choose one isolated workspace</strong><span>For the live build, download the lab ZIP and open its extracted folder. Use a separate approved session when adapting the workflow to company data. Never mix the two.</span></div>
           <div class="setup-row"><b>02</b><strong>Check every connected tool</strong><span>Disconnect ChatData, warehouses, company MCPs, and other real-data or externally write-capable tools before opening the lab. A connected tool is in scope even when you do not intend to use it.</span></div>
-          <div class="setup-row"><b>03</b><strong>Confirm the lab root</strong><span>You should see <code>README.md</code>, <code>verify.py</code>, <code>data/</code>, <code>context/</code>, <code>evals.yaml</code>, and <code>work/</code> directly inside the open folder. Every course path starts here.</span></div>
+          <div class="setup-row"><b>03</b><strong>Confirm the lab root</strong><span>You should see <code>README.md</code>, <code>verify.py</code>, <code>data/</code>, <code>context/</code>, <code>feedback/</code>, <code>evals.yaml</code>, and <code>work/</code> directly inside the open folder. Every course path starts here.</span></div>
           <div class="setup-row"><b>04</b><strong>Test a harmless local read</strong><span>Ask the agent to list the two CSV files, their row counts, and date bounds. Do not analyze the business question yet.</span></div>
           <div class="setup-row"><b>05</b><strong>Load only the supplied context</strong><span>Read the metric definition and business-change note from <code>context/</code>. Treat both as approved inputs for the exercise, not as files the agent may overwrite.</span></div>
           <div class="setup-row"><b>06</b><strong>State the write boundary</strong><span>The agent may read inside the extracted lab and write only under <code>work/</code>. If it cannot follow that boundary, stop before the first prompt.</span></div>
@@ -780,7 +771,7 @@
             <div>
               <span class="kicker">No warehouse? Start here.</span>
               <h3>Use the same practice case Paras will run live.</h3>
-              <p>The kit contains two CSV files, the metric definition, a known business change, an optional dependency-free Python verifier, and ten eval cases. It works locally with any file-capable harness.</p>
+              <p>The kit contains two CSV files, the metric definition, a known business change, a seeded user report, an optional dependency-free Python 3.9+ verifier, and ten eval cases. It works locally with any file-capable harness.</p>
               <div class="kit-actions">
                 <a class="button primary" href="assets/agentic-analytics-workshop-lab.zip" download="agentic-analytics-workshop-lab.zip">Download the lab kit</a>
                 <a class="button" href="assets/agentic-analytics-lab/README.md" target="_blank" rel="noopener noreferrer">Read the lab guide</a>
@@ -790,12 +781,13 @@
               </div>
               <p class="microcopy">Use the preview if your browser does not open CSV files directly. Every download keeps its original <code>.csv</code> filename.</p>
               <div class="boundary"><strong>Before you open the lab</strong><p>Start a clean local harness session and disconnect ChatData, warehouse connections, company MCPs, and other real-data tools. If you cannot disconnect them, use a separate profile or observe a paired run. Do not use a live company workspace for this exercise.</p></div>
-              <div class="boundary"><strong>Run the kit in three steps</strong><p>1. Download and unzip the kit. Do not clone the repository for the live exercise. 2. Open the extracted folder, not the ZIP file, in your harness. Confirm that <code>README.md</code>, <code>verify.py</code>, <code>data/</code>, <code>context/</code>, <code>evals.yaml</code>, and <code>work/</code> sit directly inside it. 3. If Python is available, run <code>python3 verify.py --readiness-only</code> (Windows: <code>py -3 verify.py --readiness-only</code>). It should print <code>READINESS: PASS</code> without calculating the answer. If Python is unavailable, confirm the six lab-root items and continue in the harness. Do not install a runtime during class.</p></div>
+              <div class="boundary"><strong>Run the kit in three steps</strong><p>1. Download and unzip the kit. Do not clone the repository for the live exercise. 2. Open the extracted folder, not the ZIP file, in your harness. Confirm that <code>README.md</code>, <code>verify.py</code>, <code>data/</code>, <code>context/</code>, <code>feedback/</code>, <code>evals.yaml</code>, and <code>work/</code> sit directly inside it. 3. If Python is available, confirm <code>python3 --version</code> reports 3.9 or newer, then run <code>python3 verify.py --readiness-only</code> (Windows: <code>py -3 --version</code>, then <code>py -3 verify.py --readiness-only</code>). It should print <code>READINESS: PASS</code> without calculating the answer. If Python 3.9+ is unavailable, confirm the seven lab-root items and continue in the harness. Do not install a runtime during class.</p></div>
             </div>
             <ul class="file-list" aria-label="Workshop kit contents">
               <li><code>funnel_segments.csv</code><span>calculation source</span></li>
               <li><code>wbr_benchmark.csv</code><span>independent tie-out</span></li>
               <li><code>metric.yaml</code><span>meaning + limits</span></li>
+              <li><code>flagged_answer.yaml</code><span>seeded user feedback</span></li>
               <li><code>verify.py</code><span>optional independent check</span></li>
               <li><code>evals.yaml</code><span>failure cases</span></li>
             </ul>
@@ -807,7 +799,7 @@
           <button class="button" type="button" data-copy-target="openingPrompt">Copy the readiness prompt</button>
           <span id="openingPrompt" hidden>This session is for the extracted agentic-analytics lab only. Before reading the data, list every connected tool and MCP. If the tool list includes ChatData, a warehouse, a company MCP, or any other real-data or externally write-capable tool, stop and tell me to disconnect it. Do not call external tools.
 
-Confirm that the current folder is the lab root and contains README.md, verify.py, data/, context/, evals.yaml, and work/. Treat data/ and context/ as read-only. Write every generated artifact only under work/. Every work/... path is relative to this folder.
+Confirm that the current folder is the lab root and contains README.md, verify.py, data/, context/, feedback/, evals.yaml, and work/. Treat data/ and context/ as read-only. Write every generated artifact only under work/. Every work/... path is relative to this folder.
 
 Do not analyze the business question yet. List the local files you can access, row counts and date bounds, the business and metric context you found, and your access limits. Run one harmless local read check. If anything required is missing, stop and name the smallest repair. Save the result as work/00_readiness.md.</span>
         </div>
@@ -854,7 +846,7 @@ Do not analyze the business question yet. List the local files you can access, r
           <div class="runway-row"><span class="runway-time">2:20–3:05</span><span class="runway-title">Run, verify, and show proof</span><span class="runway-output">Execute one complete analysis, reconcile it independently, correct one claim, and save the proof.</span><span class="runway-kind">Build 4</span></div>
           <div class="runway-row"><span class="runway-time">3:05–3:15</span><span class="runway-title">Q&amp;A checkpoint</span><span class="runway-output">Bring the number, caveat, validation, or response-state choice you cannot yet defend.</span><span class="runway-kind">10 min</span></div>
           <div class="runway-row break-row"><span class="runway-time">3:15–3:25</span><span class="runway-title">Break</span><span class="runway-output">Return with one failure you want the agent to catch.</span><span class="runway-kind">10 min</span></div>
-          <div class="runway-row"><span class="runway-time">3:25–4:10</span><span class="runway-title">Break it, repair it, rerun it</span><span class="runway-output">Declare expected outcomes, run the cases, repair one shared artifact, and rerun affected tests.</span><span class="runway-kind">Build 5</span></div>
+          <div class="runway-row"><span class="runway-time">3:25–4:10</span><span class="runway-title">Flag it, review it, promote it, rerun it</span><span class="runway-output">Run the cases, hand a flagged answer to a data admin, promote the correction, and prove a fresh session reuses it.</span><span class="runway-kind">Build 5</span></div>
           <div class="runway-row"><span class="runway-time">4:10–4:35</span><span class="runway-title">Operate it + present the launch decision</span><span class="runway-output">Set controls, owners, monitoring, cost, rollout, incident response, and a Scale / Hold / Stop ask.</span><span class="runway-kind">Build 6</span></div>
           <div class="runway-row"><span class="runway-time">4:35–4:50</span><span class="runway-title">Peer review</span><span class="runway-output">Use five questions to find and repair the weakest part of one another’s plan.</span><span class="runway-kind">Review</span></div>
           <div class="runway-row"><span class="runway-time">4:50–5:00</span><span class="runway-title">Open Q&amp;A + export + Monday commitment</span><span class="runway-output">Resolve the final blocker, export the starter pack, and name the first owner and artifact.</span><span class="runway-kind">Close</span></div>
@@ -936,7 +928,7 @@ Do not analyze the business question yet. List the local files you can access, r
               <tr><td>Contract</td><td><strong>Bound output and authority</strong>Define Answer, Clarify, Review, and Refuse.</td><td><strong>Visible verification and action gates</strong>A useful result could still require review; no autonomous budget or routing change.</td><td><strong>Contract + architecture</strong>Create `work/02_contract.yaml` and map the shared request path.</td></tr>
               <tr><td>Context</td><td><strong>Bind approved meaning</strong>Metric, source, business change, owner, freshness, and precedence.</td><td><strong>Domain rules survived every run</strong>Correct funnel order, time comparison, exclusions, known-good behavior, and prior corrections.</td><td><strong>Metric proposal</strong>Inspect `context/metric.yaml` and propose `work/03_metric_proposal.yaml`.</td></tr>
               <tr><td>Prove</td><td><strong>Execute and verify independently</strong>Keep source execution, validation, caveat, and decision together.</td><td><strong>War Room proof layer</strong>Cross-validation, freshness, decomposition, and verification state appeared in the briefing.</td><td><strong>Proof receipt</strong>Run the lab, tie to the benchmark, and save `work/04_proof.yaml`.</td></tr>
-              <tr><td>Learn</td><td><strong>Turn failures into regression tests</strong>Repair the shared artifact, then rerun affected cases.</td><td><strong>The wrong-source failure changed the architecture</strong>Fluent output was not accepted as proof.</td><td><strong>Eval + correction</strong>Inject impossible data and a source conflict; save the repair and rerun.</td></tr>
+              <tr><td>Learn</td><td><strong>Turn failures into shared context</strong>Flag the answer, review it, promote the correction, then rerun from a fresh session.</td><td><strong>The wrong-source failure changed the architecture</strong>Fluent output was not accepted as proof.</td><td><strong>Feedback + reuse</strong>Hand off the seeded report, approve the narrow correction, and prove the next run uses it.</td></tr>
               <tr><td>Operate</td><td><strong>Own release, monitoring, cost, and incidents</strong>Shadow, canary, narrow production, rollback, and reapproval.</td><td><strong>Replaceable client, shared controls</strong>Parallel workers and chat interfaces called the same governed path.</td><td><strong>Operations + launch memo</strong>Finish the control sheet and make a Scale, Hold, or Stop ask.</td></tr>
             </tbody>
           </table>
@@ -946,13 +938,13 @@ Do not analyze the business question yet. List the local files you can access, r
 
         <div class="section-header" style="margin-top: 64px;">
           <div><span class="kicker">My first-principles operating model</span><h2>Trustworthy analytics needs meaning, feedback, and review.</h2></div>
-          <p class="section-lede">Over the last year, I have been obsessed with one question: how do you get agentic analytics adopted across a company without giving up trust? This model helped more than 800 people adopt it, about 80% of the company. I worked backward from a failure I kept seeing. The agent could choose the wrong definition and still sound polished. A user could spot the problem but had no way to fix the shared system.</p>
+          <p class="section-lede">Over the last year, I have been obsessed with one question: how do you spread agentic analytics across a company without giving up trust? I worked backward from a failure I kept seeing. The agent could choose the wrong definition and still sound polished. A user could spot the problem but had no way to fix the shared system.</p>
         </div>
         <div class="control-grid" aria-label="Three-part trustworthy analytics operating model">
           <div class="control-card"><b>01 · Semantic model</b><h4>Give the agent shared meaning</h4><p>The agent needs the metric, source, exclusions, and approved logic.</p><p>In my implementation, Snowflake Cortex provided this layer. Claude Code, Cursor, Gumloop, and other tools called it through MCP. Cube could fit here too; I chose to put more of the next investment into feedback and review.</p></div>
           <div class="control-card"><b>02 · User feedback</b><h4>Capture wrong or unverifiable answers</h4><p>Users need one easy way to flag an answer that is wrong or hard to validate.</p><p>We started in Slack. Later, we built a plug-in and MCP path that wrote back a concise summary of the question, answer, evidence gap, and user feedback.</p></div>
-          <div class="control-card"><b>03 · Data-admin review</b><h4>Promote the correction to source of truth</h4><p>Data owners review the edge case and settle the canonical definition or answer path. They publish the accepted change into the semantic layer.</p><p>We also narrowed the search space from roughly 1,400 dashboards to about 15 approved paths stored as code. The agent could now compare its work with logic the team had reviewed.</p></div>
-          <div class="control-card"><b>The operating result</b><h4>Spend people’s time on the edge cases</h4><p>The review burden started high. As self-checks and validations improved, the system handled more than 95% of cases and left the data team with roughly 5% of edge cases.</p><p>The goal is not zero human review. Each review should improve the shared path.</p></div>
+          <div class="control-card"><b>03 · Data-admin review</b><h4>Promote the correction to source of truth</h4><p>Data owners review the edge case and settle the canonical definition or answer path. They publish the accepted change into the semantic layer.</p><p>We narrowed a sprawling dashboard catalog to a small set of approved paths stored as code. The agent could now compare its work with logic the team had reviewed.</p></div>
+          <div class="control-card"><b>The operating result</b><h4>Spend people’s time on the edge cases</h4><p>The review burden started high. As self-checks and validations improved, routine cases stopped consuming the same human attention.</p><p>The goal is not zero human review. Each review should improve the shared path.</p></div>
         </div>
         <div class="boundary"><strong>The flywheel</strong><p>When the agent gets it wrong or the user cannot validate it, the user flags the gap. The data team defines the canonical answer and updates the semantic model and eval suite. The next run gets better. No single vendor has to own the whole loop; the interfaces between these three parts matter more.</p></div>
 
@@ -1257,11 +1249,11 @@ Save work/02_contract.yaml and work/02_architecture.md. Mark unknown owners inst
         </div>
 
         <div class="operator-story" aria-label="First-person semantic layer example">
-          <div class="story-number">1,400 → 15<span>dashboards to blessed decision paths</span></div>
+          <div class="story-number">Many → few<span>dashboards to approved decision paths</span></div>
           <div>
             <span class="kicker">First-person operator example</span>
             <h3>The real work was deciding which definitions deserved to survive.</h3>
-            <p>Consolidating 1,400 dashboards into 15 blessed dashboards was not mainly a cleanup project. It forced the team to settle metric meaning, ownership, source precedence, and where trusted logic lived. That work made the analytics foundation easier for people and agents to reuse.</p>
+            <p>Narrowing a sprawling dashboard catalog to a small set of approved paths was not mainly a cleanup project. It forced the team to settle metric meaning, ownership, source precedence, and where trusted logic lived. That work made the analytics foundation easier for people and agents to reuse.</p>
             <p><strong>A metric name is not a metric definition.</strong> If the exclusion lives only in a wiki page or a BI filter, a model can write correct SQL and still return the wrong answer.</p>
           </div>
         </div>
@@ -1519,12 +1511,18 @@ Do not call an observed contributor a root cause unless the evidence isolates ca
     <section class="section alt" id="module-5" data-nav="module-5">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 5</span><span class="tag">45 minutes</span><span class="tag output">Output: run → fail → repair → rerun</span></div>
+          <div class="module-meta"><span class="tag">Module 5</span><span class="tag">45 minutes</span><span class="tag output">Output: flag → review → promote → reuse</span></div>
           <div class="timer" data-minutes="45"><span class="timer-readout">45:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
-          <div><span class="kicker">Test the failures</span><h2>Set the pass bar before the model shows you a polished answer.</h2></div>
-          <p class="section-lede">A serious eval tests the path, expected outcome, result, and operating behavior. It includes unsafe questions the agent must block and failures users could not validate on their own.</p>
+          <div><span class="kicker">Close the loop</span><h2>A correction matters only when the next person gets the better answer.</h2></div>
+          <p class="section-lede">You will run the tests, process one seeded user report, hand it to a data admin, promote the accepted correction into shared context, and prove that a fresh session reuses it.</p>
+        </div>
+        <div class="architecture-flow" aria-label="Live feedback and reuse loop">
+          <div class="architecture-node"><b>01 · FLAG</b><strong>Student A reports the gap</strong><span>Capture the answer, missing evidence, failed self-validation, and decision risk.</span></div>
+          <div class="architecture-node"><b>02 · REVIEW</b><strong>Student B checks the proof</strong><span>Approve, hold, or reject the narrow correction. Never invent precedence or causality.</span></div>
+          <div class="architecture-node"><b>03 · PROMOTE</b><strong>Save it as shared context</strong><span>Store the accepted correction and regression case outside chat history.</span></div>
+          <div class="architecture-node"><b>04 · REUSE</b><strong>Start a fresh session</strong><span>Rerun the case and prove the bad claim no longer passes.</span></div>
         </div>
         <div class="teaching-grid">
           <div class="teaching-copy">
@@ -1599,7 +1597,7 @@ python3 verify.py --inject-benchmark-conflict</pre>
         </div>
 
         <div class="prompt-turn">
-          <div class="turn-head"><strong>Harness turn 5 · Declare, run, repair, and rerun</strong><span>The correction loop</span></div>
+          <div class="turn-head"><strong>Harness turn 5 · Flag, review, promote, and rerun</strong><span>The live operating loop</span></div>
           <div class="template-block">
             <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
             <pre>For the live workshop, continue with the included CSV lab. Read evals.yaml. Before execution, record the expected outcome and required evidence for these four live cases: routine_1, ambiguous_1, causal_claim, and authority_boundary.
@@ -1608,28 +1606,44 @@ Run those four cases one at a time. For each, record expected versus observed ou
 
 When quick reruns are available, run routine_1 twice and record each trial separately. Save the observable trace: tools selected, source path, validation results, final outcome, and artifact links. Do not ask for or store hidden reasoning. Use deterministic checks for numbers, source, and response state; use a short human rubric for usefulness and caveat quality.
 
-Then run:
+When Python 3.9+ is available, run:
 - python3 verify.py --inject-impossible-row
 - python3 verify.py --inject-benchmark-conflict
 
-If Python is unavailable, run the four harness cases, predict both injected outcomes, observe Paras’s or a partner’s verifier run, record the observed results, and rejoin at the correction step.
+The impossible-row command must Refuse and exit 2. The benchmark conflict must return Review. Do not choose a winning source when no approved precedence rule exists. Record the conflict, the decision it blocks, and the owner who must settle it.
 
-Pick one failure or unsupported claim. Identify whether it came from a missing asset, retrieval miss, context conflict, application error, query error, or source-data error. Write a feedback record with the question, response outcome, evidence gap, user impact, self-validation result, and failure layer. Write the smallest proposed repair under work/, append work/correction.yaml, and rerun every affected case. Do not modify the lab’s data/ or context/ files. Once the repair is approved, keep the failure as a regression case.
+If Python 3.9+ is unavailable, run the four harness cases, predict both injected outcomes, observe Paras’s or a partner’s verifier run, record the observed results, and continue with the seeded feedback record below.
 
-Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep the remaining four cases as the extension pack after class.</pre>
+Now operate one complete feedback loop. Open feedback/flagged_answer.yaml. Student A, or your first harness session, writes work/05_feedback.yaml with the question, reported answer, missing evidence, failed self-validation, decision risk, and requested review.
+
+Student B, acting as the data admin, or a second fresh harness session, reviews that record against context/metric.yaml, context/business_changes.md, and work/04_proof.yaml. Save work/05_admin_decision.yaml with Approve, Hold, or Reject; the evidence checked; the narrow correction; the owner; and what remains unresolved. Do not invent a source-precedence rule or causal proof.
+
+If approved, save the reusable correction as work/shared_context/correction-001.yaml and the affected test as work/05_regression_case.yaml. Do not modify the lab’s data/ or context/ files. Student A then starts a fresh session, reads the promoted correction, reruns causal_claim, and saves work/05_reuse_rerun.md with the before-and-after outcome, wording, evidence, and whether the bad causal claim was prevented.
+
+Save work/05_eval_results.csv and work/05_observed_operations.csv. The operations file must include case_id, outcome, elapsed_seconds, reviewer_minutes, source_calls, tokens, cost, correction_reused, and result_changed. Mark unavailable fields honestly. Stop if any high-risk case is quietly wrong. Keep the remaining four cases as the extension pack after class.</pre>
           </div>
-          <div class="checkpoint"><div><b>You should now have</b><span>Expected-versus-observed results plus one durable correction.</span></div><div><b>Done when</b><span>The affected cases pass after repair and no high-risk failure is hidden in an average.</span></div><div><b>Next</b><span>Turn the tested path into controls, monitoring, and a narrow rollout decision.</span></div></div>
+          <div class="checkpoint"><div><b>You should now have</b><span>A user flag, an admin decision, a promoted correction, a regression case, a fresh-session rerun, and observed operating data.</span></div><div><b>Done when</b><span>The bad causal claim no longer passes and a second session can reuse the correction without chat history.</span></div><div><b>Next</b><span>Use the measured review time and runtime evidence in the launch decision.</span></div></div>
         </div>
+
+        <details class="reference-answer">
+          <summary>Check the feedback loop</summary>
+          <div class="note-body">
+            <p><strong>Admin decision:</strong> approve a narrow claim-boundary correction, not a new causal conclusion. The movement and largest observed contributor are supported; the tagging change and non-paid decline keep causal language in Review.</p>
+            <p><strong>Promoted correction:</strong> replace “paid search caused the decline” with “paid search was the largest observed contributor.” Require the tagging caveat and block any spend action from this evidence alone.</p>
+            <p><strong>Fresh-session result:</strong> the <code>causal_claim</code> case should return Review, cite the corrected boundary, and avoid the unsupported root-cause claim. Record actual elapsed time and reviewer minutes; leave unavailable token or cost fields blank rather than guessing.</p>
+          </div>
+        </details>
 
         <details class="workshop-note">
           <summary>Walkthrough + timing + team challenge</summary>
           <div class="note-body">
             <blockquote>“The best analytics-agent test includes a question the system should not answer.”</blockquote>
             <p>Do not blend the scores. One overall 92 can hide a high-risk case that the agent answered confidently and incorrectly.</p>
-            <p><strong>0–8 min:</strong> Teach task, trial, observable trace, deterministic check, human rubric, and quietly wrong versus loud failure. Explain why security cases belong beside correctness cases.</p>
-            <p><strong>8–15 min:</strong> Use Abandonment Intelligence’s known-good rules to predict three lab outcomes before running them.</p>
-            <p><strong>15–32 min:</strong> Students run four representative cases plus the two injected failures. Without Python, predict the injections, observe Paras’s or a partner’s run, record the results, and rejoin at the correction. Do not let the harness skip the four cases.</p>
-            <p><strong>32–42 min:</strong> Repair one shared artifact, record the correction, and rerun affected cases.</p>
+            <p><strong>0–8 min:</strong> Predict and run the four representative cases. Keep quietly wrong results separate from loud failures.</p>
+            <p><strong>8–14 min:</strong> Run or observe the two deterministic drills. The source conflict stays in Review until an owner settles precedence.</p>
+            <p><strong>14–25 min:</strong> Student A files the seeded report. Student B reviews it and records the admin decision. Solo students use two fresh harness sessions.</p>
+            <p><strong>25–35 min:</strong> Promote the narrow correction under <code>work/shared_context/</code>. Start a fresh session, rerun the causal case, and compare before with after.</p>
+            <p><strong>35–42 min:</strong> Record elapsed time, reviewer minutes, calls, tokens, and cost when available. Keep the sample size visible.</p>
             <p><strong>42–45 min:</strong> State the launch bar and the one case that would stop the release.</p>
           </div>
         </details>
@@ -1658,7 +1672,7 @@ Save work/05_eval_results.csv. Stop if any high-risk case is quietly wrong. Keep
         </div>
         <div class="section-header">
           <div><span class="kicker">Operate it</span><h2>Production begins when the demo ends.</h2></div>
-          <p class="section-lede">A production plan needs owners, a review rhythm, monitoring, correction memory, cost, and a clear rule for stopping or narrowing the system. The user-feedback path and data-admin approval path are part of the product.</p>
+          <p class="section-lede">A production plan needs owners, a review rhythm, monitoring, correction memory, cost, and a clear rule for stopping or narrowing the system. Use what you just observed—the rerun, review minutes, runtime, and missing telemetry—instead of planning from guesses.</p>
         </div>
         <div class="teaching-grid">
           <div class="teaching-copy">
@@ -1713,12 +1727,12 @@ steps:
     error: dashboard delta exceeded tolerance
 next_runnable_step: repair_source_conflict
 
-# work/correction.yaml
+# work/shared_context/correction-001.yaml
 - id: CORR-001
-  category: metric
-  description: Partner-assisted sessions were included.
-  fix: Apply the approved exclusion before calculating conversion.
-  prevented_by: business-rules validation
+  category: claim_boundary
+  description: Paid search was called the cause without isolated causal evidence.
+  fix: Call it the largest observed contributor and route causal language to Review.
+  prevented_by: causal_claim regression case
   owner: growth_analytics</pre>
           </div>
           <p class="source-note">Adapted from AI Analyst’s <a href="https://github.com/ai-analyst-lab/ai-analyst/blob/049d5bd5ff21a67ea4bcd5b42f697e8e4ec1f82f/agents/pipeline_state_schema.md" target="_blank" rel="noreferrer">pipeline state</a> and the public AI+Data correction-memory pattern.</p>
@@ -1728,7 +1742,7 @@ next_runnable_step: repair_source_conflict
           <div class="turn-head"><strong>Harness turn 6 · Operate it and ask for a launch decision</strong><span>Portfolio-ready output</span></div>
           <div class="template-block">
             <button class="button small copy-button" type="button" data-copy-container>Copy prompt</button>
-            <pre>Read the approved contract, metric, proof, eval results, and correction.
+            <pre>Read the approved contract, metric, proof, eval results, admin decision, promoted correction, fresh-session rerun, and observed operations file.
 
 Create work/06_operations.md with:
 - manual baseline and target, check date, and guardrail
@@ -1736,16 +1750,17 @@ Create work/06_operations.md with:
 - read-only scope, prohibited data, limits, timeout, retry, fallback, health check, and kill switch
 - Rule of Two classification for untrusted input, sensitive access, and external action
 - user-feedback intake, self-validation signal, review queue, data-admin approval, and promotion into semantic context and regression tests
+- observed run time, review minutes, source calls, tokens, and cost from work/05_observed_operations.csv; sample size and unavailable measures must stay visible
 - run-event fields, alert thresholds, audit sample, reviewer-capacity ceiling, and incident/resume owner
 - shadow → canary → narrow-production steps and rollback rule
 - model-routing rule based on task quality, latency, and cost; plus model, warehouse, and human-review cost per run and per month
 - expiry and reapproval triggers
 
-Then create work/07_launch_memo.md: business decision, pilot users and workflow, quality result, material risks, adoption and reuse measure, review burden, total cost, 30-day milestones, and the leadership decision requested: Scale, Hold, or Stop.
+Then create work/07_launch_memo.md: business decision, pilot users and workflow, quality result, correction-reuse result, material risks, adoption and reuse measure, observed review burden, observed or unresolved runtime and cost, 30-day milestones, and the leadership decision requested: Scale, Hold, or Stop.
 
 Do not invent names, baselines, thresholds, or deployment evidence. Mark unresolved decisions and make Monday’s first move small enough to complete in 30 minutes.</pre>
           </div>
-          <div class="checkpoint"><div><b>You should now have</b><span>A production-control sheet and one-page launch memo.</span></div><div><b>Done when</b><span>The manual baseline, owner, cost, rollback, reviewer capacity, and Scale / Hold / Stop ask are explicit.</span></div><div><b>Next</b><span>Give the proof and memo to a peer. Ask them to find the weakest link.</span></div></div>
+          <div class="checkpoint"><div><b>You should now have</b><span>A production-control sheet and one-page launch memo grounded in the loop you ran.</span></div><div><b>Done when</b><span>The manual baseline, observed review burden, measured or unresolved cost and latency, owner, rollback, reviewer capacity, and Scale / Hold / Stop ask are explicit.</span></div><div><b>Next</b><span>Give the proof and memo to a peer. Ask them to find the weakest link.</span></div></div>
         </div>
 
         <details class="workshop-note">
@@ -1813,28 +1828,6 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
         <div class="qa-number">10</div>
         <div><span class="kicker">Open Q&amp;A + export</span><h3>Resolve the final blocker and commit Monday’s first move.</h3><p>Use this time for the questions that did not fit the checkpoints. Export the starter pack, then name the owner, meeting, or first artifact you will create.</p></div>
         <div class="timer" data-minutes="10"><span class="timer-readout">10:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
-      </div>
-    </section>
-
-    <section class="section" id="facilitation" data-nav="facilitation">
-      <div class="shell">
-        <div class="section-header">
-          <div><span class="kicker">Live-session notes</span><h2>How this workshop stays useful when a demo fails.</h2></div>
-          <p class="section-lede">These notes are here for anyone running the session again. The learning depends on the path and judgment, not a lucky API response.</p>
-        </div>
-        <details class="workshop-note">
-          <summary>Expand live-session preparation, room rules, and scripts</summary>
-          <div class="note-body">
-            <div class="prep-columns">
-              <div class="prep-column"><h3>30 minutes before</h3><ul><li>Open this page and export a blank starter pack.</li><li>Download the lab ZIP and run <code>python3 verify.py --readiness-only</code>.</li><li>Disconnect real company MCP and warehouse routes from the session used for the lab.</li><li>Silence notifications and share one browser window.</li><li>Put the three Q&amp;A windows and two breaks in your calendar.</li></ul></div>
-              <div class="prep-column"><h3>Room contract</h3><ul><li>Use approved examples only.</li><li>No credentials, proprietary SQL, raw customer records, or restricted files.</li><li>Python is optional; the harness can work directly with the CSV files.</li><li>Questions about a specific company stay at the design level.</li><li>If a source cannot run, state that clearly and use the lab kit.</li></ul></div>
-              <div class="prep-column"><h3>Energy design</h3><ul><li>Use chat in the first two minutes.</li><li>Do not talk for more than ten minutes without a room action.</li><li>Ask students to predict an outcome before revealing it.</li><li>Use the practice case whenever an example is sensitive.</li><li>Timebox feedback to the current artifact.</li></ul></div>
-            </div>
-            <div class="fallback"><h3>If the live agent fails, teach the failure.</h3><p>Show the planned path, state that the source did not run, and ask what the agent should do next. Use the lab’s proof as the completed example. A failed call becomes a production lesson, not dead air.</p></div>
-            <blockquote>Opening: “By 2 PM, you will have one written production plan. We are going to build it in six pieces, and you will use the same real question all day.”</blockquote>
-            <blockquote>Closing: “Do not start Monday by building the whole agent. Start by locking one question, one owner, and one approved metric path. Then make one failure visible and fix it.”</blockquote>
-          </div>
-        </details>
       </div>
     </section>
 
@@ -1958,10 +1951,10 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
         ['2. Decision contract', ['contract_user','contract_decision','contract_output','contract_evidence','may_do','may_not','refusal_condition','human_owner','contract_sentence']],
         ['3. Context map and metric packet', ['metric_definition','metric_owners','grain_filters','approved_source','freshness_rule','source_precedence','caveats','validation_rule','required_context']],
         ['4. Proof and response rules', ['automatic_checks','human_review_gates','proof_receipt_fields','clarify_rule','review_rule','refusal_rule']],
-        ['5. Eval set and launch bar', ['eval_happy','eval_ambiguous','eval_stale','eval_conflict','eval_broken','eval_risk','release_gate']],
+        ['5. Eval set, feedback loop, and launch bar', ['eval_happy','eval_ambiguous','eval_stale','eval_conflict','eval_broken','eval_risk','release_gate']],
         ['6. Production controls and 30-day plan', ['owners','week_1','week_2','week_3','week_4','monitoring','cost_permissions_support','stop_rule','monday_move','peer_review_blocker','followup_question']]
       ];
-      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## The three-spine route\n\n1. **Framework:** decision contract, approved context, scoped execution, validation, proof, review, correction, and operations.\n2. **Paras-built examples:** [Acquisition War Room](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/acquisition-war-room.html) and [Abandonment Intelligence](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/abandonment-intelligence.html), using the included course dataset.\n3. **Your build:** the files below, created with an approved source or the included practice lab.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04a_plan.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
+      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## The three-spine route\n\n1. **Framework:** decision contract, approved context, scoped execution, validation, proof, review, correction, and operations.\n2. **Paras-built examples:** [Acquisition War Room](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/acquisition-war-room.html) and [Abandonment Intelligence](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/abandonment-intelligence.html), using the included course dataset.\n3. **Your build:** the files below, created with an approved source or the included practice lab.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04a_plan.yaml`\n- `work/04_proof.yaml`\n- `work/05_feedback.yaml`\n- `work/05_admin_decision.yaml`\n- `work/shared_context/correction-001.yaml`\n- `work/05_regression_case.yaml`\n- `work/05_reuse_rerun.md`\n- `work/05_eval_results.csv`\n- `work/05_observed_operations.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
       sections.forEach(([title, keys]) => {
         markdown += `## ${title}\n\n`;
         keys.forEach((key) => {
