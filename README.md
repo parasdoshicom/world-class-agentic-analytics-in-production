@@ -4,9 +4,12 @@ Build an analytics agent that can answer with evidence. It should also ask for c
 
 This repository is the companion for a five-hour, hands-on course. You can bring an approved data source or use the included synthetic lab. The workflow works with Codex, Cursor, Claude Code, or another file-capable harness.
 
+The material runs on three linked spines. You learn the production framework, inspect sanitized examples of systems Paras built, and practice with an approved source or the public synthetic lab.
+
 ## Start here
 
 - [Open the live workshop](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/)
+- [See the systems Paras built](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/#paras-built)
 - [Run the prompts in order](prompts/README.md)
 - [Download the complete lab](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/assets/agentic-analytics-workshop-lab.zip)
 - [Inspect the lab before downloading](assets/agentic-analytics-lab/README.md)
@@ -40,6 +43,8 @@ Generated work stays under the lab's `work/` directory. The supplied `data/` and
 | --- | --- |
 | [`index.html`](index.html) | The canonical one-page course and browser workbook |
 | [`prompts/`](prompts/README.md) | Eight copyable prompts, from readiness through launch |
+| [`examples/paras-built/`](examples/paras-built/README.md) | Sanitized War Room, Abandonment Intelligence, and data-agent design examples |
+| [`assets/case-studies/`](assets/case-studies/) | Public screenshots used in the course case studies |
 | [`assets/agentic-analytics-lab/`](assets/agentic-analytics-lab/README.md) | Synthetic data, approved context, SQL, evals, and verifier |
 | [`assets/agentic-analytics-workshop-lab.zip`](assets/agentic-analytics-workshop-lab.zip) | Downloadable copy of the full lab |
 | [`scripts/validate_course.py`](scripts/validate_course.py) | Link, prompt-sync, ZIP-integrity, and public-safety checks |

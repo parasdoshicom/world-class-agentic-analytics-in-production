@@ -163,6 +163,53 @@
     .hero-meta i { width: 5px; height: 5px; display: block; border-radius: 50%; background: var(--accent); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 
+    .spine-band { padding: 58px 0 64px; background: #111315; border-bottom: 1px solid var(--line); }
+    .spine-intro { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 68px; align-items: end; margin-bottom: 38px; }
+    .spine-intro h2 { font-size: clamp(34px, 4vw, 54px); }
+    .spine-intro p { margin: 0; color: var(--muted); }
+    .spine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .spine { padding-top: 18px; border-top: 2px solid var(--line-strong); }
+    .spine:nth-child(2) { border-color: var(--accent); }
+    .spine-num { display: block; margin-bottom: 32px; color: var(--accent); font: 800 11px/1 ui-monospace, monospace; letter-spacing: .13em; }
+    .spine h3 { margin-bottom: 9px; font-size: 23px; }
+    .spine p { margin-bottom: 18px; color: var(--muted); font-size: 13px; }
+    .spine a { font-size: 12px; font-weight: 750; text-decoration: none; }
+
+    .case-study-section { overflow: hidden; background: #111315; }
+    .case-block { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr); gap: 48px; align-items: center; margin: 72px 0 96px; }
+    .case-block.reverse { grid-template-columns: minmax(320px, .82fr) minmax(0, 1.18fr); }
+    .case-block.reverse .case-media { order: 2; }
+    .case-media { position: relative; display: block; overflow: hidden; background: #0a0e14; border: 1px solid var(--line-strong); box-shadow: 0 28px 90px rgba(0,0,0,.32); }
+    .case-media img { width: 100%; display: block; transition: transform .35s ease; }
+    .case-media:hover img { transform: scale(1.018); }
+    .case-media::after { content: "Open full reconstruction ↗"; position: absolute; right: 14px; bottom: 14px; padding: 7px 10px; color: #17121f; background: var(--accent); font-size: 10px; font-weight: 850; letter-spacing: .05em; }
+    .case-copy .case-index { display: block; margin-bottom: 22px; color: var(--accent); font: 800 11px/1 ui-monospace,monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .case-copy h3 { font-size: clamp(32px, 3.5vw, 48px); }
+    .case-copy > p { color: var(--muted); }
+    .design-decisions { margin: 28px 0; border-top: 1px solid var(--line-strong); }
+    .design-decision { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .design-decision b { color: var(--accent); font-size: 10px; }
+    .design-decision span { color: var(--muted); font-size: 13px; }
+    .case-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .evidence-label { margin-top: 16px; color: var(--dim); font-size: 10px; }
+
+    .front-door { margin: 0 0 72px; padding: 34px 0; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--line-strong); }
+    .front-door-head { display: grid; grid-template-columns: .62fr 1.38fr; gap: 42px; margin-bottom: 30px; }
+    .front-door-head p { color: var(--muted); }
+    .front-door-flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .front-door-flow div { min-height: 126px; padding: 16px; background: var(--base-2); }
+    .front-door-flow b { display: block; margin-bottom: 20px; color: var(--accent); font-size: 10px; letter-spacing: .1em; }
+    .front-door-flow strong { display: block; margin-bottom: 5px; font-size: 13px; }
+    .front-door-flow span { color: var(--dim); font-size: 11px; }
+
+    .spine-map { margin-top: 54px; overflow-x: auto; border-top: 1px solid var(--line-strong); }
+    .spine-map table { width: 100%; min-width: 880px; border-collapse: collapse; }
+    .spine-map th, .spine-map td { padding: 16px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    .spine-map th { color: var(--dim); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+    .spine-map td { color: var(--muted); font-size: 12px; }
+    .spine-map td:first-child { width: 110px; color: var(--accent); font-weight: 800; }
+    .spine-map strong { display: block; margin-bottom: 3px; color: var(--ink); }
+
     .hero-visual {
       position: relative;
       min-height: 520px;
@@ -489,6 +536,10 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero-visual { min-height: 430px; }
       .orbit { width: 430px; }
+      .spine-intro { grid-template-columns: 1fr; gap: 22px; }
+      .case-block, .case-block.reverse { grid-template-columns: 1fr; }
+      .case-block.reverse .case-media { order: 0; }
+      .front-door-flow { grid-template-columns: repeat(3, 1fr); }
       .section-header, .teaching-grid, .kit-grid { grid-template-columns: 1fr; gap: 26px; }
       .runway-row { grid-template-columns: 92px minmax(190px, .8fr) minmax(220px, 1.2fr); }
       .runway-kind { display: none; }
@@ -512,6 +563,13 @@
       .orbit { width: 320px; }
       .orbit-node { width: 92px; min-height: 48px; padding: 7px; font-size: 9px; }
       .section { padding: 68px 0; }
+      .spine-band { padding: 48px 0; }
+      .spine-grid { grid-template-columns: 1fr; gap: 34px; }
+      .spine-num { margin-bottom: 16px; }
+      .case-block { gap: 26px; margin: 52px 0 70px; }
+      .case-media::after { position: static; display: block; }
+      .front-door-head { grid-template-columns: 1fr; gap: 12px; }
+      .front-door-flow { grid-template-columns: 1fr; }
       .section-header { margin-bottom: 38px; }
       h2 { font-size: 40px; }
       .runway-row { grid-template-columns: 76px 1fr; gap: 14px; min-height: 78px; }
@@ -595,17 +653,19 @@
   <aside class="rail" aria-label="Workshop navigation">
     <p class="rail-label">Run of show · 300 min</p>
     <nav id="railNav">
-      <a href="#setup"><span class="nav-num">00</span><span class="nav-title">Get ready + lab kit</span><span class="nav-time">20m</span></a>
-      <a href="#schedule"><span class="nav-num">01</span><span class="nav-title">Full agenda</span><span class="nav-time">5h</span></a>
-      <a href="#module-1"><span class="nav-num">02</span><span class="nav-title">Choose the work</span><span class="nav-time">25m</span></a>
-      <a href="#module-2"><span class="nav-num">03</span><span class="nav-title">Contract + architecture</span><span class="nav-time">35m</span></a>
-      <a href="#module-3"><span class="nav-num">04</span><span class="nav-title">Context map</span><span class="nav-time">40m</span></a>
-      <a href="#module-4"><span class="nav-num">05</span><span class="nav-title">Proof and review</span><span class="nav-time">45m</span></a>
-      <a href="#module-5"><span class="nav-num">06</span><span class="nav-title">Failure evals</span><span class="nav-time">45m</span></a>
-      <a href="#module-6"><span class="nav-num">07</span><span class="nav-title">Operate + launch</span><span class="nav-time">25m</span></a>
-      <a href="#peer-review"><span class="nav-num">08</span><span class="nav-title">Peer review</span><span class="nav-time">15m</span></a>
-      <a href="#facilitation"><span class="nav-num">09</span><span class="nav-title">Live-session notes</span><span class="nav-time">notes</span></a>
-      <a href="#sources"><span class="nav-num">10</span><span class="nav-title">Further reading</span><span class="nav-time">refs</span></a>
+      <a href="#three-spines"><span class="nav-num">00</span><span class="nav-title">How to use the course</span><span class="nav-time">guide</span></a>
+      <a href="#setup"><span class="nav-num">01</span><span class="nav-title">Get ready + lab kit</span><span class="nav-time">20m</span></a>
+      <a href="#schedule"><span class="nav-num">02</span><span class="nav-title">Full agenda</span><span class="nav-time">5h</span></a>
+      <a href="#paras-built"><span class="nav-num">03</span><span class="nav-title">Systems Paras built</span><span class="nav-time">examples</span></a>
+      <a href="#module-1"><span class="nav-num">04</span><span class="nav-title">Choose the work</span><span class="nav-time">25m</span></a>
+      <a href="#module-2"><span class="nav-num">05</span><span class="nav-title">Contract + architecture</span><span class="nav-time">35m</span></a>
+      <a href="#module-3"><span class="nav-num">06</span><span class="nav-title">Context map</span><span class="nav-time">40m</span></a>
+      <a href="#module-4"><span class="nav-num">07</span><span class="nav-title">Proof and review</span><span class="nav-time">45m</span></a>
+      <a href="#module-5"><span class="nav-num">08</span><span class="nav-title">Failure evals</span><span class="nav-time">45m</span></a>
+      <a href="#module-6"><span class="nav-num">09</span><span class="nav-title">Operate + launch</span><span class="nav-time">25m</span></a>
+      <a href="#peer-review"><span class="nav-num">10</span><span class="nav-title">Peer review</span><span class="nav-time">15m</span></a>
+      <a href="#facilitation"><span class="nav-num">11</span><span class="nav-title">Live-session notes</span><span class="nav-time">notes</span></a>
+      <a href="#sources"><span class="nav-num">12</span><span class="nav-title">Further reading</span><span class="nav-time">refs</span></a>
     </nav>
     <div class="rail-footer">
       <strong>Friday · Aug 21, 2026</strong>
@@ -619,15 +679,17 @@
         <div>
           <p class="eyebrow">Live workshop · course companion + workbook</p>
           <h1>Build an analytics agent people can trust with real work.</h1>
-          <p class="hero-deck">Bring one recurring analytics question. Leave with a tested path, proof, production controls, and a 30-day launch memo your team can use.</p>
+          <p class="hero-deck">Learn the production framework, see how I used it in systems I built, then practice the full path with your data or the included synthetic lab.</p>
           <div class="hero-meta">
             <span><i></i> Five hours, live</span>
             <span><i></i> No coding required</span>
             <span><i></i> Works in your chosen harness</span>
             <span><i></i> One finished starter pack</span>
+            <span><i></i> Real systems + public practice lab</span>
           </div>
           <div class="hero-actions">
             <a class="button primary" href="#setup">Start with setup</a>
+            <a class="button" href="#paras-built">See the systems I built</a>
             <a class="button" href="#schedule">Open the run of show</a>
           </div>
         </div>
@@ -642,6 +704,20 @@
             <div class="orbit-node node-6">Reuse safely</div>
             <div class="orbit-caption">Question → evidence → decision → learning</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="spine-band" id="three-spines" data-nav="three-spines">
+      <div class="shell">
+        <div class="spine-intro">
+          <div><span class="kicker">One course, three linked spines</span><h2>Learn it. See it. Build it.</h2></div>
+          <p>Each module moves through the same three views. I will teach the production pattern, show how that choice appeared in systems I built, and then give you a safe way to create the artifact yourself. If your warehouse is unavailable, the synthetic case keeps the third spine fully runnable.</p>
+        </div>
+        <div class="spine-grid">
+          <article class="spine"><span class="spine-num">SPINE 01</span><h3>The production framework</h3><p>Decision contract, approved context, scoped execution, validation, proof, review states, correction memory, and operations.</p><a href="#module-1">Start with the framework →</a></article>
+          <article class="spine"><span class="spine-num">SPINE 02</span><h3>Systems I built</h3><p>Acquisition War Room, Abandonment Intelligence, and the conversational data-agent front door—shown with sanitized interfaces and honest evidence boundaries.</p><a href="#paras-built">Open the case studies →</a></article>
+          <article class="spine"><span class="spine-num">SPINE 03</span><h3>Your hands-on build</h3><p>Use an approved company source or run the same workflow on the included conversion lab. Every prompt produces a file you can take back to work.</p><a href="#lab-kit">Download the practice lab →</a></article>
         </div>
       </div>
     </section>
@@ -751,6 +827,84 @@
           <div class="lane"><span>Use the workshop source</span><h4>Everything runs locally</h4><p>Download the kit and follow Paras’s exact case in any file-capable harness. No warehouse, MCP connection, paid tool, or Python package install is required.</p></div>
         </div>
 
+      </div>
+    </section>
+
+    <section class="section case-study-section" id="paras-built" data-nav="paras-built">
+      <div class="shell">
+        <div class="section-header">
+          <div><span class="kicker">Spine 02 · systems I built</span><h2>See the operating system before you build the pieces.</h2></div>
+          <p class="section-lede">These are sanitized reconstructions of real systems I designed and built. I replaced internal data, sources, names, and tickets with the workshop lab, so you can inspect the design without exposing company material. We will return to them inside the timed modules rather than add another lecture block.</p>
+        </div>
+
+        <article class="case-block" id="war-room-case">
+          <a class="case-media" href="examples/paras-built/acquisition-war-room.html" target="_blank" rel="noreferrer"><img src="assets/case-studies/acquisition-war-room.png" alt="Sanitized Acquisition War Room showing synthetic headline metrics, movement decomposition, review state, segment comparison, and validation gates"></a>
+          <div class="case-copy">
+            <span class="case-index">Case 01 · Executive sensing</span>
+            <h3>Acquisition War Room</h3>
+            <p>The recurring question was simple: what changed, why, and where should the operating team focus next? The hard part was producing one briefing that combined quantitative movement, business context, operating signals, and an honest verification state.</p>
+            <div class="design-decisions">
+              <div class="design-decision"><b>01</b><span><strong>Parallel specialists, narrow jobs.</strong> Headline metrics, deeper funnel analysis, segment movement, operating signals, and business context ran as separate workstreams.</span></div>
+              <div class="design-decision"><b>02</b><span><strong>Analyzed summaries, not raw-table handoffs.</strong> Each specialist returned a compact result so synthesis did not repeat the analysis or ingest every row.</span></div>
+              <div class="design-decision"><b>03</b><span><strong>Verification stayed visible.</strong> An unverified or review-required result could still be useful, but nobody could mistake it for an approved answer.</span></div>
+              <div class="design-decision"><b>04</b><span><strong>The decision sat next to the evidence.</strong> The number, decomposition, caveat, next investigation, and authority boundary lived on the same screen.</span></div>
+            </div>
+            <div class="case-actions"><a class="button primary" href="examples/paras-built/acquisition-war-room.html" target="_blank" rel="noreferrer">Open the full example</a><a class="button" href="#module-4">See the proof pattern</a></div>
+            <p class="evidence-label">Interface: sanitized reconstruction · visible values: synthetic workshop data · architecture: grounded in the system I built</p>
+          </div>
+        </article>
+
+        <article class="case-block reverse" id="abandonment-case">
+          <a class="case-media" href="examples/paras-built/abandonment-intelligence.html" target="_blank" rel="noreferrer"><img src="assets/case-studies/abandonment-intelligence.png" alt="Sanitized Abandonment Intelligence interface showing three ranked actions, synthetic conversion metrics, a funnel gap, and an investigation table"></a>
+          <div class="case-copy">
+            <span class="case-index">Case 02 · Investigation + action</span>
+            <h3>Abandonment Intelligence</h3>
+            <p>The War Room says what moved. Abandonment Intelligence goes underneath it and asks what specific rule, route, or product flow deserves investigation. It rejects “conversion is down” as an answer because a rate alone does not tell an engineer or operator what to do.</p>
+            <div class="design-decisions">
+              <div class="design-decision"><b>01</b><span><strong>Investigators followed funnel breakpoints.</strong> Each agent owned a narrow abandonment area instead of letting one generalist scan the entire business.</span></div>
+              <div class="design-decision"><b>02</b><span><strong>Every finding needed a shape.</strong> Affected population, broken flow, durability, evidence, owner, next action, and confidence.</span></div>
+              <div class="design-decision"><b>03</b><span><strong>Known-good behavior was encoded.</strong> The system had to distinguish a real defect from an intentional rule or expected operating pattern.</span></div>
+              <div class="design-decision"><b>04</b><span><strong>Synthesis ranked work, not observations.</strong> The result was a reviewable action list with gates, not a longer dashboard.</span></div>
+            </div>
+            <div class="case-actions"><a class="button primary" href="examples/paras-built/abandonment-intelligence.html" target="_blank" rel="noreferrer">Open the full example</a><a class="button" href="#module-5">See the correction loop</a></div>
+            <p class="evidence-label">Interface: sanitized reconstruction · visible values: synthetic workshop data · investigation rules: grounded in the system I built</p>
+          </div>
+        </article>
+
+        <section class="front-door" id="data-agent-case">
+          <div class="front-door-head">
+            <div><span class="kicker">Case 03 · Conversational front door</span><h3>The data agent connected questions to the same governed path.</h3></div>
+            <div><p>The chat interface routed direct questions, investigations, and recurring briefings. An early test returned a fluent but incorrect number after choosing the wrong source. That failure changed the design: source selection, semantic context, visible query evidence, validation, time windows, security, and PII controls became system responsibilities instead of prompt reminders.</p><p><strong>What I would borrow:</strong> keep the client replaceable. Put the trust logic in the shared path every client calls.</p></div>
+          </div>
+          <div class="front-door-flow" aria-label="Conversational data-agent request path">
+            <div><b>01</b><strong>Question</strong><span>Direct answer, investigation, or briefing</span></div>
+            <div><b>02</b><strong>Route</strong><span>Intent, scope, authority, and risk</span></div>
+            <div><b>03</b><strong>Context</strong><span>Approved metric and business rules</span></div>
+            <div><b>04</b><strong>Source</strong><span>Scoped route with execution proof</span></div>
+            <div><b>05</b><strong>Validate</strong><span>Logic, benchmark, and failure gates</span></div>
+            <div><b>06</b><strong>Respond</strong><span>Answer, Clarify, Review, or Refuse</span></div>
+          </div>
+        </section>
+
+        <div class="section-header" style="margin-bottom:22px">
+          <div><span class="kicker">All three spines, end to end</span><h3>Use the same sequence to learn, inspect, and practice.</h3></div>
+          <p class="section-lede">The examples and the lab are not side stories. They map to the exact artifact you build in each module.</p>
+        </div>
+        <div class="spine-map">
+          <table>
+            <thead><tr><th>Course step</th><th>Spine 01 · Framework</th><th>Spine 02 · What I built</th><th>Spine 03 · What you build</th></tr></thead>
+            <tbody>
+              <tr><td>Choose</td><td><strong>Start with a recurring decision</strong>Frequency, repeatability, value, and risk.</td><td><strong>War Room + Abandonment</strong>“What changed?” and “what deserves action?” were separate recurring jobs.</td><td><strong>Use-case brief</strong>Frame the synthetic conversion question or your approved question.</td></tr>
+              <tr><td>Contract</td><td><strong>Bound output and authority</strong>Define Answer, Clarify, Review, and Refuse.</td><td><strong>Visible verification and action gates</strong>A useful result could still require review; no autonomous budget or routing change.</td><td><strong>Contract + architecture</strong>Create `work/02_contract.yaml` and map the shared request path.</td></tr>
+              <tr><td>Context</td><td><strong>Bind approved meaning</strong>Metric, source, business change, owner, freshness, and precedence.</td><td><strong>Domain rules survived every run</strong>Correct funnel order, time comparison, exclusions, known-good behavior, and prior corrections.</td><td><strong>Metric proposal</strong>Inspect `context/metric.yaml` and propose `work/03_metric_proposal.yaml`.</td></tr>
+              <tr><td>Prove</td><td><strong>Execute and verify independently</strong>Keep source execution, validation, caveat, and decision together.</td><td><strong>War Room proof layer</strong>Cross-validation, freshness, decomposition, and verification state appeared in the briefing.</td><td><strong>Proof receipt</strong>Run the lab, tie to the benchmark, and save `work/04_proof.yaml`.</td></tr>
+              <tr><td>Learn</td><td><strong>Turn failures into regression tests</strong>Repair the shared artifact, then rerun affected cases.</td><td><strong>The wrong-source failure changed the architecture</strong>Fluent output was not accepted as proof.</td><td><strong>Eval + correction</strong>Inject impossible data and a source conflict; save the repair and rerun.</td></tr>
+              <tr><td>Operate</td><td><strong>Own release, monitoring, cost, and incidents</strong>Shadow, canary, narrow production, rollback, and reapproval.</td><td><strong>Replaceable client, shared controls</strong>Parallel workers and chat interfaces called the same governed path.</td><td><strong>Operations + launch memo</strong>Finish the control sheet and make a Scale, Hold, or Stop ask.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="boundary"><strong>Public evidence boundary</strong><p>The systems and design decisions are grounded in Paras’s operating work. The interfaces here are sanitized reconstructions, and every visible number comes from the fictional workshop lab. Treat shipped code, internal testing, production design, and customer-production proof as different evidence states.</p></div>
       </div>
     </section>
 
@@ -1706,7 +1860,7 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
         ['5. Eval set and launch bar', ['eval_happy','eval_ambiguous','eval_stale','eval_conflict','eval_broken','eval_risk','release_gate']],
         ['6. Production controls and 30-day plan', ['owners','week_1','week_2','week_3','week_4','monitoring','cost_permissions_support','stop_rule','monday_move','peer_review_blocker','private_review_question']]
       ];
-      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
+      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## The three-spine route\n\n1. **Framework:** decision contract, approved context, scoped execution, validation, proof, review, correction, and operations.\n2. **Paras-built examples:** [Acquisition War Room](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/acquisition-war-room.html) and [Abandonment Intelligence](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/abandonment-intelligence.html). Both public interfaces use synthetic lab data.\n3. **Your build:** the files below, created with an approved source or the included public lab.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
       sections.forEach(([title, keys]) => {
         markdown += `## ${title}\n\n`;
         keys.forEach((key) => {

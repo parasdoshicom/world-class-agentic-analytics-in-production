@@ -45,20 +45,28 @@ def fail(errors: list[str], message: str) -> None:
 
 def check_html(errors: list[str]) -> None:
     source = COURSE.read_text(encoding="utf-8")
-    parser = CourseParser()
-    parser.feed(source)
+    html_files = [COURSE, *sorted((ROOT / "examples").rglob("*.html"))]
+    for html_file in html_files:
+        parser = CourseParser()
+        parser.feed(html_file.read_text(encoding="utf-8"))
 
-    duplicates = sorted({item for item in parser.ids if parser.ids.count(item) > 1})
-    if duplicates:
-        fail(errors, f"duplicate HTML ids: {', '.join(duplicates)}")
+        duplicates = sorted({item for item in parser.ids if parser.ids.count(item) > 1})
+        if duplicates:
+            fail(
+                errors,
+                f"duplicate HTML ids in {html_file.relative_to(ROOT)}: {', '.join(duplicates)}",
+            )
 
-    for target in parser.links:
-        parsed = urlsplit(target)
-        if parsed.scheme in {"http", "https", "mailto", "data"} or target.startswith("#"):
-            continue
-        path = unquote(parsed.path)
-        if path and not (ROOT / path).exists():
-            fail(errors, f"missing relative course link: {target}")
+        for target in parser.links:
+            parsed = urlsplit(target)
+            if parsed.scheme in {"http", "https", "mailto", "data"} or target.startswith("#"):
+                continue
+            path = unquote(parsed.path)
+            if path and not (html_file.parent / path).exists():
+                fail(
+                    errors,
+                    f"missing relative link in {html_file.relative_to(ROOT)}: {target}",
+                )
 
     page_text = normalize(html.unescape(source))
     prompt_files = sorted(PROMPTS.glob("[0-9]*.md"))
@@ -133,7 +141,7 @@ def main() -> int:
         for error in errors:
             print(f"FAIL: {error}")
         return 1
-    print("PASS: links, ids, prompts, lab ZIP, and public boundary")
+    print("PASS: course and example links, ids, prompts, lab ZIP, and public boundary")
     return 0
 
 
