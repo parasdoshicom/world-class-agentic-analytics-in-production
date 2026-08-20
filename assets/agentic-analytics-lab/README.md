@@ -1,6 +1,6 @@
 # Agentic Analytics Workshop Lab
 
-This is the included practice case for the workshop. It works without a warehouse, an MCP server, or extra Python packages.
+This is the included practice case for the workshop. It works without a warehouse or an MCP server. Python is optional and uses no extra packages.
 
 ## The question
 
@@ -10,10 +10,18 @@ The answer supports a weekly review decision about what to investigate. It does 
 
 ## Start here
 
-1. Open this folder in Codex, Cursor, Claude Code, or another file-capable harness.
-2. Tell the harness to work only inside this folder, treat `data/` and `context/` as read-only, and write generated work only under `work/`.
-3. Copy the staged prompts from the course page. Inspect and approve each checkpoint before moving to the next.
-4. Run the independent verifier at any time:
+1. Start a clean local session. Disconnect ChatData, warehouse connections, company MCPs, and other real-data tools before opening the lab. A connected tool is in scope even when you do not intend to use it.
+2. Open this extracted folder in Codex, Cursor, Claude Code, or another file-capable harness. This folder is the lab root. You should see `README.md`, `verify.py`, `data/`, `context/`, `evals.yaml`, and `work/` directly inside it.
+3. Tell the harness to work only inside this folder, treat `data/` and `context/` as read-only, and write generated work only under `work/`. Every `work/...` path in the course is relative to this lab root.
+4. Check the kit without revealing the analysis:
+
+   ```bash
+   python3 verify.py --readiness-only
+   ```
+
+   The check should print `READINESS: PASS`. If Python is unavailable, confirm the six lab-root items from step 2 and continue in the harness.
+5. Copy the staged prompts from the course page. Inspect and approve each checkpoint before moving to the next.
+6. Run the independent verifier during Step 4B, after you have calculated the answer in your harness:
 
    ```bash
    python3 verify.py
@@ -28,16 +36,6 @@ The answer supports a weekly review decision about what to investigate. It does 
 - `verify.py` — a standard-library Python verifier.
 - `evals.yaml` — expected outcomes for routine, ambiguous, broken, and unsafe requests.
 - `work/` — the only folder where the harness should save generated artifacts.
-
-## Known truth
-
-Do the work before expanding the reference answer in the course page.
-
-- August 3: 840 / 10,000 = 8.4%.
-- August 10: 690 / 10,000 = 6.9%.
-- Change: -1.5 percentage points, or -17.86% relative.
-- Paid search is the largest observed contributor to segment-rate underperformance.
-- A tagging change means the system should recommend review, not claim a proven root cause.
 
 ## Deliberate traps
 

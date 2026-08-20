@@ -5,7 +5,7 @@ Propose the exact source path, calculations, and validation checks for the appro
 
 Run checks in dependency order: source and structure, logic, business rules, segment or statistical checks, then benchmark reconciliation.
 
-Return plan_only: true and source_executed: false. Do not execute until I approve.
+Return plan_only: true and source_executed: false. Save the plan as work/04a_plan.yaml. Do not execute until I approve.
 ```
 
 Check that the route is read-only, uses the approved source, and can prove every planned claim before you authorize execution.

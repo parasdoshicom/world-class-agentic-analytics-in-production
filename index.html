@@ -368,6 +368,8 @@
 
     .artifact { display: none; margin-top: 50px; padding-top: 32px; border-top: 1px solid var(--line-strong); }
     .workbook-open .artifact { display: block; }
+    .artifact.workbook-reveal { animation: workbook-reveal .65s ease both; }
+    @keyframes workbook-reveal { 0% { background: rgba(11,52,118,.12); } 100% { background: transparent; } }
     .artifact-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 22px; }
     .artifact-head p { max-width: 640px; margin: 0; color: var(--muted); font-size: 14px; }
     .artifact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; }
@@ -715,7 +717,7 @@
           <p class="hero-deck">Learn the production framework, see it in systems I built, then practice the full path with your data or the included lab.</p>
           <div class="hero-meta">
             <span><i></i> Five hours, live</span>
-            <span><i></i> No coding required</span>
+            <span><i></i> Python optional</span>
             <span><i></i> Works in your chosen harness</span>
             <span><i></i> One finished starter pack</span>
           </div>
@@ -761,15 +763,16 @@
         </div>
         <div class="section-header">
           <div><span class="kicker">Before the first prompt</span><h2>Make sure the agent can see the right data and context.</h2></div>
-          <p class="section-lede">Use Codex, Cursor, Claude Code, or the harness your team already trusts. The tool can change. These readiness checks do not.</p>
+          <p class="section-lede">Use Codex, Cursor, Claude Code, or the harness your team already trusts. For the live lab, start in a clean local session with real company tools disconnected.</p>
         </div>
 
         <div class="setup-flow" aria-label="Workspace readiness checks">
-          <div class="setup-row"><b>01</b><strong>Open the right workspace</strong><span>Point the agent at one course folder or an approved project. Confirm what it can read and where it may write. Do not give it your whole computer by default.</span></div>
-          <div class="setup-row"><b>02</b><strong>Connect one data source</strong><span>Use a local CSV file, or configure the warehouse connector or MCP server your team already approves. Keep passwords and tokens in the approved secret store, not in chat or course files.</span></div>
-          <div class="setup-row"><b>03</b><strong>Test the connection</strong><span>Ask the agent to name the active source and list the available tables or files. Then show the date range and run a harmless read such as a row count. “Configured” is not the same as “working.”</span></div>
-          <div class="setup-row"><b>04</b><strong>Load the context people carry</strong><span>Add the user and team, the business question, metric definitions, known exclusions, recent changes, saved corrections, and preferred output. Use only context your company permits you to share.</span></div>
-          <div class="setup-row"><b>05</b><strong>State the access boundary</strong><span>Say whether this session is read-only, which sources are approved, where outputs may be saved, and what requires a person. If the source is unavailable, use the workshop practice case.</span></div>
+          <div class="setup-row"><b>01</b><strong>Choose one isolated workspace</strong><span>For the live build, download the lab ZIP and open its extracted folder. Use a separate approved session when adapting the workflow to company data. Never mix the two.</span></div>
+          <div class="setup-row"><b>02</b><strong>Check every connected tool</strong><span>Disconnect ChatData, warehouses, company MCPs, and other real-data or externally write-capable tools before opening the lab. A connected tool is in scope even when you do not intend to use it.</span></div>
+          <div class="setup-row"><b>03</b><strong>Confirm the lab root</strong><span>You should see <code>README.md</code>, <code>verify.py</code>, <code>data/</code>, <code>context/</code>, <code>evals.yaml</code>, and <code>work/</code> directly inside the open folder. Every course path starts here.</span></div>
+          <div class="setup-row"><b>04</b><strong>Test a harmless local read</strong><span>Ask the agent to list the two CSV files, their row counts, and date bounds. Do not analyze the business question yet.</span></div>
+          <div class="setup-row"><b>05</b><strong>Load only the supplied context</strong><span>Read the metric definition and business-change note from <code>context/</code>. Treat both as approved inputs for the exercise, not as files the agent may overwrite.</span></div>
+          <div class="setup-row"><b>06</b><strong>State the write boundary</strong><span>The agent may read inside the extracted lab and write only under <code>work/</code>. If it cannot follow that boundary, stop before the first prompt.</span></div>
         </div>
 
         <div class="kit-card" id="lab-kit">
@@ -777,43 +780,44 @@
             <div>
               <span class="kicker">No warehouse? Start here.</span>
               <h3>Use the same practice case Paras will run live.</h3>
-              <p>The kit contains two CSV files, the metric definition, a known business change, a dependency-free Python verifier, and ten eval cases. It works locally with any file-capable harness.</p>
+              <p>The kit contains two CSV files, the metric definition, a known business change, an optional dependency-free Python verifier, and ten eval cases. It works locally with any file-capable harness.</p>
               <div class="kit-actions">
                 <a class="button primary" href="assets/agentic-analytics-workshop-lab.zip" download="agentic-analytics-workshop-lab.zip">Download the lab kit</a>
                 <a class="button" href="assets/agentic-analytics-lab/README.md" target="_blank" rel="noopener noreferrer">Read the lab guide</a>
-                <a class="button" href="examples/workshop-data.html" target="_blank" rel="noopener noreferrer">Preview the data</a>
+                <a class="button" href="examples/workshop-data.html">Preview the data</a>
                 <a class="button" href="assets/agentic-analytics-lab/data/funnel_segments.csv" download="funnel_segments.csv">Download calculation CSV</a>
                 <a class="button" href="assets/agentic-analytics-lab/data/wbr_benchmark.csv" download="wbr_benchmark.csv">Download benchmark CSV</a>
               </div>
-              <p class="microcopy">Use the preview if your browser does not open CSV files directly. Every download now keeps its original <code>.csv</code> filename.</p>
-              <div class="boundary"><strong>Run the kit in three steps</strong><p>1. Download and unzip the kit. 2. Open the extracted folder, not the ZIP file, in your harness. 3. Run <code>python3 --version</code> (Windows: <code>py -3 --version</code>), then run <code>python3 verify.py</code> (Windows: <code>py -3 verify.py</code>). If Python is unavailable, keep working with the two CSV files in your harness, mark the independent verifier unavailable, and use the browser preview plus the collapsed reference answer for the tie-out. Do not install a runtime during class.</p></div>
+              <p class="microcopy">Use the preview if your browser does not open CSV files directly. Every download keeps its original <code>.csv</code> filename.</p>
+              <div class="boundary"><strong>Before you open the lab</strong><p>Start a clean local harness session and disconnect ChatData, warehouse connections, company MCPs, and other real-data tools. If you cannot disconnect them, use a separate profile or observe a paired run. Do not use a live company workspace for this exercise.</p></div>
+              <div class="boundary"><strong>Run the kit in three steps</strong><p>1. Download and unzip the kit. Do not clone the repository for the live exercise. 2. Open the extracted folder, not the ZIP file, in your harness. Confirm that <code>README.md</code>, <code>verify.py</code>, <code>data/</code>, <code>context/</code>, <code>evals.yaml</code>, and <code>work/</code> sit directly inside it. 3. If Python is available, run <code>python3 verify.py --readiness-only</code> (Windows: <code>py -3 verify.py --readiness-only</code>). It should print <code>READINESS: PASS</code> without calculating the answer. If Python is unavailable, confirm the six lab-root items and continue in the harness. Do not install a runtime during class.</p></div>
             </div>
             <ul class="file-list" aria-label="Workshop kit contents">
               <li><code>funnel_segments.csv</code><span>calculation source</span></li>
               <li><code>wbr_benchmark.csv</code><span>independent tie-out</span></li>
               <li><code>metric.yaml</code><span>meaning + limits</span></li>
-              <li><code>verify.py</code><span>independent check</span></li>
+              <li><code>verify.py</code><span>optional independent check</span></li>
               <li><code>evals.yaml</code><span>failure cases</span></li>
             </ul>
           </div>
-          <details class="reference-answer">
-            <summary>Check the kit before class: expected clean result</summary>
-            <div class="note-body"><p><strong>8.4% → 6.9% (-1.5 percentage points).</strong> Paid search is the largest observed contributor; the current partial week is excluded; both complete weeks tie to the benchmark. The correct state for a causal “why” is <strong>Review</strong> because campaign tagging changed between periods.</p><p>If Python is available, run <code>python3 verify.py</code>. It uses only the Python standard library, so no package install is required.</p></div>
-          </details>
         </div>
 
         <div class="ready-line">
           <div><strong>You are ready when the agent can name the active source, summarize the loaded context, and state what it cannot do.</strong><p>AI Analyst implements this with setup state, an active dataset, a connection test, and session-start context loading. This workshop keeps the same sequence without requiring one specific coding tool.</p></div>
           <button class="button" type="button" data-copy-target="openingPrompt">Copy the readiness prompt</button>
-          <span id="openingPrompt" hidden>Work only inside this course folder. Treat data/ and context/ as read-only. Write every generated artifact only under work/. Do not analyze the business question yet. List the files, tables, and tools you can actually access; row counts and date bounds; the business and metric context you found; and your access limits. Run one harmless read check. If anything required is missing, stop and name the smallest repair. Save the result as work/00_readiness.md.</span>
+          <span id="openingPrompt" hidden>This session is for the extracted agentic-analytics lab only. Before reading the data, list every connected tool and MCP. If the tool list includes ChatData, a warehouse, a company MCP, or any other real-data or externally write-capable tool, stop and tell me to disconnect it. Do not call external tools.
+
+Confirm that the current folder is the lab root and contains README.md, verify.py, data/, context/, evals.yaml, and work/. Treat data/ and context/ as read-only. Write every generated artifact only under work/. Every work/... path is relative to this folder.
+
+Do not analyze the business question yet. List the local files you can access, row counts and date bounds, the business and metric context you found, and your access limits. Run one harmless local read check. If anything required is missing, stop and name the smallest repair. Save the result as work/00_readiness.md.</span>
         </div>
 
         <details class="workshop-note">
           <summary>Walkthrough + timing + connection fallback</summary>
           <div class="note-body">
             <blockquote>“Your favorite harness does not decide whether the analysis is trustworthy. The active data, loaded context, permissions, and checks do.”</blockquote>
-            <p><strong>0–4 min:</strong> Ask students to open their preferred harness and one approved workspace. Do not spend class time comparing tools.</p>
-            <p><strong>4–8 min:</strong> Students choose their safe source or download and unzip the workshop kit. Open the extracted folder in the harness; check the optional Python runtime before relying on the verifier.</p>
+            <p><strong>0–4 min:</strong> Ask students to open a clean local harness session and disconnect real company tools. Do not spend class time comparing harnesses.</p>
+            <p><strong>4–8 min:</strong> Download and unzip the workshop kit. Open the extracted lab root; run the optional spoiler-free readiness check.</p>
             <p><strong>8–15 min:</strong> Run the readiness check: active source, visible tables or files, date range, one harmless read, and explicit access boundary.</p>
             <p><strong>15–20 min:</strong> Load the minimum business context, inspect <code>work/00_readiness.md</code>, and repair one missing item before moving on.</p>
           </div>
@@ -1448,7 +1452,7 @@ owner: growth_analytics</pre>
 
 Run checks in dependency order: source and structure, logic, business rules, segment or statistical checks, then benchmark reconciliation.
 
-Return plan_only: true and source_executed: false. Do not execute until I approve.</pre>
+Return plan_only: true and source_executed: false. Save the plan as work/04a_plan.yaml. Do not execute until I approve.</pre>
           </div>
         </div>
 
@@ -1822,8 +1826,8 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
           <summary>Expand live-session preparation, room rules, and scripts</summary>
           <div class="note-body">
             <div class="prep-columns">
-              <div class="prep-column"><h3>30 minutes before</h3><ul><li>Open this page and export a blank starter pack.</li><li>Download the lab zip and run <code>python3 verify.py</code>.</li><li>Check any MCP or warehouse route you plan to demo; do not make it the critical path.</li><li>Silence notifications and share one browser window.</li><li>Put the three Q&amp;A windows and two breaks in your calendar.</li></ul></div>
-              <div class="prep-column"><h3>Room contract</h3><ul><li>Use approved examples only.</li><li>No credentials, proprietary SQL, raw customer records, or restricted files.</li><li>No coding experience is required; the harness can write and run the files.</li><li>Questions about a specific company stay at the design level.</li><li>If a source cannot run, state that clearly and use the lab kit.</li></ul></div>
+              <div class="prep-column"><h3>30 minutes before</h3><ul><li>Open this page and export a blank starter pack.</li><li>Download the lab ZIP and run <code>python3 verify.py --readiness-only</code>.</li><li>Disconnect real company MCP and warehouse routes from the session used for the lab.</li><li>Silence notifications and share one browser window.</li><li>Put the three Q&amp;A windows and two breaks in your calendar.</li></ul></div>
+              <div class="prep-column"><h3>Room contract</h3><ul><li>Use approved examples only.</li><li>No credentials, proprietary SQL, raw customer records, or restricted files.</li><li>Python is optional; the harness can work directly with the CSV files.</li><li>Questions about a specific company stay at the design level.</li><li>If a source cannot run, state that clearly and use the lab kit.</li></ul></div>
               <div class="prep-column"><h3>Energy design</h3><ul><li>Use chat in the first two minutes.</li><li>Do not talk for more than ten minutes without a room action.</li><li>Ask students to predict an outcome before revealing it.</li><li>Use the practice case whenever an example is sensitive.</li><li>Timebox feedback to the current artifact.</li></ul></div>
             </div>
             <div class="fallback"><h3>If the live agent fails, teach the failure.</h3><p>Show the planned path, state that the source did not run, and ask what the agent should do next. Use the lab’s proof as the completed example. A failed call becomes a production lesson, not dead air.</p></div>
@@ -1914,9 +1918,19 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
     workbookButton.addEventListener('click', () => {
       body.classList.toggle('workbook-open');
       const open = body.classList.contains('workbook-open');
-      workbookButton.textContent = open ? 'Close workbook' : 'Open workbook';
+      workbookButton.textContent = open ? 'Workbook open' : 'Open workbook';
       workbookButton.setAttribute('aria-pressed', String(open));
-      showToast(open ? 'Browser workbook opened' : 'Browser workbook closed');
+      showToast(open ? 'Workbook open — jumping to the next fields' : 'Browser workbook closed');
+      if (open) {
+        const artifacts = [...document.querySelectorAll('.artifact')];
+        const topbarHeight = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbar'), 10);
+        const nextArtifact = artifacts.find((artifact) => artifact.getBoundingClientRect().top >= topbarHeight) || artifacts[0];
+        if (nextArtifact) {
+          nextArtifact.classList.add('workbook-reveal');
+          nextArtifact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          window.setTimeout(() => nextArtifact.classList.remove('workbook-reveal'), 900);
+        }
+      }
     });
 
     const workbookFields = [...document.querySelectorAll('[data-workbook]')];
@@ -1947,7 +1961,7 @@ Do not invent names, baselines, thresholds, or deployment evidence. Mark unresol
         ['5. Eval set and launch bar', ['eval_happy','eval_ambiguous','eval_stale','eval_conflict','eval_broken','eval_risk','release_gate']],
         ['6. Production controls and 30-day plan', ['owners','week_1','week_2','week_3','week_4','monitoring','cost_permissions_support','stop_rule','monday_move','peer_review_blocker','followup_question']]
       ];
-      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## The three-spine route\n\n1. **Framework:** decision contract, approved context, scoped execution, validation, proof, review, correction, and operations.\n2. **Paras-built examples:** [Acquisition War Room](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/acquisition-war-room.html) and [Abandonment Intelligence](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/abandonment-intelligence.html), using the included course dataset.\n3. **Your build:** the files below, created with an approved source or the included practice lab.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
+      let markdown = '# Agentic Analytics Production Starter Pack\n\nExported from World-Class Agentic Analytics in Production on August 21, 2026.\n\n## The three-spine route\n\n1. **Framework:** decision contract, approved context, scoped execution, validation, proof, review, correction, and operations.\n2. **Paras-built examples:** [Acquisition War Room](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/acquisition-war-room.html) and [Abandonment Intelligence](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/examples/paras-built/abandonment-intelligence.html), using the included course dataset.\n3. **Your build:** the files below, created with an approved source or the included practice lab.\n\n## Companion artifacts from the harness\n\n- `work/00_readiness.md`\n- `work/01_use_case.md`\n- `work/02_contract.yaml`\n- `work/02_architecture.md`\n- `work/03_metric_proposal.yaml`\n- `work/04a_plan.yaml`\n- `work/04_proof.yaml`\n- `work/correction.yaml`\n- `work/05_eval_results.csv`\n- `work/06_operations.md`\n- `work/07_launch_memo.md`\n\nAttach the files you actually created. Mark missing artifacts honestly.\n\n';
       sections.forEach(([title, keys]) => {
         markdown += `## ${title}\n\n`;
         keys.forEach((key) => {

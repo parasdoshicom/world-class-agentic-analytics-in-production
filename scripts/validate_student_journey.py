@@ -90,6 +90,7 @@ def check_prompt_contract() -> None:
         "work/02_contract.yaml",
         "work/02_architecture.md",
         "work/03_metric_proposal.yaml",
+        "work/04a_plan.yaml",
         "work/04_proof.yaml",
         "work/correction.yaml",
         "work/05_eval_results.csv",
@@ -105,6 +106,10 @@ def check_prompt_contract() -> None:
     require(
         "Do not modify the lab’s data/ or context/ files" in prompt_text,
         "eval prompt must preserve the read-only source boundary",
+    )
+    require(
+        "If the tool list includes ChatData, a warehouse, a company MCP" in prompt_text,
+        "readiness prompt must stop when real-company tools are connected",
     )
 
 
@@ -163,6 +168,12 @@ def check_downloaded_lab() -> None:
         require(clean.returncode == 0, f"clean verifier failed:\n{clean.stdout}")
         for expected in ("OUTCOME: Review", "8.40%", "6.90%", "change_pp: -1.50"):
             require(expected in clean.stdout, f"clean verifier is missing {expected!r}")
+
+        readiness = run_verifier(lab, "--readiness-only")
+        require(readiness.returncode == 0, f"readiness check failed:\n{readiness.stdout}")
+        require("READINESS: PASS" in readiness.stdout, "readiness check must report PASS")
+        for spoiler in ("OUTCOME:", "8.40%", "6.90%", "change_pp"):
+            require(spoiler not in readiness.stdout, f"readiness check leaked the answer: {spoiler}")
 
         impossible = run_verifier(lab, "--inject-impossible-row")
         require(impossible.returncode == 2, "impossible-row drill must exit 2")
@@ -251,6 +262,7 @@ def check_downloaded_lab() -> None:
             "02_contract.yaml",
             "02_architecture.md",
             "03_metric_proposal.yaml",
+            "04a_plan.yaml",
             "04_proof.yaml",
             "correction.yaml",
             "05_eval_results.csv",

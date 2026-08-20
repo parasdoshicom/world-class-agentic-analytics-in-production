@@ -126,7 +126,7 @@ def check_public_boundary(errors: list[str]) -> None:
     for path in ROOT.rglob("*"):
         if (
             not path.is_file()
-            or path == Path(__file__)
+            or path == Path(__file__).resolve()
             or ".git" in path.parts
             or path.suffix in {".zip", ".png"}
         ):
@@ -156,6 +156,28 @@ def check_course_content(errors: list[str]) -> None:
     for source in required_sources:
         if source not in course_text:
             fail(errors, f"missing leading-practice source in index.html: {source}")
+
+    setup_start = course_text.find('<section class="section alt" id="setup"')
+    setup_end = course_text.find('<section class="section" id="schedule"')
+    if setup_start == -1 or setup_end == -1:
+        fail(errors, "could not isolate the setup section")
+    else:
+        setup_text = course_text[setup_start:setup_end]
+        for spoiler in ("8.4%", "6.9%", "-1.5 percentage points"):
+            if spoiler in setup_text:
+                fail(errors, f"setup section reveals the practice answer: {spoiler}")
+        for safety_line in (
+            "Do not clone the repository for the live exercise.",
+            "disconnect ChatData",
+            "READINESS: PASS",
+        ):
+            if safety_line not in setup_text:
+                fail(errors, f"setup section is missing student safety guidance: {safety_line}")
+
+    lab_guide = (LAB / "README.md").read_text(encoding="utf-8")
+    for spoiler in ("8.4%", "6.9%", "-1.5 percentage points"):
+        if spoiler in lab_guide:
+            fail(errors, f"lab start guide reveals the practice answer: {spoiler}")
 
 def main() -> int:
     errors: list[str] = []

@@ -9,7 +9,7 @@ test('master course controls and downloads work end to end', async ({ page, cont
   await page.goto('/');
 
   await expect(page).toHaveTitle(/World-Class Agentic Analytics/);
-  await expect(page.locator('details.reference-answer')).toHaveCount(3);
+  await expect(page.locator('details.reference-answer')).toHaveCount(2);
   await expect(page.locator('details.reference-answer[open]')).toHaveCount(0);
 
   await page.getByRole('button', { name: 'Expand walkthroughs' }).click();
@@ -18,6 +18,8 @@ test('master course controls and downloads work end to end', async ({ page, cont
 
   await page.getByRole('button', { name: 'Open workbook' }).click();
   await expect(page.locator('.artifact').first()).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Workbook open' })).toHaveAttribute('aria-pressed', 'true');
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
 
   const copyButtons = page.locator('[data-copy-target], [data-copy-container]');
   const copyCount = await copyButtons.count();
@@ -59,6 +61,13 @@ test('master course controls and downloads work end to end', async ({ page, cont
   expect(exported.suggestedFilename()).toBe('agentic-analytics-production-starter-pack.md');
 
   expect(consoleErrors).toEqual([]);
+});
+
+test('setup preview navigates on the first click', async ({ page }) => {
+  await page.goto('/#lab-kit');
+  await page.getByRole('link', { name: 'Preview the data', exact: true }).click();
+  await expect(page).toHaveURL(/\/examples\/workshop-data\.html$/);
+  await expect(page.locator('#calculation-table tbody tr')).toHaveCount(16);
 });
 
 test('data preview loads both CSVs without browser errors', async ({ page }) => {

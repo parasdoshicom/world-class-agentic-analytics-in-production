@@ -13,6 +13,13 @@ ROOT = Path(__file__).resolve().parent
 FUNNEL_PATH = ROOT / "data" / "funnel_segments.csv"
 BENCHMARK_PATH = ROOT / "data" / "wbr_benchmark.csv"
 TOLERANCE_PP = 0.2
+WORK_PATH = ROOT / "work"
+CALCULATION_REQUIRED = {
+    "row_id", "week_start", "channel", "device", "landing_page",
+    "qualified_sessions", "qualified_signups", "population",
+    "is_complete", "tag_version",
+}
+BENCHMARK_REQUIRED = {"week_start", "conversion_pct", "is_complete"}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -40,6 +47,7 @@ def refuse(reason: str, details: list[str] | None = None) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--readiness-only", action="store_true")
     parser.add_argument("--inject-impossible-row", action="store_true")
     parser.add_argument("--inject-benchmark-conflict", action="store_true")
     parser.add_argument("--inject-missing-column", action="store_true", help=argparse.SUPPRESS)
@@ -52,16 +60,40 @@ def main() -> int:
     except (OSError, csv.Error) as error:
         return refuse("A required source could not be read.", [str(error)])
 
+    if args.readiness_only:
+        readiness_errors: list[str] = []
+        if not rows:
+            readiness_errors.append("calculation CSV is empty")
+        elif not CALCULATION_REQUIRED.issubset(rows[0]):
+            missing = sorted(CALCULATION_REQUIRED - set(rows[0]))
+            readiness_errors.append(f"calculation CSV missing columns: {', '.join(missing)}")
+        if not benchmarks:
+            readiness_errors.append("benchmark CSV is empty")
+        elif not BENCHMARK_REQUIRED.issubset(benchmarks[0]):
+            missing = sorted(BENCHMARK_REQUIRED - set(benchmarks[0]))
+            readiness_errors.append(f"benchmark CSV missing columns: {', '.join(missing)}")
+        if not WORK_PATH.is_dir():
+            readiness_errors.append("work/ directory is missing")
+        if readiness_errors:
+            print("READINESS: FAIL")
+            for error in readiness_errors:
+                print(f"- {error}")
+            print("No business result was calculated.")
+            return 2
+        print("READINESS: PASS")
+        print("lab_root: confirmed")
+        print(f"calculation_rows: {len(rows)}")
+        print(f"benchmark_rows: {len(benchmarks)}")
+        print("write_boundary: work/")
+        print("No business result was calculated.")
+        return 0
+
     if args.inject_missing_column:
         rows = [{key: value for key, value in row.items() if key != "qualified_sessions"} for row in rows]
     if args.inject_missing_benchmark:
         benchmarks = [row for row in benchmarks if row.get("week_start") != "2026-08-10"]
 
-    required = {
-        "row_id", "week_start", "channel", "device", "landing_page",
-        "qualified_sessions", "qualified_signups", "population",
-        "is_complete", "tag_version",
-    }
+    required = CALCULATION_REQUIRED
     if not rows:
         return refuse("The calculation source is empty.")
     missing_columns = sorted(required - set(rows[0]))
@@ -117,7 +149,7 @@ def main() -> int:
     if missing_calculation_weeks:
         return refuse("The calculation source is missing a required complete week.", missing_calculation_weeks)
 
-    benchmark_required = {"week_start", "conversion_pct", "is_complete"}
+    benchmark_required = BENCHMARK_REQUIRED
     benchmark_schema_ok = bool(benchmarks) and benchmark_required.issubset(benchmarks[0])
     benchmark_by_week: dict[str, dict[str, str]] = {}
     benchmark_errors: list[str] = []

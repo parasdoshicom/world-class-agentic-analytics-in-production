@@ -2,7 +2,7 @@
 
 Build an analytics agent that can answer with evidence. It should also ask for clarification, route work to review, or refuse when the data and authority are not good enough.
 
-This repository is the companion for a five-hour, hands-on course. You can bring an approved data source or use the included practice lab. The workflow works with Codex, Cursor, Claude Code, or another file-capable harness.
+This repository is the companion for a five-hour, hands-on course. You can bring an approved data source or use the included practice lab. The workflow works with Codex, Cursor, Claude Code, or another file-capable harness; Python provides an optional independent check.
 
 The material runs on three linked spines. You learn the production framework, inspect systems Paras built, and practice with an approved source or the included lab.
 
@@ -28,14 +28,13 @@ The course checks that model against published practices from [OpenAI](https://o
 - [Download the complete lab](https://parasdoshicom.github.io/world-class-agentic-analytics-in-production/assets/agentic-analytics-workshop-lab.zip)
 - [Inspect the lab before downloading](assets/agentic-analytics-lab/README.md)
 
-If you have no warehouse connection, clone this repository and run:
+For the live workshop, download the ZIP rather than cloning the repository. Unzip it, open the extracted `agentic-analytics-lab` folder in a clean local harness session, and disconnect real company data tools. Then run the spoiler-free readiness check when Python is available:
 
 ```bash
-cd assets/agentic-analytics-lab
-python3 verify.py
+python3 verify.py --readiness-only
 ```
 
-The clean lab should report `OUTCOME: Review`, with qualified-signup conversion moving from 8.4% to 6.9%. Review is the correct state because the supplied business context documents a tagging change close to the movement.
+The check should report `READINESS: PASS` without calculating the business result. Students who cloned the repository to inspect its source should still open `assets/agentic-analytics-lab/` as the lab root before running prompts.
 
 ## What you will build
 
