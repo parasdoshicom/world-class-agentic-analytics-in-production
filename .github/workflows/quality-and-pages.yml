@@ -39,7 +39,9 @@ jobs:
           grep -q 'OUTCOME: Refuse' <<< "$output"
       - name: Confirm benchmark conflict routes to review
         working-directory: assets/agentic-analytics-lab
-        run: python3 verify.py --inject-benchmark-conflict | tee /tmp/benchmark-conflict.txt && grep -q 'OUTCOME: Review' /tmp/benchmark-conflict.txt
+        run: |
+          python3 verify.py --inject-benchmark-conflict | tee /tmp/benchmark-conflict.txt
+          grep -q 'OUTCOME: Review' /tmp/benchmark-conflict.txt
 
   deploy:
     if: github.event_name != 'pull_request'
