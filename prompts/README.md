@@ -2,6 +2,14 @@
 
 Use these prompts one at a time. Inspect what the harness creates, make corrections, and approve the output before moving forward. Do not combine them into one large prompt; the review points are part of the production workflow.
 
+Choose the stopping point that matches your current maturity:
+
+- **Solo, n=1:** run Steps 0–4B. Keep the artifacts local or in a private repository. The goal is one recurring workflow that is useful, verifiable, and repeatable for you.
+- **Small team, n=3–10:** add Step 5. A second person should be able to run the workflow, flag a miss, review the evidence, and reuse an approved correction without the original author beside them.
+- **Organization:** add Step 6 after the team handoff works. Centralize permissions, context, review, telemetry, rollout, cost, and incident controls only when shared usage creates that need.
+
+Two fresh sessions can rehearse the team roles when you are learning alone. They do not prove multiplayer adoption; repeat the handoff with another person before scaling the infrastructure.
+
 | Step | Prompt | Expected artifact |
 | --- | --- | --- |
 | 0 | [Prove readiness](00-readiness.md) | `work/00_readiness.md` |

@@ -186,6 +186,7 @@
 
     .spine-band { padding: 72px 0 78px; background: #fff; border-bottom: 1px solid var(--line); }
     .spine-intro { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 68px; align-items: end; margin-bottom: 38px; }
+    .maturity-intro { margin-top: 48px; }
     .spine-intro h2 { font-size: clamp(34px, 4vw, 54px); }
     .spine-intro p { margin: 0; color: var(--muted); }
     .spine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -705,7 +706,7 @@
         <div>
           <p class="eyebrow">Live workshop · one production path, end to end</p>
           <h1>Build analytics agents people can trust.</h1>
-          <p class="hero-deck">Contract one recurring question, run it, catch a bad answer, promote the correction, prove that a fresh session reuses it, and make a measured Scale, Hold, or Stop decision.</p>
+          <p class="hero-deck">Start by making one recurring analytics workflow trustworthy for yourself. Then earn the right to share it with a team, add a review loop, and operate it in production.</p>
           <div class="hero-meta">
             <span><i></i> Five hours, live</span>
             <span><i></i> Python optional</span>
@@ -743,13 +744,42 @@
           <article class="spine"><span class="spine-num">SPINE 02</span><h3>Systems I built</h3><p>Acquisition War Room, Abandonment Intelligence, and the conversational data-agent front door—showing the product choices, controls, and operating loops behind each experience.</p><a href="#paras-built">Open the case studies →</a></article>
           <article class="spine"><span class="spine-num">SPINE 03</span><h3>Your hands-on build</h3><p>Use an approved company source or run the same workflow on the included conversion lab. Every prompt produces a file you can take back to work.</p><a href="#lab-kit">Download the practice lab →</a></article>
         </div>
+
+        <div class="spine-intro maturity-intro">
+          <div><span class="kicker">Choose your starting level</span><h2>Start solo. Earn multiplayer.</h2></div>
+          <p>You do not need an enterprise platform to get value from this course. Build the smallest version that solves your current problem, prove it works, and add shared infrastructure only when another person needs to reuse it.</p>
+        </div>
+        <div class="spine-grid" aria-label="Solo to team to organization maturity path">
+          <article class="spine">
+            <span class="spine-num">CRAWL · SOLO · N=1</span>
+            <h3>Make yourself better first</h3>
+            <p>Use one harness, one recurring decision, a local folder or private Git repository, approved context, a proof receipt, and a small eval set. Finish Modules 0–4. You do not need an MCP gateway, admin portal, or enterprise semantic layer.</p>
+            <p><strong>Move on when:</strong> the workflow repeatedly returns a useful, verified result, catches a known failure, and saves enough effort to run again.</p>
+          </article>
+          <article class="spine">
+            <span class="spine-num">WALK · SMALL TEAM · N=3–10</span>
+            <h3>Share one working path</h3>
+            <p>Put the contract, context, evals, and corrections in one versioned place. Ask another person to run the workflow without sitting beside you. Add a flagged-answer inbox and reviewed promotion path in Module 5.</p>
+            <p><strong>Move on when:</strong> a second person can reproduce the result, report a miss, and reuse an approved correction in a fresh session.</p>
+          </article>
+          <article class="spine">
+            <span class="spine-num">RUN · ORGANIZATION · MANY USERS</span>
+            <h3>Operate a shared system</h3>
+            <p>Move common guarantees behind a client-neutral MCP or gateway. Add permissions, shared semantic context, deduped review queues, versions, telemetry, rollout controls, cost limits, and an incident path in Module 6.</p>
+            <p><strong>Scale when:</strong> the pilot works across users and tools, review demand is sustainable, and an owner can monitor, stop, repair, and safely resume the route.</p>
+          </article>
+        </div>
+        <div class="boundary">
+          <strong>The promotion rule</strong>
+          <p>Do not solve tomorrow's coordination problem before one person has a workflow worth sharing. Solo proof earns a team pilot. A team pilot earns shared infrastructure. The lab lets one learner rehearse the team handoff with two fresh sessions, but a simulated handoff is practice—not proof of adoption.</p>
+        </div>
       </div>
     </section>
 
     <section class="section alt" id="setup" data-nav="setup">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 0</span><span class="tag">20 minutes</span><span class="tag output">Output: ready workspace + working source</span></div>
+          <div class="module-meta"><span class="tag">Module 0</span><span class="tag">Solo foundation</span><span class="tag">20 minutes</span><span class="tag output">Output: ready workspace + working source</span></div>
           <div class="timer" data-minutes="20"><span class="timer-readout">20:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
@@ -964,7 +994,7 @@ Do not analyze the business question yet. List the local files you can access, r
     <section class="section alt" id="module-1" data-nav="module-1">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 1</span><span class="tag">25 minutes</span><span class="tag output">Output: approved use-case brief</span></div>
+          <div class="module-meta"><span class="tag">Module 1</span><span class="tag">Solo foundation</span><span class="tag">25 minutes</span><span class="tag output">Output: approved use-case brief</span></div>
           <div class="timer" data-minutes="25"><span class="timer-readout">25:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
@@ -1053,7 +1083,7 @@ Ask the smallest missing clarification. Then recommend Build, Fix the foundation
     <section class="section" id="module-2" data-nav="module-2">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 2</span><span class="tag">35 minutes</span><span class="tag output">Output: contract + architecture map</span></div>
+          <div class="module-meta"><span class="tag">Module 2</span><span class="tag">Solo foundation</span><span class="tag">35 minutes</span><span class="tag output">Output: contract + architecture map</span></div>
           <div class="timer" data-minutes="35"><span class="timer-readout">35:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
@@ -1217,7 +1247,7 @@ Save work/02_contract.yaml and work/02_architecture.md. Mark unknown owners inst
     <section class="section alt" id="module-3" data-nav="module-3">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 3</span><span class="tag">40 minutes</span><span class="tag output">Output: reviewed metric + context path</span></div>
+          <div class="module-meta"><span class="tag">Module 3</span><span class="tag">Solo foundation</span><span class="tag">40 minutes</span><span class="tag output">Output: reviewed metric + context path</span></div>
           <div class="timer" data-minutes="40"><span class="timer-readout">40:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
@@ -1372,7 +1402,7 @@ Show the proposed file diff and wait for approval before treating it as trusted.
     <section class="section" id="module-4" data-nav="module-4">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 4</span><span class="tag">45 minutes</span><span class="tag output">Output: proof + response rules</span></div>
+          <div class="module-meta"><span class="tag">Module 4</span><span class="tag">Solo proof</span><span class="tag">45 minutes</span><span class="tag output">Output: proof + response rules</span></div>
           <div class="timer" data-minutes="45"><span class="timer-readout">45:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
@@ -1511,12 +1541,16 @@ Do not call an observed contributor a root cause unless the evidence isolates ca
     <section class="section alt" id="module-5" data-nav="module-5">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 5</span><span class="tag">45 minutes</span><span class="tag output">Output: flag → review → promote → reuse</span></div>
+          <div class="module-meta"><span class="tag">Module 5</span><span class="tag">Team bridge</span><span class="tag">45 minutes</span><span class="tag output">Output: flag → review → promote → reuse</span></div>
           <div class="timer" data-minutes="45"><span class="timer-readout">45:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
           <div><span class="kicker">Close the loop</span><h2>A correction matters only when the next person gets the better answer.</h2></div>
           <p class="section-lede">You will run the tests, process one seeded user report, hand it to a data admin, promote the accepted correction into shared context, and prove that a fresh session reuses it.</p>
+        </div>
+        <div class="boundary">
+          <strong>This is the handoff from solo to multiplayer</strong>
+          <p>Modules 0–4 make one operator's workflow useful and verifiable. Module 5 changes the test: can another person use the same artifacts, flag a miss, review the evidence, promote a narrow correction, and improve a fresh run? If you are working alone, use two fresh sessions to rehearse the roles. Before calling it a team system, repeat the handoff with another person.</p>
         </div>
         <div class="architecture-flow" aria-label="Live feedback and reuse loop">
           <div class="architecture-node"><b>01 · FLAG</b><strong>Student A reports the gap</strong><span>Capture the answer, missing evidence, failed self-validation, and decision risk.</span></div>
@@ -1667,12 +1701,16 @@ Save work/05_eval_results.csv and work/05_observed_operations.csv. The operation
     <section class="section" id="module-6" data-nav="module-6">
       <div class="shell">
         <div class="module-topline">
-          <div class="module-meta"><span class="tag">Module 6</span><span class="tag">25 minutes</span><span class="tag output">Output: controls + launch memo</span></div>
+          <div class="module-meta"><span class="tag">Module 6</span><span class="tag">Organization controls</span><span class="tag">25 minutes</span><span class="tag output">Output: controls + launch memo</span></div>
           <div class="timer" data-minutes="25"><span class="timer-readout">25:00</span><button class="button small timer-toggle" type="button">Start</button><button class="button small timer-reset" type="button">Reset</button></div>
         </div>
         <div class="section-header">
           <div><span class="kicker">Operate it</span><h2>Production begins when the demo ends.</h2></div>
           <p class="section-lede">A production plan needs owners, a review rhythm, monitoring, correction memory, cost, and a clear rule for stopping or narrowing the system. Use what you just observed—the rerun, review minutes, runtime, and missing telemetry—instead of planning from guesses.</p>
+        </div>
+        <div class="boundary">
+          <strong>Infrastructure follows adoption</strong>
+          <p>Keep local files while one person is learning. Use a shared repository and lightweight review when a small team is iterating. Add a gateway, admin queue, deduplication, centralized permissions, and formal operations when usage crosses tools, teams, or risk boundaries. Each layer should remove an observed failure or coordination cost.</p>
         </div>
         <div class="teaching-grid">
           <div class="teaching-copy">

@@ -8,6 +8,16 @@ The material runs on three linked spines. You learn the production framework, in
 
 The live workshop page is the canonical course experience. Share that one URL for class; it contains the agenda, explanations, prompts, examples, checkpoints, practice-data links, reference answers, and exports. The standalone files give students direct access to the prompts and practice lab.
 
+## Start solo. Earn multiplayer.
+
+The course supports three different starting points. Do not begin with enterprise infrastructure when one person is still proving the workflow.
+
+1. **Solo, n=1:** use one harness, one recurring decision, a local folder or private Git repository, approved context, proof, and a small eval set. Modules 0–4 are enough to make your own work faster and safer.
+2. **Small team, n=3–10:** put the working contract, context, evals, and corrections in one versioned place. Use Module 5 to prove that another person can run it, flag a miss, review the evidence, and reuse an approved correction.
+3. **Organization:** move common guarantees behind a shared MCP or gateway only after the team path works. Add centralized permissions, semantic context, review queues, telemetry, rollout controls, cost limits, and incident ownership in Module 6.
+
+Solo proof earns a team pilot. A team pilot earns shared infrastructure. Two fresh harness sessions can rehearse the multiplayer loop, but another person must complete the handoff before you call it adopted.
+
 ## The operating model
 
 Trustworthy agentic analytics needs three connected parts:
